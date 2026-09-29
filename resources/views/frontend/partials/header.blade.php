@@ -3,7 +3,7 @@
         <!-- Logo Section -->
         <div class="flex-shrink-0">
             <a href="/" class="flex flex-col items-center">
-                <img src="{{ asset('storage/' . $setting->logo ?? '') }}" alt="logo" class="h-14 md:h-18" />
+                <img src="{{ asset('storage/' . $setting->logo ?? '') }}" alt="logo" class="w-[80px]" />
             </a>
         </div>
 
@@ -32,7 +32,7 @@
                     @endforelse
                 </div>
             </div>
-            <a href="{{ route('developers.index') }}" class="nav-link" aria-label="Developers">Concerns</a>
+            <!-- <a href="{{ route('developers.index') }}" class="nav-link" aria-label="Developers">Concerns</a> -->
             <a href="{{ route('web.blog') }}" class="nav-link" aria-label="Blogs">Blog</a>
             {{-- @auth
             @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
@@ -92,9 +92,9 @@
                         @endforelse
                     </div>
                 </div>
-                <a href="{{ route('developers.index') }}"
+                <!-- <a href="{{ route('developers.index') }}"
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2"
-                    aria-label="Developers">Concerns</a>
+                    aria-label="Developers">Concerns</a> -->
                 <a href="{{ route('web.blog') }}"
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2" aria-label="Blogs">Blog</a>
                 @auth
