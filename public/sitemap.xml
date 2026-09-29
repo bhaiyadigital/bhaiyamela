@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+    <url>
+    <loc>http://127.0.0.1:8000</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/blogs</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/offers</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/events</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/company-profile</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/why-invest</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/contact</loc>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/offers/🎉 শেয়ার বুকিং-এ পাচ্ছেন ৭০,০০০ টাকা মূল্যছাড়!</loc>
+    <lastmod>2026-01-28T15:07:02+00:00</lastmod>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/events/kids-fest-2025</loc>
+    <lastmod>2026-01-18T06:11:06+00:00</lastmod>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/pages/privacy-policy</loc>
+    <lastmod>2026-01-18T06:38:15+00:00</lastmod>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/pages/terms-&amp;-conditions</loc>
+    <lastmod>2026-01-18T06:38:42+00:00</lastmod>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/pages/disclaimers</loc>
+    <lastmod>2026-01-18T06:39:01+00:00</lastmod>
+            </url>
+</urlset>

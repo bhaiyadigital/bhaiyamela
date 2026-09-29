@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Company;
+use Illuminate\Http\Request;
+use App\Models\Contact;
+use App\Rules\Recaptcha;
+use App\Rules\ValidPhoneNumber;
+use Illuminate\Support\Facades\Log;
+
+class ContactController extends Controller
+{
+    public function index()
+    {
+        $user = auth()->user();
+
+        if ($user->hasRole('super-admin')) {
+            $contacts = Contact::with('company')->latest()->get();
+            $companies = Company::select('id', 'company_name')->get();
+        } else {
+            $companyId = $user->company_id;
+
+            if (!$companyId) {
+                $contacts = collect();
+            } else {
+                $contacts = Contact::where('company_id', $companyId)->latest()->get();
+            }
+
+            $companies = collect();
+        }
+
+        return view('admin.contactList', compact('contacts', 'companies'));
+    }
+
+    /**
+     * মেসেজকে রিড (is_read = true) হিসেবে আপডেট করা (AJAX)
+     */
+    public function markRead($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $user = auth()->user();
+
+        // সিকিউরিটি গার্ড: সাধারণ ইউজার যেন অন্য কোম্পানির মেসেজ রিড করতে না পারে
+        if (!$user->hasRole('super-admin') && $contact->company_id !== $user->company_id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized access.'
+            ], 403);
+        }
+
+        $contact->update(['is_read' => true]);
+
+        return response()->json(['success' => true]);
+    }
+
+
+    public function destroy($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $user = auth()->user();
+
+        if (!$user->hasRole('super-admin') && $contact->company_id !== $user->company_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $contact->delete();
+
+        return redirect()->back()->with('success', 'Message deleted successfully.');
+    }
+    public function storeLead(Request $request)
+    {
+        // ১. প্রোপার ইনপুট ভ্যালিডেশন
+        $request->validate([
+            'lead_name'    => 'required|string|max:255',
+            'lead_email'   => 'nullable|email|max:255',
+            'country_code' => 'required|string',
+            'lead_phone' => ['required', 'string', new ValidPhoneNumber()],
+            'lead_message' => 'required|string',
+            'company_id'   => 'nullable|integer',
+            'subject'      => 'nullable|string|max:255',
+            'recaptcha_token' => ['required', new Recaptcha()],
+
+        ], [
+            'lead_name.required'  => 'Please enter your name.',
+            'lead_phone.required' => 'Please enter your phone number.',
+            'lead_message.required' => 'Please write a message.',
+        ]);
+
+        try {
+            $fullPhone = $request->input('country_code') . ' ' . $request->input('lead_phone');
+
+            Contact::create([
+                'name'       => $request->input('lead_name'),
+                'company_id' => $request->input('company_id'),
+                'email'      => $request->input('lead_email'),
+                'phone'      => $fullPhone,
+                'subject'    => $request->input('subject'),
+                'message'    => $request->input('lead_message'),
+                'is_read'    => false,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Your message has been sent successfully to the property owner.'
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Lead Submission Error: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to send message. Please try again later.'
+            ], 500);
+        }
+    }
+}
