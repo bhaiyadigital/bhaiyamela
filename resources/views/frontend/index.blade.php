@@ -102,7 +102,7 @@
                     <img src="{{ asset($slide->img_path ? 'storage/' . $slide->img_path : 'assets/images/landing-hero.jpg') }}"
                         class="w-full h-full object-cover" alt="Hero Slide {{ $index + 1 }}" />
 
-                    <div class="absolute inset-0 bg-black/20"></div>
+                    <!-- <div class="absolute inset-0 bg-black/20"></div> -->
                 </a>
             @endforeach
 
