@@ -586,7 +586,7 @@ class WebController extends Controller
             'em' => $validated['email']
         ]);
 
-        return redirect()->back()->fragment('subscribe-id')->with('success', 'Thank you for subscribing!');
+        return redirect()->back()->withFragment('subscribe-id')->with('success', 'Thank you for subscribing!');
     }
 
 

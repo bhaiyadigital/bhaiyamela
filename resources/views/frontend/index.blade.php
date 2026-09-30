@@ -203,7 +203,7 @@
 
     <!-- PROJECTS GRID SECTION -->
     <section class="py-10 md:py-16">
-        <div class="container mx-auto px-6 md:px-10">
+        <div class="container mx-auto px-4">
 
             <!-- Section Header Area -->
             <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-10 gap-6">
@@ -271,8 +271,8 @@
 
         </div>
     </section>`
-    <div class="w-full bg-[#1b6e35] py-6 px-4 md:px-8 shadow-md select-none">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+    <div class="w-full bg-[#1b6e35] py-6 px-4 shadow-md select-none">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
 
             <div class="flex-shrink-0 text-white text-xl md:text-4xl">
                 <i class="fa-solid fa-envelope-circle-check" aria-hidden="true"></i>
@@ -317,10 +317,10 @@
                             </button>
 
                             @foreach ($categories as $cat)
-                                <button data-filter="{{ $cat->id }}"
-                                    class="cursor-pointer filter-btn px-8 py-2.5 rounded-lg border-2 border-gray-200 text-gray-500 font-bold text-base uppercase tracking-wider transition-all hover:border-[#1b6e35] hover:text-[#1b6e35] bg-white">
-                                    {{ $cat->title }}
-                                </button>
+                            <button data-filter="{{ $cat->id }}"
+                                class="cursor-pointer filter-btn px-8 py-2.5 rounded-lg border-2 border-gray-200 text-gray-500 font-bold text-base uppercase tracking-wider transition-all hover:border-[#1b6e35] hover:text-[#1b6e35] bg-white">
+                                {{ $cat->title }}
+                            </button>
                             @endforeach
                         </div>
                     </div>
@@ -348,56 +348,57 @@
             <div class="swiper common-mobile-swiper lg:!overflow-hidden">
                 <div class="swiper-wrapper">
                     @foreach ($liveProject as $project)
-                        <div class="swiper-slide h-auto">
-                            <a href="{{ route('project.details', $project->slug) }}" data-category="{{ $project->parent_id }}"
-                                data-section="live"
-                                class="project-card bg-white rounded-[2.5rem] h-full flex flex-col overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100 group transition-all duration-500 hover:shadow-2xl">
+                    <div class="swiper-slide h-auto">
+                        <a href="{{ route('project.details', $project->slug) }}" data-category="{{ $project->parent_id }}"
+                            data-section="live"
+                            class="project-card bg-white rounded-[2.5rem] h-full flex flex-col overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100 group transition-all duration-500 hover:shadow-2xl">
 
-                                <!-- Video/Thumbnail Area -->
-                                <div class="relative aspect-[4/3] overflow-hidden bg-black cursor-pointer"
-                                    onclick="event.preventDefault(); event.stopPropagation(); playGridVideo('{{ $project->id }}')">
-                                    <div id="thumb-container-{{ $project->id }}" class="absolute inset-0 z-20">
-                                        @php
-                                            $images = $project->img_paths;
-                                            $firstImage = !empty($images) ? $images[0] : 'assets/images/placeholder.jpg';
-                                        @endphp
-                                        <img src="{{ asset('storage/' . $firstImage) }}"
-                                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                            alt="{{ $project->title }}" />
+                            <!-- Video/Thumbnail Area -->
+                            <div class="relative aspect-[4/3] overflow-hidden bg-black cursor-pointer"
+                                onclick="event.preventDefault(); event.stopPropagation(); playGridVideo('{{ $project->id }}')">
+                                <div id="thumb-container-{{ $project->id }}" class="absolute inset-0 z-20">
+                                    @php
+                                    $images = $project->img_paths;
+                                    $firstImage = !empty($images) ? $images[0] : 'assets/images/placeholder.jpg';
+                                    @endphp
+                                    <img src="{{ asset('storage/' . $firstImage) }}"
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        alt="{{ $project->title }}" />
+                                    <div
+                                        class="absolute top-5 left-5 bg-red-600 text-white px-4 py-1.5 rounded-full flex items-center gap-2 shadow-lg z-10">
+                                        <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span><span
+                                            class="text-[10px] font-bold uppercase tracking-widest">Live</span>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
                                         <div
-                                            class="absolute top-5 left-5 bg-red-600 text-white px-4 py-1.5 rounded-full flex items-center gap-2 shadow-lg z-10">
-                                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span><span
-                                                class="text-[10px] font-bold uppercase tracking-widest">Live</span>
-                                        </div>
-                                        <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-                                            <div
-                                                class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 transition-all duration-500">
-                                                <i class="fa-solid fa-play text-[#1b6e35] text-xl ml-1"></i>
-                                            </div>
+                                            class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 transition-all duration-500">
+                                            <i class="fa-solid fa-play text-[#1b6e35] text-xl ml-1"></i>
                                         </div>
                                     </div>
-                                    @if ($project->video_path)
-                                        <video id="video-{{ $project->id }}" class="w-full h-full object-cover hidden z-10"
-                                            controls>
-                                            <source src="{{ asset('storage/' . $project->video_path) }}" type="video/mp4">
-                                        </video>
-                                    @endif
                                 </div>
+                                @if ($project->video_path)
+                                <video id="video-{{ $project->id }}" class="w-full h-full object-cover hidden z-10"
+                                    controls>
+                                    <source src="{{ asset('storage/' . $project->video_path) }}" type="video/mp4">
+                                </video>
+                                @endif
+                            </div>
 
-                                <div class="p-8">
-                                    <h3 class="text-xl md:text-xl font-bold text-[#111111] mb-3 line-clamp-2">
-                                        {{ $project->title }}
-                                    </h3>
-                                    <div class="flex items-center gap-2 text-gray-500 text-base mb-6"><i
-                                            class="fa-solid fa-location-dot"></i><span>{{ $project->location ?? 'Location' }}</span>
-                                    </div>
-                                    <div class="h-[1px] w-full bg-gray-100 mb-6"></div>
-                                    <div class="flex items-center gap-2 text-gray-700 font-bold"><i
-                                            class="fa-regular fa-eye"></i><span>{{ number_format($project->views) }}
-                                            Watching</span></div>
+                            <div class="p-8">
+                                <h3 class="text-xl md:text-xl font-bold text-[#111111] mb-3 line-clamp-2">
+                                    {{ $project->title }}
+                                </h3>
+                                <div class="flex items-center gap-2 text-gray-500 text-base mb-6"><i
+                                        class="fa-solid fa-location-dot"></i><span>{{ $project->location ?? 'Location'
+                                        }}</span>
                                 </div>
-                            </a>
-                        </div>
+                                <div class="h-[1px] w-full bg-gray-100 mb-6"></div>
+                                <div class="flex items-center gap-2 text-gray-700 font-bold"><i
+                                        class="fa-regular fa-eye"></i><span>{{ number_format($project->views) }}
+                                        Watching</span></div>
+                            </div>
+                        </a>
+                    </div>
                     @endforeach
                 </div>
                 <!-- Pagination Mobile -->
@@ -426,34 +427,34 @@
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-8">
                 @forelse($companies as $company)
-                    @php
-                        $logo = $company->company_logo ? 'storage/' . $company->company_logo : 'assets/images/placeholder.jpg';
-                    @endphp
+                @php
+                $logo = $company->company_logo ? 'storage/' . $company->company_logo : 'assets/images/placeholder.jpg';
+                @endphp
 
-                    <!-- Company Card link filters project list by selected developer id -->
-                    <a href="{{ route('web.project', ['company' => $company->slug]) }}"
-                        class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.01)] hover:shadow-lg hover:border-gray-200 transition-all duration-300 aspect-square text-center group">
+                <!-- Company Card link filters project list by selected developer id -->
+                <a href="{{ route('web.project', ['company' => $company->slug]) }}"
+                    class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.01)] hover:shadow-lg hover:border-gray-200 transition-all duration-300 aspect-square text-center group">
 
-                        <!-- Logo Container with uniform sizing -->
-                        <div class="w-full flex-grow flex items-center justify-center p-2 mb-4 h-28">
-                            <img src="{{ asset($logo) }}"
-                                class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
-                                alt="{{ $company->company_name }}">
-                        </div>
-
-                        <!-- Company Name with green accent -->
-                        <div class="w-full">
-                            <h3
-                                class="text-xs md:text-base font-extrabold text-[#1b6e35] group-hover:underline leading-tight line-clamp-2">
-                                {{ $company->company_name }}
-                            </h3>
-                        </div>
-
-                    </a>
-                @empty
-                    <div class="col-span-full text-center py-10 text-gray-400">
-                        <p class="font-semibold text-base">No premium developers found at the moment.</p>
+                    <!-- Logo Container with uniform sizing -->
+                    <div class="w-full flex-grow flex items-center justify-center p-2 mb-4 h-28">
+                        <img src="{{ asset($logo) }}"
+                            class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                            alt="{{ $company->company_name }}">
                     </div>
+
+                    <!-- Company Name with green accent -->
+                    <div class="w-full">
+                        <h3
+                            class="text-xs md:text-base font-extrabold text-[#1b6e35] group-hover:underline leading-tight line-clamp-2">
+                            {{ $company->company_name }}
+                        </h3>
+                    </div>
+
+                </a>
+                @empty
+                <div class="col-span-full text-center py-10 text-gray-400">
+                    <p class="font-semibold text-base">No premium developers found at the moment.</p>
+                </div>
                 @endforelse
             </div>
         </div>
@@ -465,7 +466,7 @@
     <!-- EXPLORE BLOG SECTION -->
     @if($blogs->count() > 0)
         <section class=" py-10">
-            <div class="container mx-auto px-6 md:px-10">
+            <div class="container mx-auto px-4">
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-8">
                     <div class="max-w-xl">
                         <span class="text-[#1b6e35] text-xs md:text-base font-medium uppercase tracking-widest block mb-3">

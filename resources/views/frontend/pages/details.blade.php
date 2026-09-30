@@ -425,7 +425,7 @@
 
 
             {{--Right Cols--}}
-            <div class="lg:col-span-4 flex flex-col gap-6 sticky top-28">
+            <div class="lg:col-span-4 flex flex-col gap-6 sticky top-28 max-h-[calc(100vh-120px)] overflow-y-auto pb-4 scrollbar-hide">
 
                 <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                     <p
@@ -502,6 +502,28 @@
                                     value="{{ auth()->check() ? auth()->user()->phone : old('lead_phone') }}"
                                     class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
                             </div>
+
+                            <div class="flex gap-2">
+                                <input type="text" name="lead_job_title" placeholder="Job Title"
+                                    aria-label="Job Title"
+                                    class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                                <input type="text" name="lead_company" placeholder="Company"
+                                    aria-label="Company"
+                                    class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                            </div>
+
+                            <input type="text" name="lead_budget" placeholder="Estimated Budget"
+                                aria-label="Estimated Budget"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+
+                            <select name="lead_investment_time" aria-label="When Planning to Invest"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                                <option value="" disabled selected>When Planning to Invest?</option>
+                                <option value="Within 15 Days">Within 15 Days</option>
+                                <option value="Within 1 Month">Within 1 Month</option>
+                                <option value="Within 1-3 Months">Within 1-3 Months</option>
+                                <option value="After 3 Months">After 3 Months</option>
+                            </select>
 
                             <textarea name="lead_message" rows="3" placeholder="Please type your message" required
                                 aria-label="Please type your message"
