@@ -90,13 +90,28 @@ class ContactController extends Controller
         try {
             $fullPhone = $request->input('country_code') . ' ' . $request->input('lead_phone');
 
+            $additionalInfo = "";
+            if ($request->filled('lead_job_title')) $additionalInfo .= "\nJob Title: " . $request->input('lead_job_title');
+            if ($request->filled('lead_company')) $additionalInfo .= "\nCompany: " . $request->input('lead_company');
+            if ($request->filled('lead_budget')) $additionalInfo .= "\nBudget: " . $request->input('lead_budget');
+            if ($request->filled('lead_investment_time')) $additionalInfo .= "\nInvestment Plan: " . $request->input('lead_investment_time');
+
+            $finalMessage = $request->input('lead_message');
+            if (!empty($additionalInfo)) {
+                $finalMessage .= "\n\n--- Additional Details ---" . $additionalInfo;
+            }
+
             Contact::create([
                 'name'       => $request->input('lead_name'),
                 'company_id' => $request->input('company_id'),
                 'email'      => $request->input('lead_email'),
                 'phone'      => $fullPhone,
+                'job_title'  => $request->input('lead_job_title'),
+                'company'    => $request->input('lead_company'),
+                'budget'     => $request->input('lead_budget'),
+                'investment_time' => $request->input('lead_investment_time'),
                 'subject'    => $request->input('subject'),
-                'message'    => $request->input('lead_message'),
+                'message'    => $finalMessage,
                 'is_read'    => false,
             ]);
 

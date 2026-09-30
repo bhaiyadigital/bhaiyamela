@@ -1,4 +1,3 @@
-
 <style>
     table {
         width: 100%;
@@ -128,128 +127,138 @@
 
 @php
     $item = $model ?? ($page ?? ($project ?? null));
-    
+
     $previewMode = request()->query('preview') === '1';
-    
-    $descActive = $item ? ((string)$item->description_status === '1') : false;
-    $desc1Active = $item ? ((string)$item->description_1_status === '1') : false;
-    $desc2Active = $item ? ((string)$item->description_2_status === '1') : false;
+
+    $descActive = $item ? ((string) $item->description_status === '1') : false;
+    $desc1Active = $item ? ((string) $item->description_1_status === '1') : false;
+    $desc2Active = $item ? ((string) $item->description_2_status === '1') : false;
 
     $hasRenderableContent = false;
     if ($item) {
-        if (($descActive || $previewMode) && !empty($item->description)) $hasRenderableContent = true;
-        if (($desc1Active || $previewMode) && !empty($item->description_1)) $hasRenderableContent = true;
-        if (($desc2Active || $previewMode) && !empty($item->description_2)) $hasRenderableContent = true;
+        if (($descActive || $previewMode) && !empty($item->description))
+            $hasRenderableContent = true;
+        if (($desc1Active || $previewMode) && !empty($item->description_1))
+            $hasRenderableContent = true;
+        if (($desc2Active || $previewMode) && !empty($item->description_2))
+            $hasRenderableContent = true;
     }
 @endphp
 
 @if($item && $hasRenderableContent)
-<!-- Single Shared Card Container for all active accordions -->
-<div class="container bg-white  p-6 border border-gray-100 shadow-sm flex flex-col gap-3 select-none relative w-full mb-8">
-    
-    <!-- Box 1 / Description 1 Accordion -->
-    @if(($descActive || $previewMode) && !empty($item->description))
-    <div class=" overflow-hidden transition-all duration-300 relative">
-        @if(!$descActive)
-            <span class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
-        @endif
-        
-        <button type="button" 
-                class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
-                data-target="desc-answer-1">
-            <span>{{ $item->description_title }}</span>
-            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
-        </button>
-        
-        <!-- style="max-height: 0px;" added as fallback to prevent any styling overrides -->
-        <div id="desc-answer-1" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out " style="max-height: 0px;">
-            <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
-                {!! $item->description !!}
+    <!-- Single Shared Card Container for all active accordions -->
+    <div
+        class="container px-4 bg-white p-4 border border-gray-100 shadow-sm flex flex-col gap-3 select-none relative w-full mb-8">
+
+        <!-- Box 1 / Description 1 Accordion -->
+        @if(($descActive || $previewMode) && !empty($item->description))
+            <div class="overflow-hidden transition-all duration-300 relative">
+                @if(!$descActive)
+                    <span
+                        class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+                @endif
+
+                <button type="button"
+                    class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
+                    data-target="desc-answer-1">
+                    <span>{{ $item->description_title }}</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
+                </button>
+
+                <!-- style="max-height: 0px;" added as fallback to prevent any styling overrides -->
+                <div id="desc-answer-1" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
+                    style="max-height: 0px;">
+                    <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
+                        {!! $item->description !!}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    @endif
-
-    <!-- Box 2 / Description 2 Accordion -->
-    @if(($desc1Active || $previewMode) && !empty($item->description_1))
-    <div class=" overflow-hidden transition-all duration-300 relative">
-        @if(!$desc1Active)
-            <span class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
         @endif
-        
-        <button type="button" 
-                class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
-                data-target="desc-answer-2">
-            <span>{{ $item->description_1_title }}</span>
-            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
-        </button>
-        
-        <div id="desc-answer-2" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out " style="max-height: 0px;">
-            <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
-                {!! $item->description_1 !!}
-            </div>
-        </div>
-    </div>
-    @endif
 
-    <!-- Box 3 / Description 3 Accordion -->
-    @if(($desc2Active || $previewMode) && !empty($item->description_2))
-    <div class=" overflow-hidden transition-all duration-300 relative">
-        @if(!$desc2Active)
-            <span class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+        <!-- Box 2 / Description 2 Accordion -->
+        @if(($desc1Active || $previewMode) && !empty($item->description_1))
+            <div class=" overflow-hidden transition-all duration-300 relative">
+                @if(!$desc1Active)
+                    <span
+                        class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+                @endif
+
+                <button type="button"
+                    class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
+                    data-target="desc-answer-2">
+                    <span>{{ $item->description_1_title }}</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
+                </button>
+
+                <div id="desc-answer-2" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
+                    style="max-height: 0px;">
+                    <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
+                        {!! $item->description_1 !!}
+                    </div>
+                </div>
+            </div>
         @endif
-        
-        <button type="button" 
-                class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
-                data-target="desc-answer-3">
-            <span>{{ $item->description_2_title }}</span>
-            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
-        </button>
-        
-        <div id="desc-answer-3" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out " style="max-height: 0px;">
-            <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
-                {!! $item->description_2 !!}
+
+        <!-- Box 3 / Description 3 Accordion -->
+        @if(($desc2Active || $previewMode) && !empty($item->description_2))
+            <div class=" overflow-hidden transition-all duration-300 relative">
+                @if(!$desc2Active)
+                    <span
+                        class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+                @endif
+
+                <button type="button"
+                    class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
+                    data-target="desc-answer-3">
+                    <span>{{ $item->description_2_title }}</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
+                </button>
+
+                <div id="desc-answer-3" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
+                    style="max-height: 0px;">
+                    <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
+                        {!! $item->description_2 !!}
+                    </div>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
-    @endif
 
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const descButtons = document.querySelectorAll('.desc-faq-btn');
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const descButtons = document.querySelectorAll('.desc-faq-btn');
+            descButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const targetId = this.getAttribute('data-target');
+                    const answer = document.getElementById(targetId);
+                    const icon = this.querySelector('.fa-chevron-down');
 
-    descButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const answer = document.getElementById(targetId);
-            const icon = this.querySelector('.fa-chevron-down');
+                    if (!answer) return;
 
-            if (!answer) return;
+                    document.querySelectorAll('.desc-faq-answer').forEach(el => {
+                        if (el.id !== targetId) {
+                            el.style.maxHeight = "0px"; // Force close
+                            const otherBtn = el.previousElementSibling;
+                            if (otherBtn) {
+                                otherBtn.querySelector('.fa-chevron-down')?.classList.remove('rotate-180');
+                                otherBtn.classList.remove('text-[#2ba351]');
+                            }
+                        }
+                    });
 
-            document.querySelectorAll('.desc-faq-answer').forEach(el => {
-                if (el.id !== targetId) {
-                    el.style.maxHeight = "0px"; // Force close
-                    const otherBtn = el.previousElementSibling;
-                    if (otherBtn) {
-                        otherBtn.querySelector('.fa-chevron-down')?.classList.remove('rotate-180');
-                        otherBtn.classList.remove('text-[#2ba351]');
+                    if (answer.style.maxHeight && answer.style.maxHeight !== "0px") {
+                        answer.style.maxHeight = "0px"; // Close current accordion
+                        icon.classList.remove('rotate-180');
+                        this.classList.remove('text-[#2ba351]');
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + "px"; // Open current accordion
+                        icon.classList.add('rotate-180');
+                        this.classList.add('text-[#2ba351]');
                     }
-                }
+                });
             });
-
-            if (answer.style.maxHeight && answer.style.maxHeight !== "0px") {
-                answer.style.maxHeight = "0px"; // Close current accordion
-                icon.classList.remove('rotate-180');
-                this.classList.remove('text-[#2ba351]');
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + "px"; // Open current accordion
-                icon.classList.add('rotate-180');
-                this.classList.add('text-[#2ba351]');
-            }
         });
-    });
-});
-</script>
+    </script>
 @endif
