@@ -68,6 +68,9 @@ $isFavorite = \App\Models\Favorite::where('user_id', auth()->id())
     <!-- Content Area -->
     <div class="p-6 md:p-8 flex-grow flex flex-col">
         <!-- Title & SALE Badge (Cleaned up: Removed nested <a> tags to pass HTML5 validation) -->
+         <span class="inline-block bg-[#1b6e35] text-white text-[10px] font-bold px-3 py-1 rounded mb-4 uppercase tracking-wider w-fit">
+            {{ $project->category->title ?? 'Apartments' }}
+        </span>
         <div class="flex items-center gap-2 mb-3">
             <h3 class="text-base md:text-base font-bold text-gray-900 leading-tight line-clamp-1 group-hover:text-[#224194] transition-colors">
                 {{ $project->title }}
@@ -76,9 +79,7 @@ $isFavorite = \App\Models\Favorite::where('user_id', auth()->id())
         </div>
 
         <!-- Category Tag -->
-        <span class="inline-block bg-[#1b6e35] text-white text-[10px] font-bold px-3 py-1 rounded mb-4 uppercase tracking-wider w-fit">
-            {{ $project->category->title ?? 'Apartments' }}
-        </span>
+       
 
         <!-- Location -->
         <div class="flex items-center gap-1.5 text-gray-600 text-base mb-5">
@@ -103,7 +104,7 @@ $isFavorite = \App\Models\Favorite::where('user_id', auth()->id())
         @endif
 
         <!-- Developer Company Footer -->
-        @if($project->company)
+        <!-- @if($project->company)
         <div class="border-t border-gray-100 pt-4 mt-auto flex items-center gap-3">
             <div class="w-10 h-10 rounded-full overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0">
                 <img src="{{ $project->company->company_logo ? asset('storage/' . $project->company->company_logo) : asset('assets/images/placeholder.jpg') }}"
@@ -134,7 +135,7 @@ $isFavorite = \App\Models\Favorite::where('user_id', auth()->id())
                 </span>
             </div>
         </div>
-        @endif
+        @endif -->
     </div>
 
 </div>
