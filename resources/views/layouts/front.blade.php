@@ -68,33 +68,7 @@
 
 
 
-    <!-- Facebook Pixel Setup -->
-    <script>
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '787404720766346');
-        fbq('track', 'PageView');
-    </script>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=787404720766346&ev=PageView&noscript=1" />
-    </noscript>
+
 </head>
 
 <body class="font-manrope bg-[#F2F4F7]" data-page="index">
@@ -250,6 +224,57 @@
         });
     </script>
 
+    <!-- Facebook Pixel -->
+    <script>
+        setTimeout(() => {
+            function loadPixel() {
+                if (window.fbLoaded) return;
+                ! function(f, b, e, v, n, t, s) {
+                    if (f.fbq) return;
+                    n = f.fbq = function() {
+                        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    };
+                    if (!f._fbq) f._fbq = n;
+                    n.push = n;
+                    n.loaded = !0;
+                    n.version = '2.0';
+                    n.queue = [];
+                    t = b.createElement(e);
+                    t.async = !0;
+                    t.src = v;
+                    s = b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t, s)
+                }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '{{ config('services.facebook.pixel_id') }}');
+                @if(isset($fbEventId))
+                fbq('track', 'PageView', {}, {eventID: '{{ $fbEventId }}'});
+                @else
+                fbq('track', 'PageView');
+                @endif
+                
+                @if(session('success'))
+                fbq('track', 'Lead');
+                @endif
+                
+                @if(in_array(Route::currentRouteName(), ['project.details', 'web.project.category', 'web.page', 'web.blog.details', 'area-guides.show']))
+                fbq('track', 'ViewContent');
+                @endif
+                
+                @stack('fb_pixel_events')
+
+                window.fbLoaded = true;
+            }
+            ['mouseover', 'scroll', 'touchstart'].forEach(event => {
+                window.addEventListener(event, loadPixel, {
+                    once: true
+                });
+            });
+        }, 1500);
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id={{ config('services.facebook.pixel_id') }}&ev=PageView&noscript=1" />
+    </noscript>
 </body>
 
 </html>

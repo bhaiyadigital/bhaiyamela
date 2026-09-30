@@ -115,6 +115,12 @@ class ContactController extends Controller
                 'is_read'    => false,
             ]);
 
+            \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'property_owner'], [
+                'em' => $request->input('lead_email'),
+                'ph' => $fullPhone,
+                'fn' => $request->input('lead_name')
+            ]);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Your message has been sent successfully to the property owner.'
