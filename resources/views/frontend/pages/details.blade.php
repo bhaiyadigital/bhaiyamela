@@ -98,7 +98,7 @@
                 </div>
 
 
-                <div class="sticky top-0 bg-white z-30 py-4 flex flex-wrap gap-3 border-b border-gray-100 shadow-sm">
+                <div class="sticky top-0 bg-white z-30 py-4 pl-3 flex flex-wrap gap-3 border-b border-gray-100 shadow-sm">
 
                     <a href="#section-overview"
                         class="tab-link px-4 py-2.5 bg-[#1b6e35] text-white rounded-xl text-xs md:text-base font-extrabold border border-[#1b6e35] shadow-sm shadow-[#1b6e35]/10 hover:opacity-95 transition-all whitespace-nowrap">
@@ -425,7 +425,7 @@
 
 
             {{--Right Cols--}}
-            <div class="lg:col-span-4 flex flex-col gap-6">
+            <div class="lg:col-span-4 flex flex-col gap-6 sticky top-28">
 
                 <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                     <p
