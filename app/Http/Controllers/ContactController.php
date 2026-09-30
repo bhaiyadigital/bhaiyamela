@@ -74,7 +74,6 @@ class ContactController extends Controller
         $request->validate([
             'lead_name'    => 'required|string|max:255',
             'lead_email'   => 'nullable|email|max:255',
-            'country_code' => 'required|string',
             'lead_phone' => ['required', 'string', new ValidPhoneNumber()],
             'lead_message' => 'required|string',
             'company_id'   => 'nullable|integer',

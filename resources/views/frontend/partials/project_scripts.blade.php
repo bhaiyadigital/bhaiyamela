@@ -9,7 +9,7 @@
     <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
         <button type="button" onclick="clearCompareList()" class="text-[10px] sm:text-xs text-red-500 font-extrabold hover:underline px-1 sm:px-2 py-1">Clear</button>
         
-        <a id="compareBtnLink" href="#" class="bg-[#2ba351] hover:bg-[#1f7035] text-white text-[10px] sm:text-xs font-extrabold px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#2ba351]/10 whitespace-nowrap">
+        <a id="compareBtnLink" href="#" class="bg-[#2ba351] hover:bg-[#1a285a] text-white text-[10px] sm:text-xs font-extrabold px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#2ba351]/10 whitespace-nowrap">
             Compare Now
         </a>
     </div>
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         title: 'Limit Exceeded',
                         text: 'You can compare a maximum of 3 properties at a time.',
                         btnText: 'Understand',
-                        btnClass: 'bg-[#2ba351] hover:bg-[#1f7035] shadow-[#2ba351]/10',
+                        btnClass: 'bg-[#2ba351] hover:bg-[#1a285a] shadow-[#2ba351]/10',
                         iconClass: 'bg-green-50 text-[#2ba351]',
                         iconHtml: '<i class="fa-solid fa-scale-unbalanced-flip"></i>',
                         callback: null // Just closes on click
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             title: 'Login Required',
                             text: 'Please login to save this property to your favorites list.',
                             btnText: 'Login Now',
-                            btnClass: 'bg-[#2ba351] hover:bg-[#1f7035] shadow-[#2ba351]/10',
+                            btnClass: 'bg-[#2ba351] hover:bg-[#1a285a] shadow-[#2ba351]/10',
                             iconClass: 'bg-green-50 text-[#2ba351]',
                             iconHtml: '<i class="fa-solid fa-circle-user"></i>',
                             callback: function() {

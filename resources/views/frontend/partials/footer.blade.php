@@ -1,8 +1,8 @@
 <!-- FOOTER SECTION -->
-<footer class="bg-[#050a18] text-white pt-20 pb-8 font-manrope">
+<footer class="bg-[#050a18] text-white pt-20 pb-8">
     <div class="container mx-auto">
         <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch border-b border-[#3D7B59]">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch border-b border-[#2c4294]">
             <!-- Column 1: Logo & Social -->
             <div class="px-4 pb-16 lg:pb-20">
                 <!-- Mobile: Row containing Logo & Socials | Desktop: Vertical Stack -->
@@ -25,7 +25,7 @@
                     <div class="flex md:hidden items-center gap-3">
                         @foreach ($socials as $social)
                             <a href="{{ $social->url }}" target="_blank" aria-label="Visit our social media profile"
-                                class="w-8 h-8 rounded-full bg-[#4D6356] flex items-center justify-center hover:bg-[#2c4294] transition shadow-sm">
+                                class="w-8 h-8 rounded-full bg-[#2c4294] flex items-center justify-center hover:bg-[#2c4294] transition shadow-sm">
                                 <i class="{{ $social->title }} text-base text-white"></i>
                             </a>
                         @endforeach
@@ -41,7 +41,7 @@
                 <div class="hidden md:flex items-center gap-3">
                     @foreach ($socials as $social)
                         <a href="{{ $social->url }}" target="_blank" aria-label="Visit our social media profile"
-                            class="w-8 h-8 rounded-full bg-[#4D6356] flex items-center justify-center hover:bg-[#2c4294] transition shadow-sm">
+                            class="w-8 h-8 rounded-full bg-[#2c4294] flex items-center justify-center hover:bg-[#2c4294] transition shadow-sm">
                             <i class="{{ $social->title }} text-base text-white"></i>
                         </a>
                     @endforeach
@@ -49,23 +49,23 @@
             </div>
 
             <div
-                class="border-t lg:border-t-0 lg:border-l border-[#3D7B59] px-6 lg:px-12 flex flex-col items-center text-center pb-16 lg:pb-20 pt-12 lg:pt-0">
-                <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4">
-                    Subscribe
+                class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:px-12 flex flex-col items-center text-center pb-16 lg:pb-20 pt-12 lg:pt-0">
+                <h3 class="text-xl font-bold uppercase mb-4">
+                    সাবস্ক্রাইব
                 </h3>
                 <p class="text-white/60 text-base mb-8 max-w-[220px]">
-                    Stay updated with our latest projects and news.
+                    আমাদের নতুন প্রকল্প এবং খবরের সাথে আপডেট থাকুন।
                 </p>
 
                 <form action="{{ route('web.subscription') }}" id="subscribe-id" method="POST"
                     class="w-full max-w-[280px] space-y-4">
                     @csrf
-                    <input type="email" name="email" placeholder="Email Address" required
+                    <input type="email" name="email" placeholder="ইমেইল এড্রেস" required
                         class="w-full bg-transparent border border-white/20 rounded-full px-6 py-2.5 text-base focus:outline-none focus:border-white/50 text-center placeholder:text-white/30" />
 
                     <button type="submit"
                         class="w-full bg-[#2c4294] hover:bg-blue-800 text-white py-3 rounded-full font-bold text-base uppercase tracking-widest transition cursor-pointer">
-                        Subscribe
+                        সাবস্ক্রাইব
                     </button>
 
                     @if (session('success'))
@@ -89,15 +89,15 @@
             </div>
 
             <!-- Column 3: MENU -->
-            <div class="border-t lg:border-t-0 lg:border-l border-[#3D7B59] px-6 lg:pl-20 pb-16 lg:pb-20 pt-12 lg:pt-0">
-                <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-8">
-                    Menu
+            <div class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:pl-20 pb-16 lg:pb-20 pt-12 lg:pt-0">
+                <h3 class="text-xl font-bold uppercase  mb-8">
+                    মেনু
                 </h3>
                 <ul class="space-y-4 text-base text-white/60">
                     <li>
                         <a href="{{ route('web.project') }}" class="hover:text-white transition"
                             aria-label="all projects">
-                            All Projects
+                            সব প্রকল্প
                         </a>
                     </li>
 
@@ -114,32 +114,37 @@
                     <li>
                         <a href="{{ route('requirements.create') }}" class="hover:text-white transition"
                             aria-label="post-requirement">
-                            Post Your Requirements
+                            আপনার চাহিদা জানান
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <!-- Column 4: INFORMATION -->
+            <!-- Column 4: RECENT PROJECTS -->
             <div class="border-t lg:border-t-0 px-6 lg:pl-10 pb-16 lg:pb-20 pt-12 lg:pt-0">
-                <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-8">
-                    Information
+                <h3 class="text-xl font-bold uppercase  mb-8">
+                    সাম্প্রতিক প্রকল্প
                 </h3>
                 <ul class="space-y-4 text-base text-white/60">
-                    @foreach ($pages as $page)
+                    @php
+                        $footerProjects = \App\Models\Content::where('module', 'project')
+                            ->active()
+                            ->approved()
+                            ->latest()
+                            ->take(5)
+                            ->get();
+                    @endphp
+                    @foreach ($footerProjects as $fProject)
                         <li>
-                            <a href="{{ url('/page/' . $page->slug) }}" class="hover:text-white transition"
-                                aria-label="pages">
-                                {{ $page->title }}
+                            <a href="{{ route('project.details', $fProject->slug) }}"
+                                class="hover:text-white transition line-clamp-1" aria-label="{{ $fProject->title }}">
+                                {{ $fProject->title }}
                             </a>
                         </li>
                     @endforeach
-                    <li>
-                        <a href="{{ route('faq.index') }}" class="hover:text-white transition" aria-label="faq"> Faq
-
-                        </a>
-
-                    </li>
+                    @if($footerProjects->isEmpty())
+                        <li>কোন প্রকল্প পাওয়া যায়নি।</li>
+                    @endif
                 </ul>
             </div>
         </div>

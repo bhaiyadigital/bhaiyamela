@@ -45,10 +45,10 @@
 
         <!-- 3. Section Title -->
         <div class="text-center mb-8">
-            <h2 class="text-lg md:text-xl font-extrabold text-[#1b6e35] uppercase tracking-wider">
+            <h2 class="text-lg md:text-xl font-extrabold text-[#2c4294] uppercase tracking-wider">
                 Our Platinum Members
             </h2>
-            <div class="w-24 h-1 bg-[#1b6e35] mx-auto mt-2"></div>
+            <div class="w-24 h-1 bg-[#2c4294] mx-auto mt-2"></div>
         </div>
         <!-- Dynamic Company Search Bar (Fixed Icon Alignment) -->
         <div class="max-w-md mx-auto mb-12">
@@ -91,7 +91,7 @@
                     <!-- Company Name with green accent -->
                     <div class="w-full">
                         <h3
-                            class="text-xs md:text-base font-extrabold text-[#1b6e35] group-hover:underline leading-tight line-clamp-2">
+                            class="text-xs md:text-base font-extrabold text-[#2c4294] group-hover:underline leading-tight line-clamp-2">
                             {{ $company->company_name }}
                         </h3>
                     </div>

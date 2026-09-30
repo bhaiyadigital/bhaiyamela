@@ -62,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
                 'short'            => ['label' => 'City',    'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'description'            => ['label' => 'Sub  area',    'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'title'            => ['label' => 'Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                
+
                 'url'              => ['label' => 'Link URL',             'required' => false, 'show_in_table' => false, 'type' => 'url'],
                 'meta_title'       => ['label' => 'Meta Title',           'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'meta_description' => ['label' => 'Meta Description',     'required' => false, 'show_in_table' => false, 'type' => 'textarea'],
@@ -101,7 +101,7 @@ class AppServiceProvider extends ServiceProvider
                 'destination_id'        => ['label' => 'Select Destination',      'required' => true,  'show_in_table' => false, 'type' => 'select'],
                 'slug'             => ['label' => 'Slug',                 'required' => true,  'show_in_table' => true,  'type' => 'text'],
                 'prev_slug'        => ['label' => 'Previous Slug',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
-                'short'            => ['label' => 'Price',    'required' => true,  'show_in_table' => false, 'type' => 'text'],
+                'short'            => ['label' => 'Price',    'required' => false,  'show_in_table' => false, 'type' => 'text'],
                 'description'      => ['label' => 'Project Description',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
 
                 'description_3'    => ['label' => 'Project Description 2',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
@@ -118,7 +118,7 @@ class AppServiceProvider extends ServiceProvider
                 'description_1'    => ['label' => 'Floor Plan',        'required' => false, 'show_in_table' => false, 'type' => 'image_multiple'],
                 'description_2'    => ['label' => 'Location View',        'required' => false, 'show_in_table' => false, 'type' => 'image_multiple'],
                 'video_path'       => ['label' => 'Property Video',        'required' => false, 'show_in_table' => false, 'type' => 'video'],
-                'virtual_tour' =>     ['label' => '360° Panorama Image (Virtual Tour)', 'required' => false, 'show_in_table' => false, 'type' => 'image'],
+                // 'virtual_tour' =>     ['label' => '360° Panorama Image (Virtual Tour)', 'required' => false, 'show_in_table' => false, 'type' => 'image'],
                 'url'              => ['label' => 'Location Maps(Embed Url)',        'required' => false, 'show_in_table' => false, 'type' => 'url'],
                 'location'         => ['label' => 'Location',             'required' => false, 'show_in_table' => true,  'type' => 'text'],
                 'start_date'       => ['label' => 'Publish Date',         'required' => false, 'show_in_table' => true,  'type' => 'datetime'],

@@ -8,14 +8,14 @@
         </div>
 
         <!-- Navigation Links (Desktop) -->
-        <nav class="hidden lg:flex items-center gap-5 font-semibold text-lg">
+        <nav class="hidden lg:flex items-center gap-5 font-semibold text-base">
             <!-- Home link matches your color now via .nav-link CSS -->
-            <a href="{{ route('web.home') }}" class="nav-link active-link" aria-label="Home">Home</a>
-            <a href="{{ route('web.project') }}" class="nav-link active-link" aria-label="Properties">Properties</a>
+            <a href="{{ route('web.home') }}" class="nav-link active-link" aria-label="Home">হোম</a>
+            <a href="{{ route('web.project') }}" class="nav-link active-link" aria-label="Properties">প্রপার্টিজ</a>
             <div class="relative group cursor-pointer">
                 <button class="nav-link flex items-center gap-1 cursor-pointer" aria-haspopup="true"
                     aria-expanded="false">
-                    Category
+                    ক্যাটাগরি
                     <i class="fa-solid fa-chevron-down text-[10px] mt-1"></i>
                 </button>
 
@@ -28,12 +28,12 @@
                             {{ $category->title }}
                         </a>
                     @empty
-                        <span class="block py-2 text-xs text-gray-400">No Category Available</span>
+                        <span class="block py-2 text-xs text-gray-400">কোন ক্যাটাগরি নেই</span>
                     @endforelse
                 </div>
             </div>
             <!-- <a href="{{ route('developers.index') }}" class="nav-link" aria-label="Developers">Concerns</a> -->
-            <a href="{{ route('web.blog') }}" class="nav-link" aria-label="Blogs">Blog</a>
+            <a href="{{ route('web.blog') }}" class="nav-link" aria-label="Blogs">ব্লগ</a>
             {{-- @auth
             @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
             <!-- If logged in as Admin or Developer Company -->
@@ -59,23 +59,23 @@
         <div id="drawer-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
         <div class="absolute right-0 top-0 h-full w-[280px] bg-white p-8 shadow-2xl flex flex-col">
             <div class="flex justify-between items-center mb-10">
-                <span class="font-bold text-xl text-brand-blue">Menu</span>
+                <span class="font-bold text-xl text-brand-blue">মেনু</span>
                 <button id="close-drawer" class="text-gray-500 text-xl" aria-label="Close Menu">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <div class="flex flex-col space-y-6">
-                <a href="{{ route('web.home') }}" class="text-gray-900 font-semibold text-lg" aria-label="Home">Home</a>
+                <a href="{{ route('web.home') }}" class="text-gray-900 font-semibold text-lg" aria-label="Home">হোম</a>
                 <a href="{{ route('web.project') }}"
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2"
-                    aria-label="Developers">Properties</a>
+                    aria-label="Developers">প্রপার্টিজ</a>
                 <!-- Mobile Destination Dropdown (Click to Expand) -->
                 <div class="border-b border-gray-50 pb-2">
                     <!-- Click handler to toggle dropdown with smooth chevron rotation -->
                     <button type="button" onclick="toggleMobileDestDropdown()"
                         class="w-full flex justify-between items-center text-gray-900 font-semibold text-lg focus:outline-none cursor-pointer">
-                        Category
+                        ক্যাটাগরি
                         <i id="mobileDestIcon"
                             class="fa-solid fa-chevron-down text-base transition-transform duration-300"></i>
                     </button>
@@ -88,7 +88,7 @@
                                 {{ $category->title }}
                             </a>
                         @empty
-                            <span class="block py-2 text-xs text-gray-400">No Category Available</span>
+                            <span class="block py-2 text-xs text-gray-400">কোন ক্যাটাগরি নেই</span>
                         @endforelse
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2"
                     aria-label="Developers">Concerns</a> -->
                 <a href="{{ route('web.blog') }}"
-                    class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2" aria-label="Blogs">Blog</a>
+                    class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2" aria-label="Blogs">ব্লগ</a>
                 {{-- @auth
                 @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
                 <a href="{{route('home')}}" class="nav-link" aria-label="Admin Dashboard">Dashboard</a>

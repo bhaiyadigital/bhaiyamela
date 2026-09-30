@@ -147,82 +147,83 @@
 
 @if($item && $hasRenderableContent)
     <!-- Single Shared Card Container for all active accordions -->
-    <div
-        class="container px-4 bg-white p-4 border border-gray-100 shadow-sm flex flex-col gap-3 select-none relative w-full mb-8">
+    <div class="container mx-auto px-4 md:px-0 mb-8">
+        <div class="bg-white rounded-xl border border-gray-100 shadow-sm flex flex-col select-none relative w-full">
 
-        <!-- Box 1 / Description 1 Accordion -->
-        @if(($descActive || $previewMode) && !empty($item->description))
-            <div class="overflow-hidden transition-all duration-300 relative">
-                @if(!$descActive)
-                    <span
-                        class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
-                @endif
+            <!-- Box 1 / Description 1 Accordion -->
+            @if(($descActive || $previewMode) && !empty($item->description))
+                <div class="overflow-hidden transition-all duration-300 relative">
+                    @if(!$descActive)
+                        <span
+                            class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+                    @endif
 
-                <button type="button"
-                    class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
-                    data-target="desc-answer-1">
-                    <span>{{ $item->description_title }}</span>
-                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
-                </button>
+                    <button type="button"
+                        class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2c4294] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
+                        data-target="desc-answer-1">
+                        <span>{{ $item->description_title }}</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
 
-                <!-- style="max-height: 0px;" added as fallback to prevent any styling overrides -->
-                <div id="desc-answer-1" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
-                    style="max-height: 0px;">
-                    <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
-                        {!! $item->description !!}
+                    <!-- style="max-height: 0px;" added as fallback to prevent any styling overrides -->
+                    <div id="desc-answer-1" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
+                        style="max-height: 0px;">
+                        <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
+                            {!! $item->description !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
-        <!-- Box 2 / Description 2 Accordion -->
-        @if(($desc1Active || $previewMode) && !empty($item->description_1))
-            <div class=" overflow-hidden transition-all duration-300 relative">
-                @if(!$desc1Active)
-                    <span
-                        class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
-                @endif
+            <!-- Box 2 / Description 2 Accordion -->
+            @if(($desc1Active || $previewMode) && !empty($item->description_1))
+                <div class=" overflow-hidden transition-all duration-300 relative">
+                    @if(!$desc1Active)
+                        <span
+                            class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+                    @endif
 
-                <button type="button"
-                    class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
-                    data-target="desc-answer-2">
-                    <span>{{ $item->description_1_title }}</span>
-                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
-                </button>
+                    <button type="button"
+                        class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
+                        data-target="desc-answer-2">
+                        <span>{{ $item->description_1_title }}</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
 
-                <div id="desc-answer-2" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
-                    style="max-height: 0px;">
-                    <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
-                        {!! $item->description_1 !!}
+                    <div id="desc-answer-2" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
+                        style="max-height: 0px;">
+                        <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
+                            {!! $item->description_1 !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
-        <!-- Box 3 / Description 3 Accordion -->
-        @if(($desc2Active || $previewMode) && !empty($item->description_2))
-            <div class=" overflow-hidden transition-all duration-300 relative">
-                @if(!$desc2Active)
-                    <span
-                        class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
-                @endif
+            <!-- Box 3 / Description 3 Accordion -->
+            @if(($desc2Active || $previewMode) && !empty($item->description_2))
+                <div class=" overflow-hidden transition-all duration-300 relative">
+                    @if(!$desc2Active)
+                        <span
+                            class="absolute top-4 right-14 bg-red-50 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded border border-red-200 z-10">PREVIEW</span>
+                    @endif
 
-                <button type="button"
-                    class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
-                    data-target="desc-answer-3">
-                    <span>{{ $item->description_2_title }}</span>
-                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
-                </button>
+                    <button type="button"
+                        class="desc-faq-btn w-full flex justify-between items-center p-5 text-left text-gray-800 hover:text-[#2ba351] font-bold text-base md:text-base focus:outline-none transition-colors gap-4 cursor-pointer"
+                        data-target="desc-answer-3">
+                        <span>{{ $item->description_2_title }}</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
 
-                <div id="desc-answer-3" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
-                    style="max-height: 0px;">
-                    <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
-                        {!! $item->description_2 !!}
+                    <div id="desc-answer-3" class="desc-faq-answer overflow-hidden transition-all duration-300 ease-in-out "
+                        style="max-height: 0px;">
+                        <div class="p-5 text-gray-600 text-xs md:text-base leading-relaxed border-t border-gray-100 blog-content">
+                            {!! $item->description_2 !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
+        </div>
     </div>
 
     <script>

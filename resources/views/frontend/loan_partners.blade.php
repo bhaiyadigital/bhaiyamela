@@ -25,15 +25,15 @@
 
         <!-- 2. Header Section -->
         <div class="text-center max-w-4xl mx-auto mb-12">
-            <!-- IMPROVED: text-[#2ba351] changed to text-[#1b6e35] for contrast check -->
-            <h1 class="text-xl md:text-xl font-black text-[#1b6e35] uppercase tracking-wide mb-3">Our Financial Partners
+            <!-- IMPROVED: text-[#2ba351] changed to text-[#2c4294] for contrast check -->
+            <h1 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide mb-3">Our Financial Partners
             </h1>
             <p class="text-gray-500 text-xs md:text-base leading-relaxed">
                 Get the best home loan rates and mortgage solutions from Bangladesh's top banks and financial institutions.
                 Compare annual interest rates and apply directly through our platform.
             </p>
-            <!-- IMPROVED: bg-[#2ba351] changed to bg-[#1b6e35] -->
-            <div class="w-24 h-1 bg-[#1b6e35] mx-auto mt-4"></div>
+            <!-- IMPROVED: bg-[#2ba351] changed to bg-[#2c4294] -->
+            <div class="w-24 h-1 bg-[#2c4294] mx-auto mt-4"></div>
         </div>
 
         <!-- 3. Two-Column Layout Grid -->
@@ -69,9 +69,9 @@
                                     <div class="flex justify-between items-start gap-2 mb-3">
                                         <!-- IMPROVED: Swapped h3 for h2 for optimal heading hierarchy -->
                                         <h2 class="font-extrabold text-gray-800 text-base leading-tight">{{ $partner->title }}</h2>
-                                        <!-- IMPROVED: text-[#2ba351] changed to text-[#1b6e35] -->
+                                        <!-- IMPROVED: text-[#2ba351] changed to text-[#2c4294] -->
                                         <span
-                                            class="bg-green-50 text-[#1b6e35] text-[10px] font-black px-2.5 py-1 rounded-lg flex-shrink-0 uppercase tracking-wider">
+                                            class="bg-green-50 text-[#2c4294] text-[10px] font-black px-2.5 py-1 rounded-lg flex-shrink-0 uppercase tracking-wider">
                                             {{ $partner->short }}
                                         </span>
                                     </div>
@@ -84,9 +84,9 @@
 
                                 <!-- Apply Now Action Buttons -->
                                 <div class="flex gap-2 mt-4 pt-3 border-t border-gray-50">
-                                    <!-- IMPROVED: bg-[#2ba351] and shadow updated to #1b6e35 -->
+                                    <!-- IMPROVED: bg-[#2ba351] and shadow updated to #2c4294 -->
                                     <button type="button" onclick="applyForLoan('{{ $partner->title }}')"
-                                        class="w-full text-center bg-[#1b6e35] hover:bg-[#1f7035] text-white py-2.5 rounded-xl font-bold text-xs transition-all uppercase tracking-wider shadow-md shadow-[#1b6e35]/10">
+                                        class="w-full text-center bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs transition-all uppercase tracking-wider shadow-md shadow-[#2c4294]/10">
                                         Apply Now
                                     </button>
                                 </div>
@@ -126,21 +126,21 @@
                         <!-- Added: for="lead_name", text-gray-500 changed to text-gray-600 -->
                         <label for="lead_name" class="text-[11px] font-bold text-gray-600 uppercase">Full Name <span
                                 class="text-red-500">*</span></label>
-                        <!-- Added: id="lead_name", focus:ring-[#1b6e35]/20 -->
+                        <!-- Added: id="lead_name", focus:ring-[#2c4294]/20 -->
                         <input type="text" name="lead_name" id="lead_name" required
                             value="{{ old('name', auth()->user() ? auth()->user()->name : '') }}"
                             placeholder="Enter Your Name"
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all">
+                            class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all">
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <!-- Added: for="lead_email", text-gray-500 changed to text-gray-600 -->
                         <label for="lead_email" class="text-[11px] font-bold text-gray-600 uppercase">Email Address</label>
-                        <!-- Added: id="lead_email", focus:ring-[#1b6e35]/20 -->
+                        <!-- Added: id="lead_email", focus:ring-[#2c4294]/20 -->
                         <input type="email" name="lead_email" id="lead_email"
                             value="{{ old('email', auth()->user() ? auth()->user()->email : '') }}"
                             placeholder="Enter Your Email"
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all">
+                            class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all">
                     </div>
 
                     <div class="flex flex-col gap-1.5">
@@ -153,10 +153,10 @@
                                 class="bg-gray-50 border border-gray-200 px-2 py-3 rounded-xl text-xs outline-none w-20 text-gray-600 font-bold">
                                 <option value="+880">🇧🇩 +88</option>
                             </select>
-                            <!-- Added: id="lead_phone", focus:ring-[#1b6e35]/20 -->
+                            <!-- Added: id="lead_phone", focus:ring-[#2c4294]/20 -->
                             <input type="tel" name="lead_phone" id="lead_phone" required
                                 placeholder="Enter Your Phone Number"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all">
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all">
                         </div>
                     </div>
 
@@ -164,15 +164,15 @@
                         <!-- Added: for="lead_message", text-gray-500 changed to text-gray-600 -->
                         <label for="lead_message" class="text-[11px] font-bold text-gray-600 uppercase">Additional Query /
                             Details</label>
-                        <!-- Added: id="lead_message", focus:ring-[#1b6e35]/20 -->
+                        <!-- Added: id="lead_message", focus:ring-[#2c4294]/20 -->
                         <textarea name="lead_message" id="lead_message" rows="3"
                             placeholder="Please write details (e.g. Loan amount, income source, etc.)" required
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all resize-none"></textarea>
+                            class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs font-bold text-gray-700 outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all resize-none"></textarea>
                     </div>
 
-                    <!-- IMPROVED: bg-[#2ba351] and shadow changed to #1b6e35 for contrast check -->
+                    <!-- IMPROVED: bg-[#2ba351] and shadow changed to #2c4294 for contrast check -->
                     <button type="submit" id="loanSubmitBtn"
-                        class="w-full bg-[#1b6e35] hover:bg-[#1f7035] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#1b6e35]/10 mt-2">
+                        class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#2c4294]/10 mt-2">
                         Submit Application
                     </button>
                 </form>
@@ -252,7 +252,7 @@
 
                         if (response.ok && result.success) {
                             alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border-red-200');
-                            alertBox.classList.add('bg-green-50', 'text-[#1b6e35]', 'border-green-200');
+                            alertBox.classList.add('bg-green-50', 'text-[#2c4294]', 'border-green-200');
                             alertBox.textContent = "Your loan inquiry has been submitted successfully. Our partner bank representative will contact you soon.";
 
                             form.reset();
@@ -263,13 +263,13 @@
                                 errorMsg = Object.values(result.errors).map(err => err[0]).join('<br>');
                             }
 
-                            alertBox.classList.remove('hidden', 'bg-green-50', 'text-[#1b6e35]', 'border-green-200');
+                            alertBox.classList.remove('hidden', 'bg-green-50', 'text-[#2c4294]', 'border-green-200');
                             alertBox.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
                             alertBox.innerHTML = errorMsg;
                         }
                     } catch (error) {
                         console.error('=== Loan Inquiry Error ===', error);
-                        alertBox.classList.remove('hidden', 'bg-green-50', 'text-[#1b6e35]', 'border-green-200');
+                        alertBox.classList.remove('hidden', 'bg-green-50', 'text-[#2c4294]', 'border-green-200');
                         alertBox.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
                         alertBox.textContent = 'Verification failed or connection error. Please try again.';
                     } finally {

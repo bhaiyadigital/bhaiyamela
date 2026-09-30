@@ -228,7 +228,7 @@
         </div>
 
         <div class="flex justify-end">
-            <button type="submit" class="bg-[#2ba351] hover:bg-[#1f7035] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+            <button type="submit" class="bg-[#2ba351] hover:bg-[#1a285a] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md">
                 <i class="fa-solid fa-paper-plane mr-1.5"></i> Send Message
             </button>
         </div>
@@ -245,7 +245,7 @@
                     <h3 class="text-[#0a1d4a] text-lg md:text-[20px] font-bold uppercase tracking-wide">
                         My Support Tickets
                     </h3>
-                    <button type="button" onclick="toggleTicketForm()" id="ticketToggleBtn" class="bg-[#2ba351] hover:bg-[#1f7035] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all">
+                    <button type="button" onclick="toggleTicketForm()" id="ticketToggleBtn" class="bg-[#2ba351] hover:bg-[#1a285a] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all">
                         <i class="fa-solid fa-plus mr-1"></i> Open New Ticket
                     </button>
                 </div>
@@ -378,7 +378,7 @@
                         </div>
 
                         <div class="mt-4 flex gap-3">
-                            <button type="submit" class="bg-[#2ba351] hover:bg-[#1f7035] text-white px-8 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+                            <button type="submit" class="bg-[#2ba351] hover:bg-[#1a285a] text-white px-8 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all shadow-md">
                                 Submit Ticket
                             </button>
                             <button type="button" onclick="toggleTicketForm()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all">
@@ -413,7 +413,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="bg-[#2ba351] hover:bg-[#1f7035] text-white px-8 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#2ba351]/10">
+                        <button type="submit" class="bg-[#2ba351] hover:bg-[#1a285a] text-white px-8 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#2ba351]/10">
                             Update Profile
                         </button>
                     </div>
@@ -446,7 +446,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="bg-[#2ba351] hover:bg-[#1f7035] text-white px-8 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#2ba351]/10">
+                        <button type="submit" class="bg-[#2ba351] hover:bg-[#1a285a] text-white px-8 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#2ba351]/10">
                             Change Password
                         </button>
                     </div>
