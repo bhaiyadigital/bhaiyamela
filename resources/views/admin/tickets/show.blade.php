@@ -262,7 +262,7 @@
                         </div>
 
                         <div class="flex justify-end">
-                            <button type="submit" class="bg-[#2ba351] hover:bg-[#1f7035] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+                            <button type="submit" class="bg-[#2ba351] hover:bg-[#1a285a] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md">
                                 <i class="fa-solid fa-paper-plane mr-1.5"></i> Send Message
                             </button>
                         </div>

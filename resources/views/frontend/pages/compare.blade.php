@@ -39,7 +39,7 @@
                 <p class="text-xs text-gray-400 mb-6 leading-relaxed">Select up to 3 properties from our listing page to compare
                     them side by side.</p>
                 <a href="{{ route('projects.index') }}"
-                    class="inline-block bg-[#2ba351] hover:bg-[#1f7035] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">Go
+                    class="inline-block bg-[#2ba351] hover:bg-[#1a285a] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">Go
                     to Properties</a>
             </div>
         @else
@@ -173,7 +173,7 @@
                                 @foreach($projects as $project)
                                     <td class="p-6">
                                         <a href="{{ route('project.details', $project->slug) }}"
-                                            class="inline-block w-full text-center bg-[#2ba351] hover:bg-[#1f7035] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">View
+                                            class="inline-block w-full text-center bg-[#2ba351] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">View
                                             Details</a>
                                     </td>
                                 @endforeach
@@ -306,7 +306,7 @@
                                 <div class="flex flex-col gap-1 min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
                                     <a href="{{ route('project.details', $project->slug) }}"
-                                        class="inline-block w-full text-center bg-[#2ba351] hover:bg-[#1f7035] text-white py-2 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all">Details</a>
+                                        class="inline-block w-full text-center bg-[#2ba351] hover:bg-[#1a285a] text-white py-2 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all">Details</a>
                                 </div>
                             @endforeach
                         </div>

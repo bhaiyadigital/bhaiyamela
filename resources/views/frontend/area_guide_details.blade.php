@@ -52,8 +52,8 @@
 
                 <!-- Tagline -->
                 @if($guide->short)
-                <!-- IMPROVED: border-[#2ba351] changed to border-[#1b6e35] -->
-                <p class="text-gray-500 text-base md:text-base font-semibold italic border-l-4 border-[#1b6e35] pl-4 leading-relaxed">
+                <!-- IMPROVED: border-[#2ba351] changed to border-[#2c4294] -->
+                <p class="text-gray-500 text-base md:text-base font-semibold italic border-l-4 border-[#2c4294] pl-4 leading-relaxed">
                     "{{ $guide->short }}"
                 </p>
                 @endif
@@ -197,12 +197,12 @@
                             <img src="{{ asset('storage/' . $relThumb) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" alt="Thumb">
                         </div>
                         <div class="flex flex-col min-w-0">
-                            <!-- IMPROVED: group-hover:text-[#2ba351] changed to group-hover:text-[#1b6e35] -->
-                            <span class="text-base font-bold text-gray-800 line-clamp-1 group-hover:text-[#1b6e35] transition-colors">
+                            <!-- IMPROVED: group-hover:text-[#2ba351] changed to group-hover:text-[#2c4294] -->
+                            <span class="text-base font-bold text-gray-800 line-clamp-1 group-hover:text-[#2c4294] transition-colors">
                                 {{ $relProject->title }}
                             </span>
-                            <!-- IMPROVED: text-[#2ba351] changed to text-[#1b6e35] -->
-                            <span class="text-xs font-extrabold text-[#1b6e35] mt-0.5">{{ $relProject->short }}</span>
+                            <!-- IMPROVED: text-[#2ba351] changed to text-[#2c4294] -->
+                            <span class="text-xs font-extrabold text-[#2c4294] mt-0.5">{{ $relProject->short }}</span>
                             <!-- IMPROVED: text-gray-400 changed to text-gray-600 and added aria-hidden="true" -->
                             <span class="text-[10px] text-gray-600 mt-0.5 truncate">
                                 <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>{{ $relProject->location }}
@@ -224,8 +224,8 @@
                 <p class="font-extrabold text-gray-800 text-base mb-1 uppercase tracking-wide">Looking to Buy Here?</p>
                 <!-- IMPROVED: text-gray-500 changed to text-gray-600 -->
                 <p class="text-gray-600 text-xs leading-relaxed mb-4">Post your requirements and let verified developers find the best matching properties in {{ $guide->title }} for you.</p>
-                <!-- IMPROVED: bg-[#2ba351] and shadow changed to #1b6e35 -->
-                <a href="{{ route('requirements.create') }}" class="inline-block bg-[#1b6e35] hover:bg-[#1f7035] text-white text-xs font-bold px-6 py-2.5 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#1b6e35]/10">
+                <!-- IMPROVED: bg-[#2ba351] and shadow changed to #2c4294 -->
+                <a href="{{ route('requirements.create') }}" class="inline-block bg-[#2c4294] hover:bg-[#1a285a] text-white text-xs font-bold px-6 py-2.5 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#2c4294]/10">
                     Post Requirement
                 </a>
             </div>
@@ -242,10 +242,10 @@
         <span id="lightboxIndexText" class="text-xs font-bold uppercase tracking-wider opacity-70">Image 1 of 5</span>
 
         <div class="flex items-center gap-4 bg-white/10 px-4 py-2 rounded-full border border-white/10">
-            <!-- IMPROVED: hover:text-[#2ba351] changed to hover:text-[#1b6e35] and added aria-hidden="true" -->
-            <button type="button" id="zoomInBtn" class="text-white hover:text-[#1b6e35] text-lg focus:outline-none transition-all" title="Zoom In"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i></button>
-            <button type="button" id="zoomOutBtn" class="text-white hover:text-[#1b6e35] text-lg focus:outline-none transition-all" title="Zoom Out"><i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i></button>
-            <button type="button" id="zoomResetBtn" class="text-white hover:text-[#1b6e35] text-lg focus:outline-none transition-all" title="Reset Zoom"><i class="fa-solid fa-compress" aria-hidden="true"></i></button>
+            <!-- IMPROVED: hover:text-[#2ba351] changed to hover:text-[#2c4294] and added aria-hidden="true" -->
+            <button type="button" id="zoomInBtn" class="text-white hover:text-[#2c4294] text-lg focus:outline-none transition-all" title="Zoom In"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i></button>
+            <button type="button" id="zoomOutBtn" class="text-white hover:text-[#2c4294] text-lg focus:outline-none transition-all" title="Zoom Out"><i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i></button>
+            <button type="button" id="zoomResetBtn" class="text-white hover:text-[#2c4294] text-lg focus:outline-none transition-all" title="Reset Zoom"><i class="fa-solid fa-compress" aria-hidden="true"></i></button>
         </div>
 
         <!-- IMPROVED: Added aria-hidden="true" to close icon -->
@@ -350,8 +350,8 @@
 
         document.querySelectorAll('.lightbox-thumb-btn').forEach((btn, idx) => {
             if (idx === currentLightboxIndex) {
-                // IMPROVED: border-[#2ba351] updated to #1b6e35 inside JS for consistency
-                btn.classList.add('border-[#1b6e35]');
+                // IMPROVED: border-[#2ba351] updated to #2c4294 inside JS for consistency
+                btn.classList.add('border-[#2c4294]');
                 btn.classList.remove('border-transparent');
                 btn.scrollIntoView({
                     behavior: 'smooth',
@@ -360,7 +360,7 @@
                 });
             } else {
                 btn.classList.add('border-transparent');
-                btn.classList.remove('border-[#1b6e35]');
+                btn.classList.remove('border-[#2c4294]');
             }
         });
     }

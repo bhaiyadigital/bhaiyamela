@@ -15,13 +15,13 @@
             <div class="flex gap-2 text-base py-2 border-gray-100">
 
                 <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
-                    Home
+                    হোম
                 </a>
 
                 <span class="text-gray-300">›</span>
 
                 <a href="{{ route('web.project') ?? '#' }}" class="text-gray-600 hover:text-black">
-                    Properties
+                    প্রপার্টিজ
                 </a>
 
                 <span class="text-gray-300">›</span>
@@ -37,7 +37,7 @@
 
 
         <div class="mb-6">
-            <h1 class="text-xl md:text-xl font-extrabold text-gray-900 leading-tight flex flex-wrap items-center gap-3">
+            <h1 class="text-xl md:text-3xl font-extrabold text-gray-900 leading-tight flex flex-wrap items-center gap-3">
                 {{ $project->title }}
 
             </h1>
@@ -88,7 +88,7 @@
                             <div class="flex gap-2 overflow-x-auto py-2 scrollbar-hide" id="thumbnailSlider">
                                 @foreach($images as $index => $path)
                                     <button type="button" onclick="switchFeaturedImage('{{ asset('storage/' . $path) }}', this)"
-                                        class="thumbnail-btn w-20 h-14 rounded-lg overflow-hidden border-2 {{ $index === 0 ? 'border-[#2ba351]' : 'border-transparent' }} flex-shrink-0 focus:outline-none transition-all">
+                                        class="thumbnail-btn w-20 h-14 rounded-lg overflow-hidden border-2 {{ $index === 0 ? 'border-[#2c4294]' : 'border-transparent' }} flex-shrink-0 focus:outline-none transition-all">
                                         <img src="{{ asset('storage/' . $path) }}" class="w-full h-full object-cover" alt="Thumb">
                                     </button>
                                 @endforeach
@@ -100,123 +100,122 @@
 
                 <div class="sticky top-0 bg-white z-30 py-4 pl-3 flex flex-wrap gap-3 border-b border-gray-100 shadow-sm">
 
-                    <a href="#section-overview"
-                        class="tab-link px-4 py-2.5 bg-[#1b6e35] text-white rounded-xl text-xs md:text-base font-extrabold border border-[#1b6e35] shadow-sm shadow-[#1b6e35]/10 hover:opacity-95 transition-all whitespace-nowrap">
-                        Overview
-                    </a>
+                    @if(!empty($featuresList))
+                        <a href="#section-overview"
+                            class="tab-link px-4 py-2.5 bg-[#2c4294] text-white rounded-xl text-xs md:text-base font-extrabold border border-[#2c4294] shadow-sm shadow-[#2c4294]/10 hover:opacity-95 transition-all whitespace-nowrap">
+                            ওভারভিউ
+                        </a>
+                    @endif
 
                     @if(!empty($extraFeatures) && is_array($extraFeatures))
                         <a href="#section-features"
                             class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            Features
+                            বৈশিষ্ট্য
                         </a>
                     @endif
 
                     @if($project->description)
                         <a href="#section-description"
                             class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            Description
+                            বিবরণ
                         </a>
-                    @endif
-
-                    @if(!empty($project->virtual_tour))
-                        <a href="#section-virtual-tour"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">360°
-                            Tour</a>
                     @endif
 
                     @if(!empty($floorPlans))
                         <a href="#section-floor-plan"
                             class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            Floor Plan
+                            ফ্লোর প্ল্যান
                         </a>
                     @endif
 
                     @if(!empty($locationViews))
                         <a href="#section-location-view"
                             class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            Location View
+                            লোকেশন ভিউ
                         </a>
                     @endif
 
                     @if(!empty($project->video_path))
                         <a href="#section-video"
                             class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            Video
+                            ভিডিও
                         </a>
                     @endif
 
                     @if($isValidEmbed)
                         <a href="#section-map-view"
                             class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            Map View
+                            ম্যাপ ভিউ
                         </a>
                     @endif
 
                 </div>
 
 
-                <div id="section-overview"
-                    class="scroll-mt-16 bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
-                    <div class="flex flex-wrap justify-between items-center gap-4 mb-5 border-b border-gray-100 pb-5">
-                        <div>
-                            <span class="text-xl font-black text-[#2ba351]">{{ $project->short }}</span>
-                            <span class="text-xs text-gray-500 block mt-1">/
-                                {{ $project->category->title ?? 'Apartment/Flats for Sale' }}</span>
-                        </div>
-                        <div class="text-base text-gray-500 flex items-center gap-1.5">
-                            <i class="fa-solid fa-location-dot text-gray-400"></i>
-                            <span class="font-medium text-gray-700">{{ $project->location }}</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-2 text-center pt-2 mb-5">
-                        <div class="flex flex-col items-center">
-                            <i class="fa-solid fa-bed text-xl text-gray-400 mb-2"></i>
-                            <span class="text-base font-bold text-gray-800">{{ $bedrooms }} Beds</span>
-                        </div>
-                        <div class="flex flex-col items-center border-x border-gray-100">
-                            <i class="fa-solid fa-bath text-xl text-gray-400 mb-2"></i>
-                            <span class="text-base font-bold text-gray-800">{{ $baths }} Baths</span>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fa-solid fa-ruler-combined text-xl text-gray-400 mb-2"></i>
-                            <span class="text-base font-bold text-gray-800">{{ $size }}</span>
-                        </div>
-                    </div>
-
-                    @if(!empty($featuresList))
-                        <div class="border-t border-gray-100 pt-5">
-
-                            <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> Property Overview
-                            </p>
-                            <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
-                                @foreach($featuresList as $key => $val)
-                                    @php
-                                        if (is_numeric($key) && !is_array($val)) {
-                                            $fKey = $val;
-                                            $fVal = '';
-                                        } else {
-                                            $fKey = is_array($val) ? ($val['key'] ?? '') : $key;
-                                            $fVal = is_array($val) ? ($val['value'] ?? '') : $val;
-                                        }
-                                    @endphp
-                                    @if($fKey)
-                                        <div class="flex justify-between border-b border-gray-50 py-2.5 text-base">
-                                            <span class="text-gray-500 font-medium flex items-center gap-1.5">
-                                                <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
-                                                {{ $fKey }}
-                                            </span>
-                                            <span class="font-bold text-gray-800">{{ $fVal }}</span>
-                                        </div>
-                                    @endif
-                                @endforeach
+                @if(!empty($featuresList))
+                    <div id="section-overview"
+                        class="scroll-mt-16 bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
+                        <div class="flex flex-wrap justify-between items-center gap-4 mb-5 border-b border-gray-100 pb-5">
+                            <div>
+                                <span class="text-xl font-black text-[#2c4294]">{{ $project->short }}</span>
+                                <span class="text-xs text-gray-500 block mt-1">/
+                                    {{ $project->category->title ?? 'Apartment/Flats for Sale' }}</span>
+                            </div>
+                            <div class="text-base text-gray-500 flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span
+                                    class="font-medium text-gray-700">{{ $project->destination->title ?? $project->location ?? 'Dhaka' }}</span>
                             </div>
                         </div>
-                    @endif
-                </div>
+
+                        <div class="grid grid-cols-3 gap-2 text-center pt-2 mb-5">
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-bed text-xl text-gray-400 mb-2"></i>
+                                <span class="text-base font-bold text-gray-800">{{ $bedrooms }} বেড</span>
+                            </div>
+                            <div class="flex flex-col items-center border-x border-gray-100">
+                                <i class="fa-solid fa-bath text-xl text-gray-400 mb-2"></i>
+                                <span class="text-base font-bold text-gray-800">{{ $baths }} বাথ</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-ruler-combined text-xl text-gray-400 mb-2"></i>
+                                <span class="text-base font-bold text-gray-800">{{ $size }}</span>
+                            </div>
+                        </div>
+
+                        @if(!empty($featuresList))
+                            <div class="border-t border-gray-100 pt-5">
+
+                                <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> প্রপার্টি ওভারভিউ
+                                </p>
+                                <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+                                    @foreach($featuresList as $key => $val)
+                                        @php
+                                            if (is_numeric($key) && !is_array($val)) {
+                                                $fKey = $val;
+                                                $fVal = '';
+                                            } else {
+                                                $fKey = is_array($val) ? ($val['key'] ?? '') : $key;
+                                                $fVal = is_array($val) ? ($val['value'] ?? '') : $val;
+                                            }
+                                        @endphp
+                                        @if($fKey)
+                                            <div class="flex justify-between border-b border-gray-50 py-2.5 text-base">
+                                                <span class="text-gray-500 font-medium flex items-center gap-1.5">
+                                                    <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                                                    {{ $fKey }}
+                                                </span>
+                                                <span class="font-bold text-gray-800">{{ $fVal }}</span>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                @endif
 
 
                 {{-- ── 2. FEATURES SECTION ── --}}
@@ -224,14 +223,14 @@
                     <div id="section-features"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
 
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> Property Features
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> প্রপার্টির বৈশিষ্ট্য
                         </p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                        <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-4">
                             @foreach($extraFeatures as $featureItem)
                                 @if(!empty($featureItem))
                                     <div class="flex items-center gap-2.5 text-base text-gray-700">
-                                        <i class="fa-solid fa-circle-check text-[#2ba351] text-base leading-none"></i>
+                                        <i class="fa-solid fa-circle-check text-[#2c4294] text-base leading-none"></i>
                                         <span class="font-medium text-gray-800">{{ $featureItem }}</span>
                                     </div>
                                 @endif
@@ -246,30 +245,30 @@
                     <div id="section-description"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
 
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">Property Description
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">প্রপার্টির বিবরণ
                         </p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                        <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
                         <div class="prose max-w-none text-gray-600 text-base leading-relaxed space-y-4">
                             <div>{!! $project->description !!}</div>
                         </div>
                     </div>
                 @endif
 
-                @if(!empty($project->virtual_tour))
-                    <div id="section-virtual-tour"
-                        class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">360° Virtual Tour</p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                {{-- @if(!empty($project->virtual_tour))
+                <div id="section-virtual-tour"
+                    class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
+                    <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">৩৬০° ভার্চুয়াল ট্যুর</p>
+                    <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
-                        <div id="panorama-viewer" class="w-full rounded-xl overflow-hidden shadow-lg bg-gray-900"
-                            style="aspect-ratio: 16/9;"></div>
-                    </div>
-                @endif
+                    <div id="panorama-viewer" class="w-full rounded-xl overflow-hidden shadow-lg bg-gray-900"
+                        style="aspect-ratio: 16/9;"></div>
+                </div>
+                @endif --}}
 
                 @if(!empty($floorPlans) && count($floorPlans) > 0)
                     <div id="section-floor-plan" class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">FLOOR PLAN</p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">ফ্লোর প্ল্যান</p>
+                        <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                         <div class="flex flex-wrap gap-4">
                             @foreach($floorPlans as $index => $path)
@@ -289,8 +288,8 @@
                 @if(!empty($locationViews) && count($locationViews) > 0)
                     <div id="section-location-view"
                         class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">LOCATION VIEW</p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">লোকেশন ভিউ</p>
+                        <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                         <div class="flex flex-wrap gap-4">
                             @foreach($locationViews as $index => $path)
@@ -317,17 +316,17 @@
 
                         <div class="flex items-center gap-4 bg-white/10 px-4 py-2 rounded-full border border-white/10">
                             <button type="button" id="zoomInBtn"
-                                class="text-white hover:text-[#2ba351] text-lg focus:outline-none transition-all"
+                                class="text-white hover:text-[#2c4294] text-lg focus:outline-none transition-all"
                                 title="Zoom In">
                                 <i class="fa-solid fa-magnifying-glass-plus"></i>
                             </button>
                             <button type="button" id="zoomOutBtn"
-                                class="text-white hover:text-[#2ba351] text-lg focus:outline-none transition-all"
+                                class="text-white hover:text-[#2c4294] text-lg focus:outline-none transition-all"
                                 title="Zoom Out">
                                 <i class="fa-solid fa-magnifying-glass-minus"></i>
                             </button>
                             <button type="button" id="zoomResetBtn"
-                                class="text-white hover:text-[#2ba351] text-lg focus:outline-none transition-all"
+                                class="text-white hover:text-[#2c4294] text-lg focus:outline-none transition-all"
                                 title="Reset Zoom">
                                 <i class="fa-solid fa-compress"></i>
                             </button>
@@ -379,8 +378,8 @@
                 @if(!empty($project->video_path))
                     <div id="section-video"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">PROPERTY VIDEO</p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">প্রপার্টি ভিডিও</p>
+                        <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                         <div class="relative w-full rounded-xl overflow-hidden shadow-lg bg-black group"
                             style="aspect-ratio: 16/9;">
@@ -389,12 +388,12 @@
                                 class="absolute inset-0 bg-black/40 z-10 flex flex-col justify-center items-center cursor-pointer transition-all duration-300 group-hover:bg-black/50"
                                 onclick="playProjectVideo()">
                                 <div
-                                    class="w-16 h-16 md:w-20 md:h-20 bg-[#2ba351] hover:bg-[#1f7035] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#2ba351]/30 transition-all duration-300 hover:scale-110 active:scale-95">
+                                    class="w-16 h-16 md:w-20 md:h-20 bg-[#2c4294] hover:bg-[#1a285a] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#2c4294]/30 transition-all duration-300 hover:scale-110 active:scale-95">
                                     <i class="fa-solid fa-play text-xl md:text-xl ml-1"></i>
                                 </div>
                                 <span
-                                    class="text-white text-xs font-bold uppercase tracking-wider mt-4 drop-shadow-md tracking-widest">Watch
-                                    Video Tour</span>
+                                    class="text-white text-xs font-bold uppercase tracking-wider mt-4 drop-shadow-md tracking-widest">ভিডিও
+                                    ট্যুর দেখুন</span>
                             </div>
 
                             <!-- মেইন HTML5 ভিডিও ট্যাগ (অটোমেটিক মিউটেড প্রিভিউ রাখা হয়নি, ক্লিক করলেই প্লে হবে) -->
@@ -410,9 +409,9 @@
                 @if($isValidEmbed)
                     <div id="section-map-view"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> Map View
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> ম্যাপ ভিউ
                         </p>
-                        <div class="w-16 h-1 bg-[#2ba351] mb-5"></div>
+                        <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
                         <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100" style="height: 350px;">
                             <iframe src="{{ $mapUrl }}" title="Google Maps showing property location" width="100%" height="100%"
                                 style="border:0;" allowfullscreen="" loading="lazy">
@@ -425,12 +424,12 @@
 
 
             {{--Right Cols--}}
-            <div class="lg:col-span-4 flex flex-col gap-6 sticky top-28 max-h-[calc(100vh-120px)] overflow-y-auto pb-4 scrollbar-hide">
+            <div class="lg:col-span-4 flex flex-col gap-6 sticky top-28">
 
                 <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                     <p
-                        class="text-center font-bold text-gray-600 text-xs border-b border-gray-100 pb-3 mb-4 tracking-wider uppercase">
-                        Property Owner Details
+                        class="text-center font-bold text-gray-600 text-sm md:text-base border-b border-gray-100 pb-3 mb-4 tracking-wider uppercase">
+                        প্রপার্টি মালিকের বিস্তারিত
                     </p>
 
                     @if($project->company)
@@ -442,23 +441,23 @@
                                         class="w-full h-full object-contain rounded-full" alt="Owner Logo">
                                 </div>
                             @endif
-                            <h2 class="font-extrabold text-gray-800 text-base leading-tight mb-1">
+                            <h2 class="font-extrabold text-gray-800 text-lg leading-tight mb-1">
                                 {{ $project->company->company_name }}
                             </h2>
 
-                            <span class="text-[11px] text-gray-600 block mb-3">Property ID : {{ 250000 + $project->id }}</span>
+                            <span class="text-sm text-gray-600 block mb-3">প্রপার্টি আইডি : {{ 250000 + $project->id }}</span>
 
                             @if($project->company->phone)
                                 <div class="mt-2">
                                     <span id="revealedPhoneNum"
-                                        class="block text-gray-800 font-extrabold text-base mb-2 tracking-wide hidden">
-                                        <i class="bi bi-telephone-fill text-[#1b6e35] me-1"></i>{{ $project->company->phone }}
+                                        class="block text-gray-800 font-extrabold text-lg mb-2 tracking-wide hidden">
+                                        <i class="bi bi-telephone-fill text-[#2c4294] me-1"></i>{{ $project->company->phone }}
                                     </span>
 
                                     <button type="button" id="phoneToggleBtn" onclick="revealPhone()"
-                                        class="w-full bg-[#1b6e35] hover:bg-[#1f7035] text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-md shadow-[#1b6e35]/10">
+                                        class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-all shadow-md shadow-[#2c4294]/10">
                                         <i class="bi bi-phone-vibrate"></i>
-                                        Click to show phone number
+                                        ফোন নম্বর দেখতে ক্লিক করুন
                                     </button>
                                 </div>
                             @endif
@@ -466,81 +465,69 @@
                     @endif
 
                     <!-- ইমেইল বা মেসেজ লিড ফর্ম -->
-                    <div class="border-t border-gray-100 pt-5">
-                        <p class="text-xs font-bold text-[#1b6e35] text-center mb-4 uppercase tracking-wider">
-                            Send Message to Property Owner
+                    <div class="pt-2">
+                        <p class="text-base font-bold text-[#2c4294] text-center mb-4 uppercase tracking-wider">
+                            প্রপার্টি মালিককে মেসেজ পাঠান
                         </p>
 
-                        <div id="leadAlert" class="hidden p-3 mb-3 text-xs rounded-xl text-center font-medium"></div>
+                        <div id="leadAlert" class="hidden p-3 mb-3 text-sm rounded-xl text-center font-medium"></div>
                         <form id="leadForm" action="{{ route('contact.owner') }}" method="POST" class="flex flex-col gap-3">
                             @csrf
                             <input type="hidden" name="company_id" value="{{ $project->company_id }}">
                             <input type="hidden" name="subject" value="Inquiry for property: {{ $project->title }}">
 
-                            <div id="lead-alert-message" class="hidden p-3 rounded-xl text-center font-medium text-sm">
-                            </div>
 
-                            <input type="text" name="lead_name" placeholder="Enter Your Name" required
+
+                            <input type="text" name="lead_name" placeholder="আপনার নাম লিখুন" required
                                 aria-label="Enter Your Name"
                                 value="{{ auth()->check() ? auth()->user()->name : old('lead_name') }}"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
-                            <input type="email" name="lead_email" placeholder="Enter Your E-mail"
+                            <input type="email" name="lead_email" placeholder="আপনার ইমেইল লিখুন"
                                 aria-label="Enter Your E-mail"
                                 value="{{ auth()->check() ? auth()->user()->email : old('lead_email') }}"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+
+                            <input type="tel" name="lead_phone" placeholder="আপনার ফোন নম্বর লিখুন" required
+                                aria-label="Enter Your Phone"
+                                value="{{ auth()->check() ? auth()->user()->phone : old('lead_phone') }}"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
                             <div class="flex gap-2">
-                                <select name="country_code" aria-label="Country Code"
-                                    class="bg-gray-50 border border-gray-200 px-2 py-3 rounded-xl text-xs outline-none w-20 text-gray-600">
-                                    <option value="+880">🇧🇩 +880</option>
-                                    <option value="+1">🇺🇸 +1</option>
-                                    <option value="+44">🇬🇧 +44</option>
-                                </select>
-                                <input type="tel" name="lead_phone" placeholder="Enter Your Phone" required
-                                    aria-label="Enter Your Phone"
-                                    value="{{ auth()->check() ? auth()->user()->phone : old('lead_phone') }}"
-                                    class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                                <input type="text" name="lead_job_title" placeholder="পদের নাম" aria-label="Job Title"
+                                    class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                                <input type="text" name="lead_company" placeholder="কোম্পানি" aria-label="Company"
+                                    class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
                             </div>
 
-                            <div class="flex gap-2">
-                                <input type="text" name="lead_job_title" placeholder="Job Title"
-                                    aria-label="Job Title"
-                                    class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
-                                <input type="text" name="lead_company" placeholder="Company"
-                                    aria-label="Company"
-                                    class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
-                            </div>
-
-                            <input type="text" name="lead_budget" placeholder="Estimated Budget"
-                                aria-label="Estimated Budget"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
+                            <input type="text" name="lead_budget" placeholder="আনুমানিক বাজেট" aria-label="Estimated Budget"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
                             <select name="lead_investment_time" aria-label="When Planning to Invest"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700">
-                                <option value="" disabled selected>When Planning to Invest?</option>
-                                <option value="Within 15 Days">Within 15 Days</option>
-                                <option value="Within 1 Month">Within 1 Month</option>
-                                <option value="Within 1-3 Months">Within 1-3 Months</option>
-                                <option value="After 3 Months">After 3 Months</option>
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                                <option value="" disabled selected>কবে বিনিয়োগের পরিকল্পনা করছেন?</option>
+                                <option value="Within 15 Days">১৫ দিনের মধ্যে</option>
+                                <option value="Within 1 Month">১ মাসের মধ্যে</option>
+                                <option value="Within 1-3 Months">১-৩ মাসের মধ্যে</option>
+                                <option value="After 3 Months">৩ মাসের পর</option>
                             </select>
 
-                            <textarea name="lead_message" rows="3" placeholder="Please type your message" required
+                            <textarea name="lead_message" rows="3" placeholder="আপনার মেসেজ লিখুন" required
                                 aria-label="Please type your message"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1b6e35]/20 transition-all text-gray-700 resize-none">{{ old('lead_message') }}</textarea>
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message') }}</textarea>
 
                             <button type="submit" id="leadSubmitBtn"
-                                class="w-full bg-[#1b6e35] hover:bg-[#1f7035] text-white py-3 rounded-xl font-bold text-base transition-all active:scale-[0.98]">
-                                Send Message
+                                class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 rounded-xl font-bold text-lg transition-all active:scale-[0.98]">
+                                মেসেজ পাঠান
                             </button>
                         </form>
                         @if($project->company)
-                            <div class="flex justify-between items-center text-[11px] mt-4 px-1">
-                                <span class="text-gray-600">T&C Apply</span>
+                            <div class="flex justify-between items-center text-xs mt-4 px-1">
+                                <span class="text-gray-600">শর্তাবলী প্রযোজ্য</span>
 
                                 <a href="{{ route('web.project', ['company' => $project->company->slug]) }}"
-                                    class="font-extrabold text-[#1b6e35] hover:underline flex items-center gap-1">
-                                    More properties... <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"
+                                    class="font-extrabold text-[#2c4294] hover:underline flex items-center gap-1">
+                                    আরও প্রপার্টি... <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"
                                         aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -548,19 +535,16 @@
                     </div>
                 </div>
 
-
-                <!-- খ. ব্যানার অ্যাড / সাইডবার রিলেটেড লিংক ইমেজ -->
                 <!-- খ. Similar Projects (একই ক্যাটাগরি/লোকেশন) -->
                 @if($similarProjects->isNotEmpty())
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <h6 class="text-xs font-bold text-gray-500 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                            Similar Properties
+                        <h6 class="text-sm font-bold text-gray-500 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
+                            একই ধরনের প্রপার্টি
                         </h6>
                         <div class="flex flex-col gap-4">
                             @foreach($similarProjects as $simProject)
                                 @php
-                                    $simImages = $simProject->img_paths;
-                                    $simThumb = !empty($simImages) ? $simImages[0] : 'assets/images/placeholder.jpg';
+                                    $simThumb = $simProject->main_image ?? 'assets/images/placeholder.jpg';
                                 @endphp
                                 <a href="{{ route('project.details', $simProject->slug) }}" class="flex items-center gap-3 group">
                                     <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
@@ -570,12 +554,13 @@
                                     </div>
                                     <div class="flex flex-col min-w-0">
                                         <span
-                                            class="text-base font-bold text-gray-800 line-clamp-1 group-hover:text-[#2ba351] transition-colors">
+                                            class="text-lg font-bold text-gray-800 line-clamp-1 group-hover:text-[#2c4294] transition-colors">
                                             {{ $simProject->title }}
                                         </span>
-                                        <span class="text-xs font-extrabold text-[#2ba351] mt-0.5">{{ $simProject->short }}</span>
-                                        <span class="text-[10px] text-gray-400 mt-0.5 truncate">
-                                            <i class="fa-solid fa-location-dot me-1"></i>{{ $simProject->location }}
+                                        <span class="text-sm font-extrabold text-[#2c4294] mt-0.5">{{ $simProject->short }}</span>
+                                        <span class="text-xs text-gray-600 mt-0.5 truncate">
+                                            <i
+                                                class="fa-solid fa-location-dot me-1"></i>{{ $simProject->destination->title ?? $simProject->location ?? 'Dhaka' }}
                                         </span>
                                     </div>
                                 </a>
@@ -587,14 +572,13 @@
                 <!-- গ. Recently Viewed (সম্প্রতি ভিজিট করা প্রজেক্ট) -->
                 @if($recentProjects->isNotEmpty())
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <h6 class="text-xs font-bold text-gray-500 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                            Recently Viewed
+                        <h6 class="text-sm font-bold text-gray-500 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
+                            সম্প্রতি দেখেছেন
                         </h6>
                         <div class="flex flex-col gap-4">
                             @foreach($recentProjects as $recProject)
                                 @php
-                                    $recImages = $recProject->img_paths;
-                                    $recThumb = !empty($recImages) ? $recImages[0] : 'assets/images/placeholder.jpg';
+                                    $recThumb = $recProject->main_image ?? 'assets/images/placeholder.jpg';
                                 @endphp
                                 <a href="{{ route('project.details', $recProject->slug) }}" class="flex items-center gap-3 group">
                                     <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
@@ -604,12 +588,13 @@
                                     </div>
                                     <div class="flex flex-col min-w-0">
                                         <span
-                                            class="text-base font-bold text-gray-800 line-clamp-1 group-hover:text-[#2ba351] transition-colors">
+                                            class="text-lg font-bold text-gray-800 line-clamp-1 group-hover:text-[#2c4294] transition-colors">
                                             {{ $recProject->title }}
                                         </span>
-                                        <span class="text-xs font-extrabold text-[#2ba351] mt-0.5">{{ $recProject->short }}</span>
-                                        <span class="text-[10px] text-gray-400 mt-0.5 truncate">
-                                            <i class="fa-solid fa-location-dot me-1"></i>{{ $recProject->location }}
+                                        <span class="text-sm font-extrabold text-[#2c4294] mt-0.5">{{ $recProject->short }}</span>
+                                        <span class="text-xs text-gray-400 mt-0.5 truncate">
+                                            <i
+                                                class="fa-solid fa-location-dot me-1"></i>{{ $recProject->destination->title ?? $recProject->location ?? 'Dhaka' }}
                                         </span>
                                     </div>
                                 </a>
@@ -628,9 +613,33 @@
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
     <script>
+        function showCustomToast(message, type = 'success') {
+            const toastId = 'toast-' + Date.now();
+            const bgClass = type === 'success' ? 'bg-[#2c4294]' : 'bg-red-500';
+            const icon = type === 'success' ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-solid fa-circle-exclamation"></i>';
+
+            const toastHtml = `
+                                        <div id="${toastId}" class="fixed top-28 right-5 z-[9999] flex items-center gap-3 ${bgClass} text-white px-5 py-3 rounded-xl shadow-2xl transition-all duration-300 transform -translate-y-10 opacity-0">
+                                            <span class="text-lg">${icon}</span>
+                                            <span class="font-medium text-sm whitespace-pre-line">${message}</span>
+                                        </div>
+                                    `;
+
+            document.body.insertAdjacentHTML('beforeend', toastHtml);
+            const toastEl = document.getElementById(toastId);
+
+            setTimeout(() => {
+                toastEl.classList.remove('-translate-y-10', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toastEl.classList.add('-translate-y-10', 'opacity-0');
+                setTimeout(() => toastEl.remove(), 300);
+            }, 4000);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('leadForm');
-            const alertMessage = document.getElementById('lead-alert-message');
 
             if (!form) {
                 console.error('Lead form not found');
@@ -644,7 +653,6 @@
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'Please wait...';
-                alertMessage.classList.add('hidden');
 
                 try {
                     const token = await window.getRecaptchaToken('contact_owner');
@@ -664,27 +672,18 @@
                     const result = await response.json();
 
                     if (response.ok && result.success) {
-                        alertMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
-                        alertMessage.classList.add('bg-green-100', 'text-green-700');
-                        alertMessage.textContent = result.message || '✓ Your message has been sent successfully!';
-
-                        form.reset(); // ফর্ম খালি করে দিন
+                        showCustomToast(result.message || "Your message has been sent successfully!", "success");
+                        form.reset();
                     } else {
-                        let errorMsg = result.message || 'Something went wrong. Please try again.';
-
+                        let errorMsg = result.message || "Something went wrong. Please try again.";
                         if (result.errors) {
-                            errorMsg = Object.values(result.errors).map(err => err[0]).join(' | ');
+                            errorMsg = Object.values(result.errors).map(err => err[0]).join("\n");
                         }
-
-                        alertMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
-                        alertMessage.classList.add('bg-red-100', 'text-red-700');
-                        alertMessage.innerHTML = errorMsg;
+                        showCustomToast(errorMsg, "error");
                     }
                 } catch (error) {
-                    console.error('Lead form error:', error);
-                    alertMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
-                    alertMessage.classList.add('bg-red-100', 'text-red-700');
-                    alertMessage.textContent = 'An error occurred. Please try again.';
+                    console.error("Lead form error:", error);
+                    showCustomToast("An error occurred. Please try again.", "error");
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
@@ -733,11 +732,11 @@
                 });
 
                 tabLinks.forEach(link => {
-                    link.classList.remove('bg-[#2ba351]', 'text-white', 'border-[#2ba351]', 'shadow-sm', 'shadow-[#2ba351]/10');
+                    link.classList.remove('bg-[#2c4294]', 'text-white', 'border-[#2c4294]', 'shadow-sm', 'shadow-[#2c4294]/10');
                     link.classList.add('bg-gray-50', 'text-gray-600', 'border-gray-100');
 
                     if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('bg-[#2ba351]', 'text-white', 'border-[#2ba351]', 'shadow-sm', 'shadow-[#2ba351]/10');
+                        link.classList.add('bg-[#2c4294]', 'text-white', 'border-[#2c4294]', 'shadow-sm', 'shadow-[#2c4294]/10');
                         link.classList.remove('bg-gray-50', 'text-gray-600', 'border-gray-100');
                     }
                 });
@@ -755,11 +754,11 @@
             }
 
             document.querySelectorAll('.thumbnail-btn').forEach(b => {
-                b.classList.remove('border-[#2ba351]');
+                b.classList.remove('border-[#2c4294]');
                 b.classList.add('border-transparent');
             });
 
-            btn.classList.add('border-[#2ba351]');
+            btn.classList.add('border-[#2c4294]');
             btn.classList.remove('border-transparent');
         }
 

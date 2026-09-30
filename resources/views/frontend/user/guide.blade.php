@@ -35,7 +35,7 @@
                     <p class="text-gray-500 text-xs md:text-base leading-relaxed mb-4">
                         Navigate to "Company Profile" from your sidebar. Upload your official company logo, banner cover photo, trade license, office address, and social media links. A complete profile builds trust with buyers.
                     </p>
-                    <a href="{{ route('admin.company-profile.edit') }}" class="inline-flex items-center gap-1.5 bg-[#2ba351] hover:bg-[#1f7035] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                    <a href="{{ route('admin.company-profile.edit') }}" class="inline-flex items-center gap-1.5 bg-[#2ba351] hover:bg-[#1a285a] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
                         Edit Profile <i class="fa-solid fa-arrow-right text-[10px]"></i>
                     </a>
                 </div>
@@ -143,7 +143,7 @@
         <a href="{{route('home')}}" class="w-full sm:w-auto text-center bg-[#224194] hover:bg-[#152960] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-blue-900/10 active:scale-95">
             Go to Dashboard
         </a>
-        <a href="{{ route('admin.contents.create', 'project') }}" class="w-full sm:w-auto text-center bg-[#2ba351] hover:bg-[#1f7035] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-green-900/10 active:scale-95">
+        <a href="{{ route('admin.contents.create', 'project') }}" class="w-full sm:w-auto text-center bg-[#2ba351] hover:bg-[#1a285a] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-green-900/10 active:scale-95">
             Add First Project Now
         </a>
     </div>

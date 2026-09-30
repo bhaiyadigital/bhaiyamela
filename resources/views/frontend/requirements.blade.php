@@ -26,9 +26,9 @@
         <div class="bg-[#DFE8FF] rounded-xl p-6 md:p-10 border border-blue-50 shadow-sm mb-8">
 
             @if(session('success'))
-                <!-- IMPROVED: text-[#2ba351] changed to text-[#1b6e35] for contrast check -->
+                <!-- IMPROVED: text-[#2ba351] changed to text-[#2c4294] for contrast check -->
                 <div
-                    class="bg-green-50 text-[#1b6e35] border border-green-150 p-4 mb-6 rounded-2xl text-center font-bold text-base shadow-sm">
+                    class="bg-green-50 text-[#2c4294] border border-green-150 p-4 mb-6 rounded-2xl text-center font-bold text-base shadow-sm">
                     {{ session('success') }}
                 </div>
             @endif
@@ -46,16 +46,16 @@
 
                 <div
                     class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-5 mb-6">
-                    <h2 class="text-[#1b6e35] text-lg md:text-xl font-extrabold uppercase tracking-wide">
+                    <h2 class="text-[#2c4294] text-lg md:text-xl font-extrabold uppercase tracking-wide">
                         Property I'm looking for
                     </h2>
                     <div class="flex gap-5 text-base text-gray-700 font-bold">
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" name="purpose" value="buy" {{ old('purpose', 'buy') === 'buy' ? 'checked' : '' }} class="text-[#1b6e35] focus:ring-[#1b6e35]/20">
+                            <input type="radio" name="purpose" value="buy" {{ old('purpose', 'buy') === 'buy' ? 'checked' : '' }} class="text-[#2c4294] focus:ring-[#2c4294]/20">
                             Buy
                         </label>
                         <!-- <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="purpose" value="rent" {{ old('purpose') === 'rent' ? 'checked' : '' }} class="text-[#1b6e35] focus:ring-[#1b6e35]/20">
+                                    <input type="radio" name="purpose" value="rent" {{ old('purpose') === 'rent' ? 'checked' : '' }} class="text-[#2c4294] focus:ring-[#2c4294]/20">
                                     Rent
                                 </label> -->
                     </div>
@@ -235,9 +235,9 @@
 
                 <!-- Submit Button Footer -->
                 <div class="mt-8 pt-5 border-t border-blue-100">
-                    <!-- IMPROVED: bg-[#2ba351] changed to bg-[#1b6e35] for color contrast compliance -->
+                    <!-- IMPROVED: bg-[#2ba351] changed to bg-[#2c4294] for color contrast compliance -->
                     <button type="button" id="requirementSubmitBtn"
-                        class="bg-[#1b6e35] hover:bg-[#1f7035] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-[#1b6e35]/10 active:scale-[0.98] cursor-pointer">
+                        class="bg-[#2c4294] hover:bg-[#1a285a] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-[#2c4294]/10 active:scale-[0.98] cursor-pointer">
                         Submit Requirement
                     </button>
                 </div>
@@ -255,9 +255,9 @@
 
                 <!-- Step 1 Info Card -->
                 <div class="flex gap-4">
-                    <!-- IMPROVED: border-[#2ba351] and text-[#2ba351] updated to #1b6e35 -->
+                    <!-- IMPROVED: border-[#2ba351] and text-[#2ba351] updated to #2c4294 -->
                     <div
-                        class="w-14 h-14 rounded-full border-2 border-[#1b6e35] text-[#1b6e35] flex items-center justify-center text-xl flex-shrink-0">
+                        class="w-14 h-14 rounded-full border-2 border-[#2c4294] text-[#2c4294] flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
                     </div>
                     <div class="flex flex-col">
@@ -271,9 +271,9 @@
 
                 <!-- Step 2 Info Card -->
                 <div class="flex gap-4">
-                    <!-- IMPROVED: border-[#2ba351] and text-[#2ba351] updated to #1b6e35 -->
+                    <!-- IMPROVED: border-[#2ba351] and text-[#2ba351] updated to #2c4294 -->
                     <div
-                        class="w-14 h-14 rounded-full border-2 border-[#1b6e35] text-[#1b6e35] flex items-center justify-center text-xl flex-shrink-0">
+                        class="w-14 h-14 rounded-full border-2 border-[#2c4294] text-[#2c4294] flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
                     </div>
                     <div class="flex flex-col">
@@ -287,9 +287,9 @@
 
                 <!-- Step 3 Info Card -->
                 <div class="flex gap-4">
-                    <!-- IMPROVED: border-[#2ba351] and text-[#2ba351] updated to #1b6e35 -->
+                    <!-- IMPROVED: border-[#2ba351] and text-[#2ba351] updated to #2c4294 -->
                     <div
-                        class="w-14 h-14 rounded-full border-2 border-[#1b6e35] text-[#1b6e35] flex items-center justify-center text-xl flex-shrink-0">
+                        class="w-14 h-14 rounded-full border-2 border-[#2c4294] text-[#2c4294] flex items-center justify-center text-xl flex-shrink-0">
                         <i class="fa-solid fa-bell" aria-hidden="true"></i>
                     </div>
                     <div class="flex flex-col">

@@ -26,15 +26,15 @@
 
         <!-- 2. Header Section -->
         <div class="text-center max-w-4xl mx-auto mb-12">
-            <!-- IMPROVED: text-[#2ba351] changed to text-[#1b6e35] -->
-            <h1 class="text-xl md:text-xl font-black text-[#1b6e35] uppercase tracking-wide mb-3">Explore Neighborhoods</h1>
+            <!-- IMPROVED: text-[#2ba351] changed to text-[#2c4294] -->
+            <h1 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide mb-3">Explore Neighborhoods</h1>
             <p class="text-gray-500 text-xs md:text-base leading-relaxed">
                 Find the perfect place to live. Explore our in-depth area guides containing lifestyle reviews, famous
                 landmarks, school information, average pricing, and transportation facilities of Dhaka's most popular
                 neighborhoods.
             </p>
-            <!-- IMPROVED: bg-[#2ba351] changed to bg-[#1b6e35] -->
-            <div class="w-24 h-1 bg-[#1b6e35] mx-auto mt-4"></div>
+            <!-- IMPROVED: bg-[#2ba351] changed to bg-[#2c4294] -->
+            <div class="w-24 h-1 bg-[#2c4294] mx-auto mt-4"></div>
         </div>
 
         <!-- 3. Responsive Area Guides Grid (3 Columns) -->
@@ -113,10 +113,10 @@
                                 </div>
 
                                 <!-- Read Guide Button -->
-                                <!-- IMPROVED: bg-[#2ba351] and shadow changed to #1b6e35 for contrast check -->
+                                <!-- IMPROVED: bg-[#2ba351] and shadow changed to #2c4294 for contrast check -->
 
                                 <span
-                                    class="w-full text-center bg-[#1b6e35] hover:bg-[#1f7035] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#1b6e35]/10">
+                                    class="w-full text-center bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#2c4294]/10">
                                     Read {{ $guide->title }} Guide
                                 </span>
 
