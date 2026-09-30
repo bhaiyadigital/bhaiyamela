@@ -75,9 +75,15 @@
         @if(isset($activeCategory) || isset($activeCompany))
             <!-- White Card Container for Filter Titles & Descriptions -->
             <div class="bg-white p-6 mb-10 text-left rounded-xl">
-                <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide mb-3">
-                    {{ $pageTitle }}
-                </h2>
+                <div class="flex justify-between items-start md:items-center mb-3">
+                    <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
+                        {{ $pageTitle }}
+                    </h2>
+                    <button type="button" onclick="document.getElementById('mobileFilterContent').classList.toggle('hidden')"
+                        class="lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
+                        <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
+                    </button>
+                </div>
                 <div class="w-16 h-1 bg-[#2c4294] mb-6"></div>
 
                 @if(!empty($activeCategory->description))
@@ -92,22 +98,25 @@
             </div>
         @else
             <div class="bg-white p-6 mb-10 text-left rounded-xl">
-
-                <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide mb-3">
-                    আমাদের প্রপার্টিজ
-
-                </h2>
+                <div class="flex justify-between items-start md:items-center mb-3">
+                    <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
+                        আমাদের প্রপার্টিজ
+                    </h2>
+                    <button type="button" onclick="document.getElementById('mobileFilterContent').classList.toggle('hidden')"
+                        class="lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
+                        <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
+                    </button>
+                </div>
                 <div class="w-16 h-1 bg-[#2c4294] mb-6"></div>
                 <p class="text-gray-500 text-base leading-relaxed max-w-3xl">
                     বাংলাদেশের শীর্ষস্থানীয় ডেভেলপারদের তৈরি আমাদের প্রিমিয়াম আবাসিক ও বাণিজ্যিক প্রজেক্টগুলোর বিশাল ক্যাটালগ ব্রাউজ করুন।
                 </p>
             </div>
         @endif
+        
+        <!-- Mobile Filter Block -->
         <div class="block lg:hidden mb-6">
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-                <p class="text-xs font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                    প্রপার্টি ফিল্টার করুন
-                </p>
+            <div id="mobileFilterContent" class="{{ (request('search') || request('category') || request('destination') || request('company')) ? '' : 'hidden' }} bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                 <form action="{{ route('web.project') }}" method="GET" class="flex flex-col gap-4">
                     <div>
                         <label for="mob-search-input" class="block text-xs font-bold text-gray-600 mb-1.5">কী-ওয়ার্ড দিয়ে খুঁজুন</label>
