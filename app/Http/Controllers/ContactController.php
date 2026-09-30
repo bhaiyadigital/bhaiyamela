@@ -115,11 +115,18 @@ class ContactController extends Controller
                 'is_read'    => false,
             ]);
 
-            \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'property_owner'], [
+            \App\Services\FacebookConversionApi::sendEvent('Lead', null, [
+                'lead_type'       => 'property_owner',
+                'job_title'       => $request->input('lead_job_title'),
+                'company'         => $request->input('lead_company'),
+                'budget'          => $request->input('lead_budget'),
+                'investment_time' => $request->input('lead_investment_time')
+            ], [
                 'em' => $request->input('lead_email'),
                 'ph' => $fullPhone,
                 'fn' => $request->input('lead_name')
             ]);
+
 
             return response()->json([
                 'success' => true,
