@@ -140,20 +140,6 @@
                         </a>
 
                     </li>
-                    <li>
-
-                        <a href="{{ route('loans.index') }}" class="hover:text-white transition" aria-label="faq"> Loan
-                            Partners
-
-                        </a>
-                    </li>
-                    <li>
-
-                        <a href="{{ route('area-guides.index') }}" class="hover:text-white transition"
-                            aria-label="area-guide">Area Guides
-
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>

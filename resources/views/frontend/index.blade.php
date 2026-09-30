@@ -206,22 +206,23 @@
         <div class="container mx-auto px-4">
 
             <!-- Section Header Area -->
-            <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-10 gap-6">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-6 gap-2 border-b border-gray-100 pb-2">
                 <!-- Title Content -->
-                <div class="text-center lg:text-left">
-                    <span class="text-[#1b6e35] text-base font-semibold uppercase tracking-widest mb-3 block">FEATURED
+                <div class="text-left">
+                    <span class="inline-flex items-center gap-1.5 bg-[#000678]/10 border border-[#000678]/20 text-[#000678] px-3 py-1 rounded-full text-[11px] font-bold mb-1.5">
+                        <i class="fa-solid fa-fire text-[10px]"></i> FEATURED
                     </span>
-                    <h2 class="text-xl md:text-[32px] font-semibold text-[#111111]">
-                        Select the preferred property
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-[#111111]">
+                        Select the preferred <span class="text-[#000678]">property</span>
                     </h2>
                 </div>
 
-                <!-- View All Button (Desktop: Top Right) -->
-                <div class="hidden lg:block">
+                <!-- View All Link -->
+                <div class="hidden lg:block mb-1">
                     <a href="{{ route('web.project') }}"
-                        class="inline-flex items-center gap-3 px-8 py-3 border-2 border-[#1b6e35] text-[#1b6e35] rounded-xl font-bold hover:bg-[#1b6e35] hover:text-white transition-all duration-300 group">
+                        class="inline-flex items-center gap-1.5 text-[#2c4294] font-extrabold text-sm hover:underline transition-all group">
                         View All
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
