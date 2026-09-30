@@ -8,10 +8,10 @@
         </div>
 
         <!-- Navigation Links (Desktop) -->
-        <nav class="hidden lg:flex items-center space-x-10">
+        <nav class="hidden lg:flex items-center space-x-5 font-semibold text-lg">
             <!-- Home link matches your color now via .nav-link CSS -->
             <a href="{{ route('web.home') }}" class="nav-link active-link" aria-label="Home">Home</a>
-            <a href="{{ route('web.project') }}" class="nav-link active-link" aria-label="Home">Properties</a>
+            <a href="{{ route('web.project') }}" class="nav-link active-link" aria-label="Properties">Properties</a>
             <div class="relative group cursor-pointer">
                 <button class="nav-link flex items-center gap-1 cursor-pointer" aria-haspopup="true"
                     aria-expanded="false">
@@ -97,17 +97,17 @@
                     aria-label="Developers">Concerns</a> -->
                 <a href="{{ route('web.blog') }}"
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2" aria-label="Blogs">Blog</a>
-                @auth
-                    @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
-                        <a href="{{route('home')}}" class="nav-link" aria-label="Admin Dashboard">Dashboard</a>
-                    @else
-                        <!-- If logged in as Normal Individual User -->
-                        <a href="{{ route('user.dashboard') }}" class="nav-link" aria-label="User Profile">Profile</a>
-                    @endif
+                {{-- @auth
+                @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
+                <a href="{{route('home')}}" class="nav-link" aria-label="Admin Dashboard">Dashboard</a>
                 @else
-                    <!-- If Guest (Not Logged In) -->
-                    <a href="{{ route('company.login') }}" class="nav-link" aria-label="Company Login">Login</a>
-                @endauth
+                <!-- If logged in as Normal Individual User -->
+                <a href="{{ route('user.dashboard') }}" class="nav-link" aria-label="User Profile">Profile</a>
+                @endif
+                @else
+                <!-- If Guest (Not Logged In) -->
+                <a href="{{ route('company.login') }}" class="nav-link" aria-label="Company Login">Login</a>
+                @endauth --}}
 
 
             </div>
