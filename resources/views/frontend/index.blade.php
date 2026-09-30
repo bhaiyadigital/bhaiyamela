@@ -108,7 +108,7 @@
     </style>
     <section class="w-full overflow-x-hidden">
 
-        <div class="relative w-full overflow-hidden bg-black" style="aspect-ratio: 16/7;">
+        <div class="relative w-full overflow-hidden bg-transparent">
 
             @foreach($hero as $index => $slide)
                 @php
@@ -118,22 +118,20 @@
                 @endphp
 
                 <a href="{{ $redirectUrl }}"
-                    class="hero-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out {{ $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}"
+                    class="hero-slide w-full transition-opacity duration-1000 ease-in-out {{ $index === 0 ? 'opacity-100 z-10 relative block' : 'opacity-0 z-0 absolute inset-0' }}"
                     data-index="{{ $index }}">
                     <img src="{{ asset($slide->img_path ? 'storage/' . $slide->img_path : 'assets/images/landing-hero.jpg') }}"
-                        class="w-full h-full object-contain" alt="Hero Slide {{ $index + 1 }}" />
-
-                    <!-- <div class="absolute inset-0 bg-black/20"></div> -->
+                        class="w-full h-auto object-contain" alt="Hero Slide {{ $index + 1 }}" />
                 </a>
             @endforeach
 
             @if(count($hero) > 1)
                 <div
-                    class="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-0 md:gap-0.5 bg-black/30 px-1 py-1 rounded-full backdrop-blur-sm items-center justify-center">
+                    class="absolute bottom-2 md:bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-0 md:gap-1 bg-black/30 px-2 py-1 md:py-1.5 rounded-full backdrop-blur-sm items-center justify-center">
                     @foreach($hero as $index => $slide)
                         <button type="button" onclick="goToSlide({{ $index }})" aria-label="Go to slide {{ $index + 1 }}"
                             aria-current="{{ $index === 0 ? 'true' : 'false' }}"
-                            class="w-6 h-6 md:w-10 md:h-10 flex items-center justify-center transition-all duration-300 focus:outline-none"
+                            class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center transition-all duration-300 focus:outline-none"
                             data-index="{{ $index }}">
 
                             <span

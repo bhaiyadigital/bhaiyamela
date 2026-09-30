@@ -81,7 +81,7 @@
                     <div class="relative w-full rounded-2xl overflow-hidden shadow-sm bg-gray-50"
                         style="aspect-ratio: 16/10;">
                         <img id="mainFeaturedImage" src="{{ asset('storage/' . $firstImage) }}"
-                            class="w-full h-full object-cover transition-all duration-300" alt="{{ $project->title }}">
+                            class="w-full h-full object-contain transition-all duration-300" alt="{{ $project->title }}">
                     </div>
                     @if(!empty($images) && count($images) > 1)
                         <div class="relative mt-3">
@@ -98,58 +98,60 @@
                 </div>
 
 
-                <div class="sticky top-0 bg-white z-30 py-4 pl-3 flex flex-wrap gap-3 border-b border-gray-100 shadow-sm">
+                @if(!empty($featuresList) || (!empty($extraFeatures) && is_array($extraFeatures)) || $project->description || !empty($floorPlans) || !empty($locationViews) || !empty($project->video_path) || $isValidEmbed)
+                    <div class="sticky top-0 bg-white z-30 py-4 pl-3 flex flex-wrap gap-3 border-b border-gray-100 shadow-sm">
 
-                    @if(!empty($featuresList))
-                        <a href="#section-overview"
-                            class="tab-link px-4 py-2.5 bg-[#2c4294] text-white rounded-xl text-xs md:text-base font-extrabold border border-[#2c4294] shadow-sm shadow-[#2c4294]/10 hover:opacity-95 transition-all whitespace-nowrap">
-                            ওভারভিউ
-                        </a>
-                    @endif
+                        @if(!empty($featuresList))
+                            <a href="#section-overview"
+                                class="tab-link px-4 py-2.5 bg-[#2c4294] text-white rounded-xl text-xs md:text-base font-extrabold border border-[#2c4294] shadow-sm shadow-[#2c4294]/10 hover:opacity-95 transition-all whitespace-nowrap">
+                                ওভারভিউ
+                            </a>
+                        @endif
 
-                    @if(!empty($extraFeatures) && is_array($extraFeatures))
-                        <a href="#section-features"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            বৈশিষ্ট্য
-                        </a>
-                    @endif
+                        @if(!empty($extraFeatures) && is_array($extraFeatures))
+                            <a href="#section-features"
+                                class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
+                                বৈশিষ্ট্য
+                            </a>
+                        @endif
 
-                    @if($project->description)
-                        <a href="#section-description"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            বিবরণ
-                        </a>
-                    @endif
+                        @if($project->description)
+                            <a href="#section-description"
+                                class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
+                                বিবরণ
+                            </a>
+                        @endif
 
-                    @if(!empty($floorPlans))
-                        <a href="#section-floor-plan"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            ফ্লোর প্ল্যান
-                        </a>
-                    @endif
+                        @if(!empty($floorPlans))
+                            <a href="#section-floor-plan"
+                                class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
+                                ফ্লোর প্ল্যান
+                            </a>
+                        @endif
 
-                    @if(!empty($locationViews))
-                        <a href="#section-location-view"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            লোকেশন ভিউ
-                        </a>
-                    @endif
+                        @if(!empty($locationViews))
+                            <a href="#section-location-view"
+                                class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
+                                লোকেশন ভিউ
+                            </a>
+                        @endif
 
-                    @if(!empty($project->video_path))
-                        <a href="#section-video"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            ভিডিও
-                        </a>
-                    @endif
+                        @if(!empty($project->video_path))
+                            <a href="#section-video"
+                                class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
+                                ভিডিও
+                            </a>
+                        @endif
 
-                    @if($isValidEmbed)
-                        <a href="#section-map-view"
-                            class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                            ম্যাপ ভিউ
-                        </a>
-                    @endif
+                        @if($isValidEmbed)
+                            <a href="#section-map-view"
+                                class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
+                                ম্যাপ ভিউ
+                            </a>
+                        @endif
 
-                </div>
+                    </div>
+                @endif
 
 
                 @if(!empty($featuresList))
@@ -672,18 +674,18 @@
                     const result = await response.json();
 
                     if (response.ok && result.success) {
-                        showCustomToast(result.message || "Your message has been sent successfully!", "success");
+                        showMessageModal(result.message || "আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।", "success");
                         form.reset();
                     } else {
-                        let errorMsg = result.message || "Something went wrong. Please try again.";
+                        let errorMsg = result.message || "কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।";
                         if (result.errors) {
                             errorMsg = Object.values(result.errors).map(err => err[0]).join("\n");
                         }
-                        showCustomToast(errorMsg, "error");
+                        showMessageModal(errorMsg, "error");
                     }
                 } catch (error) {
                     console.error("Lead form error:", error);
-                    showCustomToast("An error occurred. Please try again.", "error");
+                    showMessageModal("কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।", "error");
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
@@ -799,9 +801,61 @@
 
             if (overlay && player) {
                 overlay.classList.remove('hidden');
-                player.removeAttribute('controls'); // পজ বা এন্ড হলে নেটিভ কন্ট্রোল হাইড হবে যেন প্লে বাটনটি সুন্দর দেখায়
+                player.removeAttribute('controls');
             }
         };
 
+        function showMessageModal(message, type = 'success') {
+            const modal = document.getElementById('messageModal');
+            const content = document.getElementById('messageModalContent');
+            const iconBg = document.getElementById('messageModalIconBg');
+            const icon = document.getElementById('messageModalIcon');
+            const title = document.getElementById('messageModalTitle');
+            
+            document.getElementById('messageModalText').textContent = message;
+            
+            if(type === 'success') {
+                iconBg.className = 'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-green-100';
+                icon.className = 'fa-solid fa-check text-4xl text-green-500';
+                title.textContent = 'সফল হয়েছে!';
+            } else {
+                iconBg.className = 'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-red-100';
+                icon.className = 'fa-solid fa-xmark text-4xl text-red-500';
+                title.textContent = 'ত্রুটি!';
+            }
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+        
+        function closeMessageModal() {
+            const modal = document.getElementById('messageModal');
+            const content = document.getElementById('messageModalContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
     </script>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="fixed inset-0 z-[9999] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-all" onclick="closeMessageModal()"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 text-center transform scale-95 opacity-0 transition-all duration-300 mx-4" id="messageModalContent">
+            <div id="messageModalIconBg" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i id="messageModalIcon" class="fa-solid text-4xl"></i>
+            </div>
+            <h3 id="messageModalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+            <p id="messageModalText" class="text-gray-600 mb-6 font-medium text-base"></p>
+            <button type="button" onclick="closeMessageModal()" class="w-full bg-[#2c4294] text-white rounded-xl py-3.5 font-bold text-base hover:bg-[#1a285a] shadow-md hover:shadow-lg transition-all active:scale-95">
+                ঠিক আছে
+            </button>
+        </div>
+    </div>
 @endsection
