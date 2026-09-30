@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Requirement;
 use App\Rules\Recaptcha;
 use App\Rules\ValidPhoneNumber;
+use App\Services\FacebookConversionApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -97,6 +98,15 @@ class RequirementController extends Controller
                 'name'          => $request->input('name'),
                 'email'         => $request->input('email'),
                 'phone'         => $fullPhone,
+            ]);
+
+            FacebookConversionApi::sendEvent('Lead', null, [
+                'lead_type' => 'requirement', 
+                'purpose' => $request->input('purpose')
+            ], [
+                'em' => $request->input('email'),
+                'ph' => $fullPhone,
+                'fn' => $request->input('name')
             ]);
 
             return redirect()

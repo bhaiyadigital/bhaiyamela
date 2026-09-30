@@ -236,6 +236,8 @@ class WebController extends Controller
             ->where('status', 1)
             ->firstOrFail();
 
+        \App\Services\FacebookConversionApi::sendEvent('ViewContent', null, ['content_type' => 'category', 'content_name' => $activeCategory->title]);
+
         $query = Content::where('module', 'project')
             ->active()
             ->approved()
@@ -285,6 +287,8 @@ class WebController extends Controller
     {
         $page = Content::where('module', 'page')->where('slug', $slug)->where('status', 1)->firstOrFail();
 
+        \App\Services\FacebookConversionApi::sendEvent('ViewContent', null, ['content_type' => 'page', 'content_name' => $page->title ?? '']);
+
         return view('frontend.pages.dynamicPage', compact('page'));
     }
 
@@ -299,6 +303,12 @@ class WebController extends Controller
             $query->where('status', 1);
         }
         $project = $query->firstOrFail();
+
+        \App\Services\FacebookConversionApi::sendEvent('ViewContent', null, [
+            'content_type' => 'project',
+            'content_id' => $project->id,
+            'content_name' => $project->title
+        ]);
         $similarProjects = Content::where('module', 'project')
             ->where('status', 1)
             ->where('id', '!=', $project->id)
@@ -465,6 +475,12 @@ class WebController extends Controller
         }
 
         $blog = $query->firstOrFail();
+
+        \App\Services\FacebookConversionApi::sendEvent('ViewContent', null, [
+            'content_type' => 'blog',
+            'content_id' => $blog->id,
+            'content_name' => $blog->title
+        ]);
         // Increment views
         $blog->increment('views');
 
@@ -542,6 +558,12 @@ class WebController extends Controller
             'message'     => $validated['message'],
         ]);
 
+        \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'contact'], [
+            'em' => $validated['email'],
+            'ph' => $request->input('phone'),
+            'fn' => $validated['name']
+        ]);
+
         return redirect()->back()->with('success', 'Thank you! Your message has been sent.');
     }
 
@@ -558,6 +580,10 @@ class WebController extends Controller
 
         Subscription::create([
             'email' => $validated['email'],
+        ]);
+
+        \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'subscription'], [
+            'em' => $validated['email']
         ]);
 
         return redirect()->back()->fragment('subscribe-id')->with('success', 'Thank you for subscribing!');

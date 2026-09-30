@@ -160,6 +160,12 @@ class CompanyController extends Controller
                     'status'    => 1,
                 ]);
 
+                \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'user_registration'], [
+                    'em' => $request->email,
+                    'ph' => $fullPhone,
+                    'fn' => $request->full_name
+                ]);
+
                 Auth::login($user);
 
                 DB::commit();
@@ -194,6 +200,12 @@ class CompanyController extends Controller
 
                 $user->update([
                     'company_id' => $company->id
+                ]);
+
+                \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'developer_registration', 'company_name' => $request->company_name], [
+                    'em' => $request->email,
+                    'ph' => $fullPhone,
+                    'fn' => $request->contact_person_name
                 ]);
 
                 Auth::login($user);
