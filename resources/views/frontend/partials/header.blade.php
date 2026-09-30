@@ -8,7 +8,7 @@
         </div>
 
         <!-- Navigation Links (Desktop) -->
-        <nav class="hidden lg:flex items-center space-x-5 font-semibold text-lg">
+        <nav class="hidden lg:flex items-center gap-5 font-semibold text-lg">
             <!-- Home link matches your color now via .nav-link CSS -->
             <a href="{{ route('web.home') }}" class="nav-link active-link" aria-label="Home">Home</a>
             <a href="{{ route('web.project') }}" class="nav-link active-link" aria-label="Properties">Properties</a>
