@@ -492,7 +492,7 @@
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message') }}</textarea>
 
                             <button type="submit" id="leadSubmitBtn"
-                                class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 rounded-xl font-bold text-lg transition-all active:scale-[0.98]">
+                                class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 rounded-xl font-bold text-lg transition-all active:scale-[0.98]">
                                 মেসেজ পাঠান
                             </button>
                         </form>
@@ -826,7 +826,7 @@
             </div>
             <h2 id="messageModalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h2>
             <p id="messageModalText" class="text-gray-600 mb-6 font-medium text-base"></p>
-            <button type="button" onclick="closeMessageModal()" class="w-full bg-[#2c4294] text-white rounded-xl py-3.5 font-bold text-base hover:bg-[#1a285a] shadow-md hover:shadow-lg transition-all active:scale-95">
+            <button type="button" onclick="closeMessageModal()" class="cursor-pointer w-full bg-[#2c4294] text-white rounded-xl py-3.5 font-bold text-base hover:bg-[#1a285a] shadow-md hover:shadow-lg transition-all active:scale-95">
                 ঠিক আছে
             </button>
         </div>
