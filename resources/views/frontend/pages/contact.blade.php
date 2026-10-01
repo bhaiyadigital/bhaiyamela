@@ -37,7 +37,9 @@
                     <div class="flex flex-col">
                         <h4 class="text-xl font-bold text-gray-900">ফোন নম্বর</h4>
                         <p class="text-gray-600 text-base md:text-base">
-                            {!! $setting->phone ?? '+880 1938-886333' !!}
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', strip_tags($setting->phone ?? '+8801938886333')) }}" class="hover:text-[#2c4294] transition-colors">
+                                {!! $setting->phone ?? '+880 1938-886333' !!}
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -51,7 +53,9 @@
                     <div class="flex flex-col">
                         <h4 class="text-xl font-bold text-gray-900">ইমেইল করুন</h4>
                         <p class="text-gray-600 text-base md:text-base">
-                            {{ $setting->email ?? '-' }}
+                            <a href="mailto:{{ strip_tags($setting->email ?? 'info@domain.com') }}" class="hover:text-[#2c4294] transition-colors">
+                                {{ $setting->email ?? '-' }}
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -69,7 +73,9 @@
                     </div>
 
                     <div class="text-xl md:text-xl font-bold mb-4 tracking-tight">
-                        {{ $setting->phone ?? '-' }}
+                        <a href="tel:{{ preg_replace('/[^0-9+]/', '', strip_tags($setting->phone ?? '+8801938886333')) }}" class="hover:text-gray-200 transition-colors">
+                            {{ $setting->phone ?? '-' }}
+                        </a>
                     </div>
 
                     <div class="text-xs font-medium uppercase tracking-widest leading-loose">
