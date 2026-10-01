@@ -207,7 +207,7 @@
 
 
     @include('frontend.partials.footer')
-    <button type="button" id="scrollToTopBtn"
+    <button type="button" id="scrollToTopBtn" aria-label="Scroll to top"
         class="hidden opacity-0 fixed bottom-6 right-6 z-[2000] bg-[#2c4294] hover:bg-[#1a285a] text-white w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg shadow-[#2ba351]/20 hover:scale-110 active:scale-95 cursor-pointer">
         <!-- FontAwesome Up Arrow Icon -->
         <i class="fa-solid fa-arrow-up text-sm"></i>

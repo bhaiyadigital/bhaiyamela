@@ -1,10 +1,10 @@
 <!-- FOOTER SECTION -->
-<footer class="bg-[#050a18] text-white pt-20 pb-8">
+<footer class="bg-[#050a18] text-white pt-10 md:pt-20 pb-8">
     <div class="container mx-auto">
         <!-- Main Content Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch border-b border-[#2c4294]">
             <!-- Column 1: Logo & Social -->
-            <div class="px-4 pb-16 lg:pb-20">
+            <div class="px-4 pb-10 lg:pb-20">
                 <!-- Mobile: Row containing Logo & Socials | Desktop: Vertical Stack -->
                 <div
                     class="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start gap-4 md:gap-0 mb-6">
@@ -12,7 +12,7 @@
                     <!-- Logo Container -->
                     <div class="mb-0 md:mb-6">
                         @if($setting && $setting->logo)
-                            <img src="{{ asset('storage/' . $setting->logo) }}" alt="{{ $setting->site_name ?? 'Logo' }}"
+                            <img src="{{ asset('storage/' . $setting->logo) }}" alt="{{ $setting->site_name ?? 'Logo' }}" width="80" height="80"
                                 class="w-[80px]" />
                         @else
                             <span class="text-xl md:text-2xl font-bold text-white">
@@ -49,10 +49,10 @@
             </div>
 
             <div
-                class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:px-12 flex flex-col items-center text-center pb-16 lg:pb-20 pt-12 lg:pt-0">
-                <h3 class="text-xl font-bold uppercase mb-4">
+                class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:px-12 flex flex-col items-center text-center pb-10 lg:pb-20 pt-10 lg:pt-0">
+                <h2 class="text-xl font-bold uppercase mb-4">
                     সাবস্ক্রাইব
-                </h3>
+                </h2>
                 <p class="text-white/60 text-base mb-8 max-w-[220px]">
                     আমাদের নতুন প্রকল্প এবং খবরের সাথে আপডেট থাকুন।
                 </p>
@@ -89,10 +89,10 @@
             </div>
 
             <!-- Column 3: MENU -->
-            <div class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:pl-20 pb-16 lg:pb-20 pt-12 lg:pt-0">
-                <h3 class="text-xl font-bold uppercase  mb-8">
+            <div class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:pl-20 pb-10 lg:pb-20 pt-10 lg:pt-0">
+                <h2 class="text-xl font-bold uppercase  mb-8">
                     মেনু
-                </h3>
+                </h2>
                 <ul class="space-y-4 text-base text-white/60">
                     <li>
                         <a href="{{ route('web.project') }}" class="hover:text-white transition"
@@ -121,10 +121,10 @@
             </div>
 
             <!-- Column 4: RECENT PROJECTS -->
-            <div class="border-t lg:border-t-0 px-6 lg:pl-10 pb-16 lg:pb-20 pt-12 lg:pt-0">
-                <h3 class="text-xl font-bold uppercase  mb-8">
+            <div class="border-t lg:border-t-0 border-[#2c4294] px-6 lg:pl-10 pb-10 lg:pb-20 pt-10 lg:pt-0">
+                <h2 class="text-xl font-bold uppercase  mb-8">
                     সাম্প্রতিক প্রকল্প
-                </h3>
+                </h2>
                 <ul class="space-y-4 text-base text-white/60">
                     @php
                         $footerProjects = \App\Models\Content::where('module', 'project')

@@ -121,7 +121,7 @@
                     class="hero-slide w-full transition-opacity duration-1000 ease-in-out {{ $index === 0 ? 'opacity-100 z-10 relative block' : 'opacity-0 z-0 absolute inset-0' }}"
                     data-index="{{ $index }}">
                     <img src="{{ asset($slide->img_path ? 'storage/' . $slide->img_path : 'assets/images/landing-hero.jpg') }}"
-                        class="w-full h-auto object-contain" alt="Hero Slide {{ $index + 1 }}" />
+                        class="w-full h-auto object-contain" width="3520" height="1216" alt="Hero Slide {{ $index + 1 }}" />
                 </a>
             @endforeach
 
@@ -221,7 +221,7 @@
 
 
     <!-- PROJECTS GRID SECTION -->
-    <section class="py-4 md:py-10">
+    <section class="py-4 pt-10">
         <div class="container mx-auto px-4">
             <div class="border-b border-gray-200">
 
@@ -268,29 +268,40 @@
             </div>
 
             <!-- Cards Grid / Slider -->
-            <div class="swiper common-mobile-swiper lg:!overflow-hidden mt-0 md:mt-6">
-                <div id="project-container" class="swiper-wrapper">
-                    @forelse($projects as $project)
-                        <div class="swiper-slide h-auto">
-                            @include('frontend.partials.project_card', ['project' => $project])
+            <div class="relative mt-0 md:mt-6 mobile-scroll-container">
+                <button type="button" aria-label="Scroll left"
+                    class="scroll-btn scroll-left absolute left-1 top-[45%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                    <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
+                </button>
 
-                        </div>
-                    @empty
-                        <!-- IMPROVED: Changed text-gray-400 to text-gray-600 for contrast compliance -->
-                        <p class="col-span-full text-center text-gray-600 py-10">কোন প্রকল্প পাওয়া যায়নি।</p>
-                    @endforelse
+                <div class="swiper common-mobile-swiper lg:!overflow-hidden">
+                    <div id="project-container" class="swiper-wrapper">
+                        @forelse($projects as $project)
+                            <div class="swiper-slide h-auto">
+                                @include('frontend.partials.project_card', ['project' => $project])
+
+                            </div>
+                        @empty
+                            <!-- IMPROVED: Changed text-gray-400 to text-gray-600 for contrast compliance -->
+                            <p class="col-span-full text-center text-gray-600 py-10">কোন প্রকল্প পাওয়া যায়নি।</p>
+                        @endforelse
+                    </div>
+
+                    <!-- Swiper Pagination (Mobile only) -->
+                    <div class="swiper-pagination !static mt-2 lg:hidden"></div>
                 </div>
 
-                <!-- Swiper Pagination (Mobile only) -->
-                <div class="swiper-pagination !static mt-10 lg:hidden"></div>
+                <button type="button" aria-label="Scroll right"
+                    class="scroll-btn scroll-right absolute right-1 top-[45%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                    <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
+                </button>
             </div>
 
-            <!-- View All Button (Mobile: Bottom) -->
-            <div class="mt-0 md:mt-12 flex justify-center">
-                <a href="{{ route('web.project') }}"
-                    class="inline-flex items-center gap-3 px-10 py-4 bg-[#2c4294] text-white rounded-2xl font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-all">
-                    সবগুলো প্রপার্টি দেখুন
-                    <i class="fa-solid fa-arrow-right"></i>
+            <div class="flex justify-center mt-0 lg:hidden">
+                <a href="{{ route('web.project') }}" aria-label="View all projects"
+                    class="inline-flex items-center gap-3 px-8 py-2.5 border border-[#2c4294] text-[#2c4294] rounded-lg font-bold hover:bg-[#2c4294] hover:text-white transition-all duration-300 group">
+                    সবগুলো দেখুন
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
 
@@ -468,164 +479,176 @@
 
 
     <!-- EXPLORE BLOG SECTION -->
-    @if($blogs->count() > 0)
-        <section class="py-4 md:py-10">
-            <div class="container mx-auto px-4">
-                <div
-                    class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-6 gap-2 border-b border-gray-200 pb-2">
-                    <div class="text-left">
-                        <span
-                            class="inline-flex items-center gap-1.5 bg-[#000678]/10 border border-[#000678]/20 text-[#000678] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
-                            <i class="fa-solid fa-book-open text-xs"></i> আমাদের জার্নাল থেকে
-                        </span>
-                        <h2 class="text-2xl md:text-3xl font-bold text-[#111111] mb-1">
-                            আমাদের ব্লগ এক্সপ্লোর করুন</span>
-                        </h2>
-                        <p class="text-gray-500 text-sm md:text-base max-w-xl">
-                            আমাদের রিসোর্টের দৃশ্য ও শব্দে নিজেকে হারিয়ে ফেলুন। একটি ভার্চুয়াল ট্যুর নিন
-                        </p>
-                    </div>
-
-                    <div class="hidden lg:block mb-1 whitespace-nowrap">
-                        <a href="{{ route('web.blog') }}" aria-label="Visit our blog"
-                            class="inline-flex items-center gap-1.5 text-[#2c4294] font-bold text-sm hover:underline transition-all group">
-                            আরও দেখুন
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
+    {{-- @if($blogs->count() > 0)
+    <section class="py-4 md:mb-10">
+        <div class="container mx-auto px-4">
+            <div
+                class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-6 gap-2 border-b border-gray-200 pb-2">
+                <div class="text-left">
+                    <span
+                        class="inline-flex items-center gap-1.5 bg-[#000678]/10 border border-[#000678]/20 text-[#000678] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
+                        <i class="fa-solid fa-book-open text-xs"></i> আমাদের জার্নাল থেকে
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-[#111111] mb-1">
+                        আমাদের ব্লগ এক্সপ্লোর করুন</span>
+                    </h2>
+                    <p class="text-gray-600 text-sm md:text-base max-w-xl">
+                        আমাদের রিসোর্টের দৃশ্য ও শব্দে নিজেকে হারিয়ে ফেলুন। একটি ভার্চুয়াল ট্যুর নিন
+                    </p>
                 </div>
 
-                <!-- Blog Cards Grid -->
+                <div class="hidden lg:block mb-1 whitespace-nowrap">
+                    <a href="{{ route('web.blog') }}" aria-label="Visit our blog"
+                        class="inline-flex items-center gap-1.5 text-[#2c4294] font-bold text-sm hover:underline transition-all group">
+                        আরও দেখুন
+                        <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Blog Cards Grid -->
+            <div class="relative mobile-scroll-container">
+                <button type="button" aria-label="Scroll left"
+                    class="scroll-btn scroll-left absolute left-1 top-[40%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                    <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
+                </button>
+
                 <div class="swiper common-mobile-swiper lg:!overflow-hidden">
                     <div class="swiper-wrapper">
                         @forelse($blogs as $blog)
-                            <div class="swiper-slide h-auto">
-                                <a href="{{ route('web.blog.details', $blog->slug) }}" aria-label="View blog post"
-                                    class="bg-white h-full flex flex-col rounded-xl overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.05)] border border-gray-100 group transition-all duration-300 hover:shadow-2xl">
+                        <div class="swiper-slide h-auto">
+                            <a href="{{ route('web.blog.details', $blog->slug) }}" aria-label="View blog post"
+                                class="bg-white h-full flex flex-col rounded-xl overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.05)] border border-gray-100 group transition-all duration-300 hover:shadow-2xl">
 
-                                    <!-- Image Area -->
-                                    <div class="relative aspect-[16/10] overflow-hidden">
-                                        <img src="{{ asset('storage/' . $blog->img_path ?? '') }}"
-                                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                            alt="{{ $blog->title ?? '' }}" />
-                                    </div>
+                                <!-- Image Area -->
+                                <div class="relative aspect-[16/10] overflow-hidden">
+                                    <img src="{{ asset('storage/' . $blog->img_path ?? '') }}"
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        alt="{{ $blog->title ?? '' }}" />
+                                </div>
 
-                                    <!-- Card Content Body -->
-                                    <div class="p-5 md:p-6 pb-4">
-                                        <div class="flex justify-between items-center mb-4">
-                                            <span
-                                                class="bg-[#f3f4f6] text-gray-700 px-3 py-1 rounded md:rounded-md text-[10px] font-bold uppercase tracking-wider">
-                                                {{ $blog->project->title ?? 'Bhaiya Group' }}
-                                            </span>
-                                            <div class="flex items-center gap-1.5 text-gray-700 text-xs font-semibold">
-                                                <i class="fa-regular fa-clock text-xs"></i>
-                                                <span>
-                                                    @php
-                                                        $wordCount = str_word_count(strip_tags($blog->body));
-                                                        $minutes = ceil($wordCount / 200);
-                                                    @endphp
-                                                    {{ $minutes == 0 ? 1 : $minutes }} মিনিট পড়ার সময়
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <h3
-                                            class="text-base md:text-lg font-bold text-gray-900 mb-4 leading-tight group-hover:text-[#2c4294] transition line-clamp-2">
-                                            {{ $blog->title ?? '' }}
-                                        </h3>
-
-                                        <span class="inline-flex items-center gap-1.5 text-[#2c4294] font-extrabold text-sm">
-                                            আর্টিকেল পড়ুন
-                                            <i
-                                                class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                                <!-- Card Content Body -->
+                                <div class="p-5 md:p-6 pb-4">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <span
+                                            class="bg-[#f3f4f6] text-gray-700 px-3 py-1 rounded md:rounded-md text-[10px] font-bold uppercase tracking-wider">
+                                            {{ $blog->project->title ?? 'Bhaiya Group' }}
                                         </span>
+                                        <div class="flex items-center gap-1.5 text-gray-700 text-xs font-semibold">
+                                            <i class="fa-regular fa-clock text-xs"></i>
+                                            <span>
+                                                @php
+                                                $wordCount = str_word_count(strip_tags($blog->body));
+                                                $minutes = ceil($wordCount / 200);
+                                                @endphp
+                                                {{ $minutes == 0 ? 1 : $minutes }} মিনিট পড়ার সময়
+                                            </span>
+                                        </div>
                                     </div>
 
-                                    <!-- Card Footer -->
-                                    <div
-                                        class="px-5 md:px-6 py-4 border-t border-gray-100 flex items-center justify-between gap-3 mt-auto">
-                                        <div class="flex items-center gap-2 overflow-hidden">
-                                            <img src="{{ asset($blog->company?->company_logo ? 'storage/' . $blog->company->company_logo : 'assets/images/logo.png') }}"
-                                                class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shadow-sm" alt="Author" />
-                                            <div class="leading-tight overflow-hidden">
-                                                <h4 class="text-xs md:text-sm font-bold text-gray-900 truncate">
-                                                    {{ $blog->user->name ?? 'Admin' }}
-                                                </h4>
-                                                <p class="text-[10px] md:text-xs font-medium text-gray-500 truncate">
-                                                    {{ $blog->company->company_name ?? 'Bhaiya Group' }}
-                                                </p>
-                                            </div>
+                                    <h3
+                                        class="text-base md:text-lg font-bold text-gray-900 mb-4 leading-tight group-hover:text-[#2c4294] transition line-clamp-2">
+                                        {{ $blog->title ?? '' }}
+                                    </h3>
+
+                                    <span class="inline-flex items-center gap-1.5 text-[#2c4294] font-extrabold text-sm">
+                                        আর্টিকেল পড়ুন
+                                        <i
+                                            class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                                    </span>
+                                </div>
+
+                                <!-- Card Footer -->
+                                <div
+                                    class="px-5 md:px-6 py-4 border-t border-gray-100 flex items-center justify-between gap-3 mt-auto">
+                                    <div class="flex items-center gap-2 overflow-hidden">
+                                        <img src="{{ asset($blog->company?->company_logo ? 'storage/' . $blog->company->company_logo : 'assets/images/logo.png') }}"
+                                            class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shadow-sm"
+                                            alt="Author" />
+                                        <div class="leading-tight overflow-hidden">
+                                            <h4 class="text-xs md:text-sm font-bold text-gray-900 truncate">
+                                                {{ $blog->user->name ?? 'Admin' }}
+                                            </h4>
+                                            <p class="text-[10px] md:text-xs font-medium text-gray-600 truncate">
+                                                {{ $blog->company->company_name ?? 'Bhaiya Group' }}
+                                            </p>
                                         </div>
-                                        @if($blog->start_date)
-                                            <div
-                                                class="flex items-center gap-1.5 text-gray-500 text-[10px] md:text-xs font-semibold whitespace-nowrap">
-                                                <i class="fa-regular fa-calendar-days text-[10px] md:text-xs text-gray-400"></i>
-                                                <span>{{ $blog->start_date->format('M d, Y') }}</span>
-                                            </div>
-                                        @endif
                                     </div>
-                                </a>
-                            </div>
+                                    @if($blog->start_date)
+                                    <div
+                                        class="flex items-center gap-1.5 text-gray-600 text-[10px] md:text-xs font-semibold whitespace-nowrap">
+                                        <i class="fa-regular fa-calendar-days text-[10px] md:text-xs text-gray-400"></i>
+                                        <span>{{ $blog->start_date->format('M d, Y') }}</span>
+                                    </div>
+                                    @endif
+                                </div>
+                            </a>
+                        </div>
                         @empty
-                            <p class="col-span-full text-center text-gray-400">কোন ব্লগ পোস্ট পাওয়া যায়নি।</p>
+                        <p class="col-span-full text-center text-gray-400">কোন ব্লগ পোস্ট পাওয়া যায়নি।</p>
                         @endforelse
 
                     </div>
                 </div>
-                <div class="flex justify-center mt-0 lg:hidden">
-                    <a href="{{ route('web.blog') }}" aria-label="Visit our blog"
-                        class="inline-flex items-center gap-3 px-8 py-2.5 border border-[#2c4294] text-[#2c4294] rounded-lg font-bold hover:bg-[#2c4294] hover:text-white transition-all duration-300 group">
-                        আরও দেখুন
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
+                <button type="button" aria-label="Scroll right"
+                    class="scroll-btn scroll-right absolute right-1 top-[40%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                    <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
+                </button>
             </div>
-        </section>
-        <!-- Global Tailwind CSS Dynamic Reusable Confirmation Modal -->
-        <div id="confirmModal"
-            class="hidden fixed inset-0 z-[10000] flex items-center justify-center p-4 backdrop-blur-sm bg-black/60 transition-all duration-300 select-none">
-
-            <!-- Modal Card Container -->
-            <div
-                class="bg-white rounded-3xl p-6 border border-gray-100 max-w-sm w-full text-center shadow-2xl scale-95 opacity-0 transition-all duration-300">
-
-                <!-- Dynamic Warning/Status Icon Container -->
-                <div id="confirmModalIcon"
-                    class="w-16 h-16 bg-red-50 text-red-500 rounded-full mx-auto flex items-center justify-center text-xl mb-4">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                </div>
-
-                <!-- Dynamic Header Title -->
-                <h4 id="confirmModalTitle" class="font-extrabold text-gray-800 text-lg mb-2">আপনি কি নিশ্চিত?</h4>
-
-                <!-- Dynamic Description Text -->
-                <p id="confirmModalText" class="text-gray-500 text-xs leading-relaxed mb-6">
-                    আপনি কি সত্যিই এই কাজটি করতে চান?
-                </p>
-
-                <!-- Action Buttons (Cancel & Dynamic Confirm) -->
-                <div class="flex gap-3">
-                    <button type="button" onclick="closeConfirmModal()"
-                        class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">
-                        বাতিল
-                    </button>
-                    <button type="button" id="confirmModalBtn" onclick="executeConfirmAction()"
-                        class="w-1/2 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-red-500/10">
-                        হ্যাঁ, মুছে ফেলুন
-                    </button>
-                </div>
-
+            <div class="flex justify-center mt-0 lg:hidden">
+                <a href="{{ route('web.blog') }}" aria-label="Visit our blog"
+                    class="inline-flex items-center gap-3 px-8 py-2.5 border border-[#2c4294] text-[#2c4294] rounded-lg font-bold hover:bg-[#2c4294] hover:text-white transition-all duration-300 group">
+                    আরও দেখুন
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
             </div>
         </div>
-        @php
-            $page = $allMeta->get('home');
-        @endphp
-        @if($page)
-            @include('frontend.partials.page_descriptions', ['model' => $page])
-        @endif
-        @include('frontend.partials.location_modal')
+    </section>
+    <!-- Global Tailwind CSS Dynamic Reusable Confirmation Modal -->
+    <div id="confirmModal"
+        class="hidden fixed inset-0 z-[10000] flex items-center justify-center p-4 backdrop-blur-sm bg-black/60 transition-all duration-300 select-none">
 
+        <!-- Modal Card Container -->
+        <div
+            class="bg-white rounded-3xl p-6 border border-gray-100 max-w-sm w-full text-center shadow-2xl scale-95 opacity-0 transition-all duration-300">
+
+            <!-- Dynamic Warning/Status Icon Container -->
+            <div id="confirmModalIcon"
+                class="w-16 h-16 bg-red-50 text-red-500 rounded-full mx-auto flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <!-- Dynamic Header Title -->
+            <h4 id="confirmModalTitle" class="font-extrabold text-gray-800 text-lg mb-2">আপনি কি নিশ্চিত?</h4>
+
+            <!-- Dynamic Description Text -->
+            <p id="confirmModalText" class="text-gray-600 text-xs leading-relaxed mb-6">
+                আপনি কি সত্যিই এই কাজটি করতে চান?
+            </p>
+
+            <!-- Action Buttons (Cancel & Dynamic Confirm) -->
+            <div class="flex gap-3">
+                <button type="button" onclick="closeConfirmModal()"
+                    class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">
+                    বাতিল
+                </button>
+                <button type="button" id="confirmModalBtn" onclick="executeConfirmAction()"
+                    class="w-1/2 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-red-500/10">
+                    হ্যাঁ, মুছে ফেলুন
+                </button>
+            </div>
+
+        </div>
+    </div>
+    @php
+    $page = $allMeta->get('home');
+    @endphp
+    @if($page)
+    @include('frontend.partials.page_descriptions', ['model' => $page])
     @endif
+    @include('frontend.partials.location_modal')
+
+    @endif --}}
     <div class="w-full bg-[#2c4294] py-6 px-4 shadow-md select-none">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
 
@@ -800,7 +823,7 @@
                         } else {
                             btn.classList.remove('bg-[#2c4294]', 'text-white',
                                 'border-[#2c4294]', 'shadow-md');
-                            btn.classList.add('border-gray-200', 'text-gray-500',
+                            btn.classList.add('border-gray-200', 'text-gray-600',
                                 'bg-white');
                         }
                     });
@@ -811,7 +834,7 @@
                     } else {
                         button.classList.add('bg-[#2c4294]', 'text-white', 'border-[#2c4294]',
                             'shadow-md');
-                        button.classList.remove('border-gray-200', 'text-gray-500', 'bg-white');
+                        button.classList.remove('border-gray-200', 'text-gray-600', 'bg-white');
                     }
 
                     let shownCount = 0;
@@ -898,6 +921,52 @@
                     alert('Connection error. Please try again.');
                 }
             }
+        });
+
+        // Mobile custom scroll buttons logic
+        document.querySelectorAll('.mobile-scroll-container').forEach(container => {
+            const wrapper = container.querySelector('.swiper-wrapper');
+            const leftBtn = container.querySelector('.scroll-left');
+            const rightBtn = container.querySelector('.scroll-right');
+
+            if (!wrapper || !leftBtn || !rightBtn) return;
+
+            const updateButtons = () => {
+                // Ensure buttons remain hidden on desktop by returning early if needed
+                if (window.innerWidth >= 1024) {
+                    leftBtn.classList.add('hidden');
+                    rightBtn.classList.add('hidden');
+                    return;
+                }
+
+                const { scrollLeft, scrollWidth, clientWidth } = wrapper;
+
+                if (scrollLeft > 5) {
+                    leftBtn.classList.remove('hidden');
+                } else {
+                    leftBtn.classList.add('hidden');
+                }
+
+                if (Math.ceil(scrollLeft + clientWidth) < scrollWidth - 5) {
+                    rightBtn.classList.remove('hidden');
+                } else {
+                    rightBtn.classList.add('hidden');
+                }
+            };
+
+            wrapper.addEventListener('scroll', updateButtons);
+            window.addEventListener('resize', updateButtons);
+
+            // initial check with a slight delay to allow layout to settle
+            setTimeout(updateButtons, 500);
+
+            leftBtn.addEventListener('click', () => {
+                wrapper.scrollBy({ left: -wrapper.clientWidth * 0.7, behavior: 'smooth' });
+            });
+
+            rightBtn.addEventListener('click', () => {
+                wrapper.scrollBy({ left: wrapper.clientWidth * 0.7, behavior: 'smooth' });
+            });
         });
     </script>
 @endpush

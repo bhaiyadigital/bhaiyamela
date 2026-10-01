@@ -3,7 +3,7 @@
         <!-- Logo Section -->
         <div class="flex-shrink-0">
             <a href="/" class="flex flex-col items-center">
-                <img src="{{ asset('storage/' . $setting->logo ?? '') }}" alt="logo" class="w-[80px]" />
+                <img src="{{ asset('storage/' . $setting->logo ?? '') }}" alt="logo" class="w-[80px]" width="80" height="80" />
             </a>
         </div>
 
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <!-- <a href="{{ route('developers.index') }}" class="nav-link" aria-label="Developers">Concerns</a> -->
-            <a href="{{ route('web.blog') }}" class="nav-link" aria-label="Blogs">ব্লগ</a>
+            <!-- <a href="{{ route('web.blog') }}" class="nav-link" aria-label="Blogs">ব্লগ</a> -->
             {{-- @auth
             @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
             <!-- If logged in as Admin or Developer Company -->
@@ -95,8 +95,8 @@
                 <!-- <a href="{{ route('developers.index') }}"
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2"
                     aria-label="Developers">Concerns</a> -->
-                <a href="{{ route('web.blog') }}"
-                    class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2" aria-label="Blogs">ব্লগ</a>
+                <!-- <a href="{{ route('web.blog') }}"
+                    class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2" aria-label="Blogs">ব্লগ</a> -->
                 {{-- @auth
                 @if(auth()->user()->isCompany() || auth()->user()->isAdmin())
                 <a href="{{route('home')}}" class="nav-link" aria-label="Admin Dashboard">Dashboard</a>
