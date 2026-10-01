@@ -101,7 +101,7 @@
     </style>
 </head>
 
-<body class="bg-[#F2F4F7]" data-page="index">
+<body class="bg-[#F2F4F7] flex flex-col min-h-screen" data-page="index">
     <style>
         .select2-container .select2-selection--single {
             background-color: #f9fafb !important;
@@ -180,7 +180,7 @@
     @include('frontend.partials.header')
 
     <!-- মেইন কন্টেন্ট এরিয়া -->
-    <main class="min-h-screen">
+    <main class="flex-grow">
         @yield('content')
     </main>
     <div id="confirmModal"

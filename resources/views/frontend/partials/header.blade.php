@@ -3,7 +3,8 @@
         <!-- Logo Section -->
         <div class="flex-shrink-0">
             <a href="/" class="flex flex-col items-center">
-                <img src="{{ asset('storage/' . $setting->logo ?? '') }}" alt="logo" class="w-[80px]" width="80" height="80" />
+                <img src="{{ asset('storage/' . $setting->logo ?? '') }}" alt="logo" class="w-[80px]" width="80"
+                    height="80" />
             </a>
         </div>
 
@@ -32,6 +33,7 @@
                     @endforelse
                 </div>
             </div>
+            <a href="{{ route('web.contact') }}" class="nav-link" aria-label="Contact Us">যোগাযোগ</a>
             <!-- <a href="{{ route('developers.index') }}" class="nav-link" aria-label="Developers">Concerns</a> -->
             <!-- <a href="{{ route('web.blog') }}" class="nav-link" aria-label="Blogs">ব্লগ</a> -->
             {{-- @auth
@@ -92,6 +94,9 @@
                         @endforelse
                     </div>
                 </div>
+                <a href="{{ route('web.contact') }}"
+                    class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2"
+                    aria-label="Contact Us">যোগাযোগ</a>
                 <!-- <a href="{{ route('developers.index') }}"
                     class="text-gray-900 font-semibold text-lg border-b border-gray-50 pb-2"
                     aria-label="Developers">Concerns</a> -->

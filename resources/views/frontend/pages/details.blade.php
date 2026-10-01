@@ -646,6 +646,7 @@
                     const result = await response.json();
 
                     if (response.ok && result.success) {
+                        if (typeof fbq !== 'undefined') fbq('track', 'Lead');
                         showMessageModal(result.message || "আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।", "success");
                         form.reset();
                     } else {

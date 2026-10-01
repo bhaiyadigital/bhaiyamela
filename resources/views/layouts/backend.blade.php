@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{ config('app.name') }} - @yield('title', 'Housing fair')</title>
+    <title>{{ config('app.name') }} - @yield('title', 'Bhaiya Mela')</title>
     <!--begin::Accessibility Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta name="color-scheme" content="light dark" />
@@ -15,41 +15,27 @@
     <link rel="preload" href="{{asset('/')}}backend/css/adminlte.css" as="style" />
     <!--end::Accessibility Features-->
     <!--begin::Fonts-->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
-        integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
-        crossorigin="anonymous"
-        media="print"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+        integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous" media="print"
         onload="this.media='all'" />
     <!--end::Fonts-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
         crossorigin="anonymous" />
     <!--end::Third Party Plugin(OverlayScrollbars)-->
     <!--begin::Third Party Plugin(Bootstrap Icons)-->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
         crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{asset('/')}}backend/css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
     <!-- apexcharts -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
-        integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
+        integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous" />
     <!-- jsvectormap -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
-        integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
+        integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -79,92 +65,96 @@
                 <ul class="navbar-nav ms-auto align-items-center gap-1">
 
                     @auth
-                    @if(auth()->user()->hasPermission('roles.view'))
-                    <li class="nav-item">
-                        <a href="{{ route('admin.users.index') }}"
-                            class="nav-link text-muted small {{ request()->routeIs('admin.users.*') ? 'fw-semibold text-dark' : '' }}">
-                            <i class="bi bi-people me-1"></i>
-                            <span class="d-none d-md-inline">Users</span>
-                        </a>
-                    </li>
-                    @endif
+                        @if(auth()->user()->hasPermission('roles.view'))
+                            <li class="nav-item">
+                                <a href="{{ route('admin.users.index') }}"
+                                    class="nav-link text-muted small {{ request()->routeIs('admin.users.*') ? 'fw-semibold text-dark' : '' }}">
+                                    <i class="bi bi-people me-1"></i>
+                                    <span class="d-none d-md-inline">Users</span>
+                                </a>
+                            </li>
+                        @endif
                     @endauth
 
                     {{-- Divider --}}
                     <li class="nav-item d-none d-md-block">
-                        <span style="width:1px;height:20px;background:#dee2e6;display:inline-block;vertical-align:middle;"></span>
+                        <span
+                            style="width:1px;height:20px;background:#dee2e6;display:inline-block;vertical-align:middle;"></span>
                     </li>
 
                     {{-- User dropdown --}}
                     @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 pe-0" href="#"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 pe-0" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
 
-                            {{-- Avatar --}}
-                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
-                                style="width:30px;height:30px;font-size:12px;flex-shrink:0;">
-                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                            </div>
-
-                            <div class="d-none d-md-block lh-sm">
-                                <div class="fw-semibold text-dark" style="font-size:0.825rem;line-height:1.2;">
-                                    {{ auth()->user()->name }}
+                                {{-- Avatar --}}
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
+                                    style="width:30px;height:30px;font-size:12px;flex-shrink:0;">
+                                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
-                                <div class="text-muted" style="font-size:0.72rem;">
-                                    {{ auth()->user()->roles->first()?->name ?? 'No Role' }}
+
+                                <div class="d-none d-md-block lh-sm">
+                                    <div class="fw-semibold text-dark" style="font-size:0.825rem;line-height:1.2;">
+                                        {{ auth()->user()->name }}
+                                    </div>
+                                    <div class="text-muted" style="font-size:0.72rem;">
+                                        {{ auth()->user()->roles->first()?->name ?? 'No Role' }}
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
 
-                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-1" style="min-width:200px;border-radius:10px;">
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-1"
+                                style="min-width:200px;border-radius:10px;">
 
-                            {{-- User info header --}}
-                            <li class="px-3 py-2 border-bottom">
-                                <div class="fw-semibold text-dark" style="font-size:0.85rem;">{{ auth()->user()->name }}</div>
-                                <div class="text-muted" style="font-size:0.75rem;">{{ auth()->user()->email }}</div>
-                            </li>
+                                {{-- User info header --}}
+                                <li class="px-3 py-2 border-bottom">
+                                    <div class="fw-semibold text-dark" style="font-size:0.85rem;">{{ auth()->user()->name }}
+                                    </div>
+                                    <div class="text-muted" style="font-size:0.75rem;">{{ auth()->user()->email }}</div>
+                                </li>
 
 
-                            @if(auth()->user() && auth()->user()->hasRole('super-admin'))
-                            {{-- Edit profile --}}
-                            <li>
-                                <a class="dropdown-item small py-2" href="{{ route('admin.users.edit', auth()->id()) }}">
-                                    <i class="bi bi-person-gear me-2 text-muted"></i> Edit Profile
-                                </a>
-                            </li>
-                            @endif
+                                @if(auth()->user() && auth()->user()->hasRole('super-admin'))
+                                    {{-- Edit profile --}}
+                                    <li>
+                                        <a class="dropdown-item small py-2"
+                                            href="{{ route('admin.users.edit', auth()->id()) }}">
+                                            <i class="bi bi-person-gear me-2 text-muted"></i> Edit Profile
+                                        </a>
+                                    </li>
+                                @endif
 
-                            {{-- Users list — if has permission --}}
-                            @if(auth()->user()->hasPermission('roles.view'))
-                            <li>
-                                <a class="dropdown-item small py-2" href="{{ route('admin.users.index') }}">
-                                    <i class="bi bi-people me-2 text-muted"></i> Manage Users
-                                </a>
-                            </li>
-                            @endif
+                                {{-- Users list — if has permission --}}
+                                @if(auth()->user()->hasPermission('roles.view'))
+                                    <li>
+                                        <a class="dropdown-item small py-2" href="{{ route('admin.users.index') }}">
+                                            <i class="bi bi-people me-2 text-muted"></i> Manage Users
+                                        </a>
+                                    </li>
+                                @endif
 
-                            <li>
-                                <a class="dropdown-item small py-2" href="{{ route('admin.password.edit') }}">
-                                    <i class="bi bi-shield-fill me-2 text-muted"></i> Update password
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="dropdown-item small py-2" href="{{ route('admin.password.edit') }}">
+                                        <i class="bi bi-shield-fill me-2 text-muted"></i> Update password
+                                    </a>
+                                </li>
 
-                            <li>
-                                <hr class="dropdown-divider my-1">
-                            </li>
+                                <li>
+                                    <hr class="dropdown-divider my-1">
+                                </li>
 
-                            {{-- Logout --}}
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item small py-2 text-danger">
-                                        <i class="bi bi-box-arrow-right me-2"></i> Logout
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                                {{-- Logout --}}
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item small py-2 text-danger">
+                                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                     @endauth
 
                 </ul>
@@ -187,7 +177,7 @@
 
                     <!--end::Brand Image-->
                     <!--begin::Brand Text-->
-                    <span class="brand-text fw-light">Housing fair </span>
+                    <span class="brand-text fw-light">Bhaiya Mela</span>
                     <!--end::Brand Text-->
                 </a>
                 <!--end::Brand Link-->
@@ -196,12 +186,8 @@
             <!--begin::Sidebar Wrapper-->
             <div class="sidebar-wrapper">
                 <nav class="mt-2">
-                    <ul class="nav sidebar-menu flex-column"
-                        data-lte-toggle="treeview"
-                        role="navigation"
-                        aria-label="Main navigation"
-                        data-accordion="false"
-                        id="navigation">
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
+                        aria-label="Main navigation" data-accordion="false" id="navigation">
 
                         {{-- Search --}}
                         <li id="search">
@@ -221,60 +207,60 @@
                         {{-- Content modules --}}
                         @foreach($modules as $field => $data)
 
-                        @php
-                        $icon = $data['module_name']['icon'] ?? 'bi bi-circle';
+                            @php
+                                $icon = $data['module_name']['icon'] ?? 'bi bi-circle';
 
-                        $isActive = (request()->routeIs('admin.contents.create') && request()->route('module') == $field)
-                        || (request()->routeIs('admin.contents.index') && request()->route('module') == $field);
+                                $isActive = (request()->routeIs('admin.contents.create') && request()->route('module') == $field)
+                                    || (request()->routeIs('admin.contents.index') && request()->route('module') == $field);
 
-                        $separatorBefore = ['pages', 'social', 'settings'];
+                                $separatorBefore = ['pages', 'social', 'settings'];
 
-                        $canView = auth()->user()->hasPermission("{$field}.view");
-                        $canCreate = auth()->user()->hasPermission("{$field}.create");
-                        @endphp
+                                $canView = auth()->user()->hasPermission("{$field}.view");
+                                $canCreate = auth()->user()->hasPermission("{$field}.create");
+                            @endphp
 
-                        {{-- Only show module if user can at least view it --}}
-                        @if($canView)
+                            {{-- Only show module if user can at least view it --}}
+                            @if($canView)
 
-                        @if(in_array($field, $separatorBefore))
-                        <li style="margin:0;border-bottom:1px solid var(--bs-border-color)"></li>
-                        @endif
-
-                        <li class="nav-item nav-items {{ $isActive ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ $isActive ? 'active' : '' }}">
-                                <i class="nav-icon {{ $icon }} text-info"></i>
-                                <p>
-                                    {{ $data['module_name']['label'] ?? ucwords(str_replace(['-', '_'], ' ', $field)) }}
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-
-                            <ul class="nav nav-treeview">
-
-                                {{-- List — view permission --}}
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.contents.index', $field) }}"
-                                        class="nav-link {{ request()->routeIs('admin.contents.index') && request()->route('module') == $field ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>List</p>
-                                    </a>
-                                </li>
-
-                                {{-- Create — only if create permission --}}
-                                @if($canCreate)
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.contents.create', $field) }}"
-                                        class="nav-link {{ request()->routeIs('admin.contents.create') && request()->route('module') == $field ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Create</p>
-                                    </a>
-                                </li>
+                                @if(in_array($field, $separatorBefore))
+                                    <li style="margin:0;border-bottom:1px solid var(--bs-border-color)"></li>
                                 @endif
 
-                            </ul>
-                        </li>
+                                <li class="nav-item nav-items {{ $isActive ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link {{ $isActive ? 'active' : '' }}">
+                                        <i class="nav-icon {{ $icon }} text-info"></i>
+                                        <p>
+                                            {{ $data['module_name']['label'] ?? ucwords(str_replace(['-', '_'], ' ', $field)) }}
+                                            <i class="nav-arrow bi bi-chevron-right"></i>
+                                        </p>
+                                    </a>
 
-                        @endif
+                                    <ul class="nav nav-treeview">
+
+                                        {{-- List — view permission --}}
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.contents.index', $field) }}"
+                                                class="nav-link {{ request()->routeIs('admin.contents.index') && request()->route('module') == $field ? 'active' : '' }}">
+                                                <i class="nav-icon bi bi-circle"></i>
+                                                <p>List</p>
+                                            </a>
+                                        </li>
+
+                                        {{-- Create — only if create permission --}}
+                                        @if($canCreate)
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.contents.create', $field) }}"
+                                                    class="nav-link {{ request()->routeIs('admin.contents.create') && request()->route('module') == $field ? 'active' : '' }}">
+                                                    <i class="nav-icon bi bi-circle"></i>
+                                                    <p>Create</p>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                    </ul>
+                                </li>
+
+                            @endif
 
                         @endforeach
 
@@ -283,89 +269,91 @@
                         {{-- Users & Roles — only if roles.view permission --}}
                         @if(auth()->user()->hasPermission('roles.view'))
 
-                        <li class="nav-item nav-items {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-people text-info"></i>
-                                <p>
-                                    Access Control
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.users.index') }}"
-                                        class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Users</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.roles.index') }}"
-                                        class="nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Roles</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                            <li
+                                class="nav-item nav-items {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'menu-open' : '' }}">
+                                <a href="#"
+                                    class="nav-link {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-people text-info"></i>
+                                    <p>
+                                        Access Control
+                                        <i class="nav-arrow bi bi-chevron-right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.users.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                                            <i class="nav-icon bi bi-circle"></i>
+                                            <p>Users</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.roles.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                                            <i class="nav-icon bi bi-circle"></i>
+                                            <p>Roles</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
                         @endif
                         @if(auth()->user()->hasPermission('settings.view'))
-                        <li class="nav-item">
-                            <a href="{{ route('admin.settings.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-gear text-info"></i>
-                                <p>Settings</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.settings.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-gear text-info"></i>
+                                    <p>Settings</p>
+                                </a>
+                            </li>
                         @endif
                         @if(auth()->user()->hasPermission('user_equirements.view'))
-                        <li class="nav-item">
-                            <a href="{{ route('admin.requirements.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-ui-checks text-info"></i>
-                                <p>User Requirements</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.requirements.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-ui-checks text-info"></i>
+                                    <p>User Requirements</p>
+                                </a>
+                            </li>
 
                         @endif
                         @if(auth()->user()->hasPermission('customers.view'))
-                        <li class="nav-item">
-                            <a href="{{ route('admin.customers.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-people-fill text-info"></i>
-                                <p>Customers</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.customers.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-people-fill text-info"></i>
+                                    <p>Customers</p>
+                                </a>
+                            </li>
 
                         @endif
                         @if(auth()->user()->hasRole('super-admin'))
-                        <li class="nav-item">
-                            <a href="{{ route('admin.companies.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.companies.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-person-check text-info"></i>
-                                <p>Company List</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.companies.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.companies.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-person-check text-info"></i>
+                                    <p>Company List</p>
+                                </a>
+                            </li>
                         @else
-                        <li class="nav-item">
-                            <a href="{{ route('admin.companies.profile') }}"
-                                class="nav-link {{ request()->routeIs('admin.companies.profile') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-building text-info"></i>
-                                <p>Company Profile</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.companies.profile') }}"
+                                    class="nav-link {{ request()->routeIs('admin.companies.profile') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-building text-info"></i>
+                                    <p>Company Profile</p>
+                                </a>
+                            </li>
                         @endif
                         @if(auth()->user()->hasPermission('message.view'))
-                        <li class="nav-item">
-                            <a href="{{ route('admin.contacts.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.contacts.index.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-chat text-info"></i>
-                                <p>Messages</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.contacts.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.contacts.index.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-chat text-info"></i>
+                                    <p>Messages</p>
+                                </a>
+                            </li>
                         @endif
-                        @if(auth()->user()->hasPermission('support-ticket.view'))
+                        {{-- @if(auth()->user()->hasPermission('support-ticket.view'))
                         <li class="nav-item">
                             <a href="{{ route('admin.tickets.index') }}"
                                 class="nav-link {{ request()->routeIs('admin.tickets.index.*') ? 'active' : '' }}">
@@ -373,16 +361,16 @@
                                 <p>Support Ticket</p>
                             </a>
                         </li>
-                        @endif
+                        @endif --}}
 
                         @if(auth()->user()->isCompany())
-                        <li class="nav-item">
-                            <a href="{{ route('developer.guide') }}"
-                                class="nav-link {{ request()->routeIs('developer.guide') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-chat text-info"></i>
-                                <p>Developer Guide</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('developer.guide') }}"
+                                    class="nav-link {{ request()->routeIs('developer.guide') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-chat text-info"></i>
+                                    <p>Developer Guide</p>
+                                </a>
+                            </li>
                         @endif
                         <li class="nav-item">
                             <a href="{{ route('admin.password.edit') }}"
@@ -413,12 +401,12 @@
         <main class="app-main">
             <!--begin::App Content Header-->
             @if(session('status'))
-            <div class="container mt-4">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('status') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="container mt-4">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </div>
-            </div>
             @endif
             @yield('content')
         </main>
@@ -436,16 +424,13 @@
     <!--end::App Wrapper-->
     <!--begin::Script-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <script
-        src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
         crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         crossorigin="anonymous"></script>
     <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
         crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="{{asset('/')}}backend/js/adminlte.js"></script>
@@ -457,7 +442,7 @@
             scrollbarAutoHide: 'leave',
             scrollbarClickScroll: true,
         };
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
             if (sidebarWrapper && OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined) {
                 OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
@@ -474,11 +459,11 @@
     <!-- OPTIONAL SCRIPTS -->
     <!-- sortablejs -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const input = document.getElementById('menuSearch');
             const menuItems = document.querySelectorAll('.nav-items');
 
-            input.addEventListener('keyup', function() {
+            input.addEventListener('keyup', function () {
                 const filter = input.value.toLowerCase();
 
                 menuItems.forEach(item => {

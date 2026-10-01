@@ -79,7 +79,7 @@
                     <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
                         {{ $pageTitle }}
                     </h2>
-                    <button type="button" onclick="document.getElementById('mobileFilterContent').classList.toggle('hidden')"
+                    <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"
                         class="lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
                         <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
                     </button>
@@ -102,7 +102,7 @@
                     <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
                         আমাদের প্রপার্টিজ
                     </h2>
-                    <button type="button" onclick="document.getElementById('mobileFilterContent').classList.toggle('hidden')"
+                    <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"
                         class="lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
                         <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
                     </button>
@@ -114,9 +114,18 @@
             </div>
         @endif
 
-        <!-- Mobile Filter Block -->
-        <div class="block lg:hidden mt-6">
-            <div id="mobileFilterContent" class="{{ (request('search') || request('category') || request('destination') || request('company')) ? '' : 'hidden' }} bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
+        <!-- Mobile Filter Drawer -->
+        <div id="mobileFilterDrawer" class="fixed inset-0 z-[100] lg:hidden -translate-x-full transition-transform duration-300">
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"></div>
+            
+            <div class="absolute left-0 top-0 h-full w-[300px] bg-white p-6 shadow-2xl flex flex-col overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="font-black text-lg text-[#2c4294] uppercase">ফিল্টার করুন</span>
+                    <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')" class="text-gray-500 hover:text-red-500 text-xl transition-colors" aria-label="Close Filter">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                
                 <form action="{{ route('web.project') }}" method="GET" class="flex flex-col gap-4">
                     <div>
                         <label for="mob-search-input" class="block text-xs font-bold text-gray-600 mb-1.5">কী-ওয়ার্ড দিয়ে খুঁজুন</label>
@@ -130,41 +139,41 @@
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
                             <option value="">সব কোম্পানি</option>
                             @foreach($companies as $company)
-                                <option value="{{ $company->id }}" {{ request('company') == $company->id ? 'selected' : '' }}>
+                                <option value="{{ $company->slug }}" {{ request('company') == $company->slug ? 'selected' : '' }}>
                                     {{ $company->company_name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label for="mob-filter-category"
-                            class="block text-xs font-bold text-gray-600 mb-1.5">ক্যাটাগরি</label>
+                        <label for="mob-filter-category" class="block text-xs font-bold text-gray-600 mb-1.5">ক্যাটাগরি</label>
                         <select id="mob-filter-category" name="category"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
                             <option value="">সব ক্যাটাগরি</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
                                     {{ $category->title }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label for="mob-filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
-                        <select id="mob-filter-destination" name="destination"
+                        <label class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
+                        <select id="mob-filter-destination" name="dest"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
                             <option value="">সব লোকেশন</option>
                             @foreach($destinations as $dest)
-                                <option value="{{ $dest->id }}" {{ request('destination') == $dest->id ? 'selected' : '' }}>
+                                <option value="{{ $dest->id }}" {{ request('dest') == $dest->id ? 'selected' : '' }}>
                                     {{ $dest->title }}</option>
                             @endforeach
                         </select>
                     </div>
+                    
                     <button type="submit"
-                        class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs transition-all">
+                        class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 mt-4 rounded-xl font-bold text-sm shadow-md transition-all">
                         ফিল্টার করুন
                     </button>
-                    @if(request('search') || request('category') || request('destination') || request('company'))
+                    @if(request('search') || request('category') || request('destination') || request('company') || request('city_area') || request('sub_area'))
                         <a href="{{ route('web.project') }}"
-                            class="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl font-bold text-xs transition-all">
+                            class="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-sm transition-all mt-2">
                             ফিল্টার মুছুন
                         </a>
                     @endif
@@ -220,14 +229,16 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
-
-                            <!-- This styled div acts as a button that triggers your custom geolocation-supported modal -->
-                            <div onclick="openLocationModal()"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold text-gray-600 flex justify-between items-center cursor-pointer select-none">
-                                <span>লোকেশন নির্বাচন করুন...</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] text-gray-400"></i>
-                            </div>
+                            <label for="filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
+                            <select id="filter-destination" name="dest"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
+                                <option value="">সব লোকেশন</option>
+                                @foreach($destinations as $dest)
+                                    <option value="{{ $dest->id }}" {{ request('dest') == $dest->id ? 'selected' : '' }}>
+                                        {{ $dest->title }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <!-- IMPROVED: Background changed from bg-[#2c4294] to bg-[#2c4294] for color contrast compliance -->
@@ -329,8 +340,20 @@
                 <!-- 2. Header Title & Dynamic Description Section (Styled with White Card Background) -->
 
 
-                <div id="projectGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    @include('frontend.partials._items', ['projects' => $projects])
+                <div class="relative mobile-scroll-container">
+                    <button type="button" aria-label="Scroll left"
+                        class="scroll-btn scroll-left absolute left-1 top-[45%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                        <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
+                    </button>
+
+                    <div id="projectGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 scrollable-wrapper">
+                        @include('frontend.partials._items', ['projects' => $projects])
+                    </div>
+
+                    <button type="button" aria-label="Scroll right"
+                        class="scroll-btn scroll-right absolute right-1 top-[45%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                        <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
+                    </button>
                 </div>
                 <div id="compareBar"
                     class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[1000] bg-white border border-gray-100 rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex items-center justify-between gap-6 max-w-lg w-full transition-all duration-300">
@@ -429,5 +452,50 @@
 @endsection
 @push('scripts')
     @include('frontend.partials.project_scripts')
+    <script>
+        // Mobile custom scroll buttons logic for projectGrid
+        document.querySelectorAll('.mobile-scroll-container').forEach(container => {
+            const wrapper = container.querySelector('.scrollable-wrapper');
+            const leftBtn = container.querySelector('.scroll-left');
+            const rightBtn = container.querySelector('.scroll-right');
+
+            if (!wrapper || !leftBtn || !rightBtn) return;
+
+            const updateButtons = () => {
+                if (window.innerWidth >= 1024) {
+                    leftBtn.classList.add('hidden');
+                    rightBtn.classList.add('hidden');
+                    return;
+                }
+
+                const { scrollLeft, scrollWidth, clientWidth } = wrapper;
+
+                if (scrollLeft > 5) {
+                    leftBtn.classList.remove('hidden');
+                } else {
+                    leftBtn.classList.add('hidden');
+                }
+
+                if (Math.ceil(scrollLeft + clientWidth) < scrollWidth - 5) {
+                    rightBtn.classList.remove('hidden');
+                } else {
+                    rightBtn.classList.add('hidden');
+                }
+            };
+
+            wrapper.addEventListener('scroll', updateButtons);
+            window.addEventListener('resize', updateButtons);
+
+            setTimeout(updateButtons, 500);
+
+            leftBtn.addEventListener('click', () => {
+                wrapper.scrollBy({ left: -wrapper.clientWidth * 0.7, behavior: 'smooth' });
+            });
+
+            rightBtn.addEventListener('click', () => {
+                wrapper.scrollBy({ left: wrapper.clientWidth * 0.7, behavior: 'smooth' });
+            });
+        });
+    </script>
 @endpush
 
