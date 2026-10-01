@@ -24,6 +24,14 @@
                     প্রপার্টিজ
                 </a>
 
+                @if($project->category)
+                <span class="text-gray-300">›</span>
+                
+                <a href="{{ route('web.project.category', $project->category->slug) }}" class="text-gray-600 hover:text-black">
+                    {{ $project->category->title }}
+                </a>
+                @endif
+
                 <span class="text-gray-300">›</span>
 
                 <span class="text-black font-semibold truncate">
@@ -98,6 +106,7 @@
                 </div>
 
 
+                {{--
                 @if(!empty($featuresList) || (!empty($extraFeatures) && is_array($extraFeatures)) || $project->description || !empty($floorPlans) || !empty($locationViews) || !empty($project->video_path) || $isValidEmbed)
                     <div class="sticky top-0 bg-white z-30 py-4 pl-3 flex flex-wrap gap-3 border-b border-gray-100 shadow-sm">
 
@@ -152,6 +161,7 @@
 
                     </div>
                 @endif
+                --}}
 
 
                 @if(!empty($featuresList))
@@ -160,11 +170,11 @@
                         <div class="flex flex-wrap justify-between items-center gap-4 mb-5 border-b border-gray-100 pb-5">
                             <div>
                                 <span class="text-xl font-black text-[#2c4294]">{{ $project->short }}</span>
-                                <span class="text-xs text-gray-500 block mt-1">/
+                                <span class="text-xs text-gray-600 block mt-1">/
                                     {{ $project->category->title ?? 'Apartment/Flats for Sale' }}</span>
                             </div>
-                            <div class="text-base text-gray-500 flex items-center gap-1.5">
-                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                            <div class="text-base text-gray-600 flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-gray-600"></i>
                                 <span
                                     class="font-medium text-gray-700">{{ $project->destination->title ?? $project->location ?? 'Dhaka' }}</span>
                             </div>
@@ -172,15 +182,15 @@
 
                         <div class="grid grid-cols-3 gap-2 text-center pt-2 mb-5">
                             <div class="flex flex-col items-center">
-                                <i class="fa-solid fa-bed text-xl text-gray-400 mb-2"></i>
+                                <i class="fa-solid fa-bed text-xl text-gray-600 mb-2"></i>
                                 <span class="text-base font-bold text-gray-800">{{ $bedrooms }} বেড</span>
                             </div>
                             <div class="flex flex-col items-center border-x border-gray-100">
-                                <i class="fa-solid fa-bath text-xl text-gray-400 mb-2"></i>
+                                <i class="fa-solid fa-bath text-xl text-gray-600 mb-2"></i>
                                 <span class="text-base font-bold text-gray-800">{{ $baths }} বাথ</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <i class="fa-solid fa-ruler-combined text-xl text-gray-400 mb-2"></i>
+                                <i class="fa-solid fa-ruler-combined text-xl text-gray-600 mb-2"></i>
                                 <span class="text-base font-bold text-gray-800">{{ $size }}</span>
                             </div>
                         </div>
@@ -205,8 +215,8 @@
                                         @endphp
                                         @if($fKey)
                                             <div class="flex justify-between border-b border-gray-50 py-2.5 text-base">
-                                                <span class="text-gray-500 font-medium flex items-center gap-1.5">
-                                                    <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                                                <span class="text-gray-600 font-medium flex items-center gap-1.5">
+                                                    <i class="fa-solid fa-chevron-right text-[10px] text-gray-600"></i>
                                                     {{ $fKey }}
                                                 </span>
                                                 <span class="font-bold text-gray-800">{{ $fVal }}</span>
@@ -429,48 +439,11 @@
             <div class="lg:col-span-4 flex flex-col gap-6 sticky top-28">
 
                 <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-                    <p
-                        class="text-center font-bold text-gray-600 text-sm md:text-base border-b border-gray-100 pb-3 mb-4 tracking-wider uppercase">
-                        প্রপার্টি মালিকের বিস্তারিত
-                    </p>
+                    <h2 class="text-center font-bold text-gray-600 text-sm md:text-base border-b border-gray-100 pb-3 mb-4 tracking-wider uppercase">
+                        {{ $project->category?->short ?: ($project->title . ' এর জন্য যোগাযোগ করুন') }}
+                    </h2>
 
-                    @if($project->company)
-                        <div class="text-center mb-5">
-                            @if($project->company->company_logo)
-                                <div
-                                    class="w-20 h-20 mx-auto rounded-full overflow-hidden border border-gray-200 p-1 mb-3 bg-white">
-                                    <img src="{{ asset('storage/' . $project->company->company_logo) }}"
-                                        class="w-full h-full object-contain rounded-full" alt="Owner Logo">
-                                </div>
-                            @endif
-                            <h2 class="font-extrabold text-gray-800 text-lg leading-tight mb-1">
-                                {{ $project->company->company_name }}
-                            </h2>
 
-                            <span class="text-sm text-gray-600 block mb-3">প্রপার্টি আইডি : {{ 250000 + $project->id }}</span>
-
-                            @if($project->company->phone)
-                                <div class="mt-2">
-                                    <span id="revealedPhoneNum"
-                                        class="block text-gray-800 font-extrabold text-lg mb-2 tracking-wide hidden">
-                                        <i class="bi bi-telephone-fill text-[#2c4294] me-1"></i>{{ $project->company->phone }}
-                                    </span>
-
-                                    <button type="button" id="phoneToggleBtn" onclick="revealPhone()"
-                                        class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-all shadow-md shadow-[#2c4294]/10">
-                                        <i class="bi bi-phone-vibrate"></i>
-                                        ফোন নম্বর দেখতে ক্লিক করুন
-                                    </button>
-                                </div>
-                            @endif
-                        </div>
-                    @endif
-
-                    <!-- ইমেইল বা মেসেজ লিড ফর্ম -->
-                    <div class="pt-2">
-                        <p class="text-base font-bold text-[#2c4294] text-center mb-4 uppercase tracking-wider">
-                            প্রপার্টি মালিককে মেসেজ পাঠান
-                        </p>
 
                         <div id="leadAlert" class="hidden p-3 mb-3 text-sm rounded-xl text-center font-medium"></div>
                         <form id="leadForm" action="{{ route('contact.owner') }}" method="POST" class="flex flex-col gap-3">
@@ -534,15 +507,14 @@
                                 </a>
                             </div>
                         @endif
-                    </div>
                 </div>
 
                 <!-- খ. Similar Projects (একই ক্যাটাগরি/লোকেশন) -->
                 @if($similarProjects->isNotEmpty())
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <h6 class="text-sm font-bold text-gray-500 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
+                        <h2 class="text-sm font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
                             একই ধরনের প্রপার্টি
-                        </h6>
+                        </h2>
                         <div class="flex flex-col gap-4">
                             @foreach($similarProjects as $simProject)
                                 @php
@@ -574,9 +546,9 @@
                 <!-- গ. Recently Viewed (সম্প্রতি ভিজিট করা প্রজেক্ট) -->
                 @if($recentProjects->isNotEmpty())
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <h6 class="text-sm font-bold text-gray-500 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
+                        <h2 class="text-sm font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
                             সম্প্রতি দেখেছেন
-                        </h6>
+                        </h2>
                         <div class="flex flex-col gap-4">
                             @foreach($recentProjects as $recProject)
                                 @php
@@ -594,7 +566,7 @@
                                             {{ $recProject->title }}
                                         </span>
                                         <span class="text-sm font-extrabold text-[#2c4294] mt-0.5">{{ $recProject->short }}</span>
-                                        <span class="text-xs text-gray-400 mt-0.5 truncate">
+                                        <span class="text-xs text-gray-600 mt-0.5 truncate">
                                             <i
                                                 class="fa-solid fa-location-dot me-1"></i>{{ $recProject->destination->title ?? $recProject->location ?? 'Dhaka' }}
                                         </span>
@@ -851,7 +823,7 @@
             <div id="messageModalIconBg" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i id="messageModalIcon" class="fa-solid text-4xl"></i>
             </div>
-            <h3 id="messageModalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+            <h2 id="messageModalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h2>
             <p id="messageModalText" class="text-gray-600 mb-6 font-medium text-base"></p>
             <button type="button" onclick="closeMessageModal()" class="w-full bg-[#2c4294] text-white rounded-xl py-3.5 font-bold text-base hover:bg-[#1a285a] shadow-md hover:shadow-lg transition-all active:scale-95">
                 ঠিক আছে

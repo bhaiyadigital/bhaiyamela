@@ -77,6 +77,7 @@ class AppServiceProvider extends ServiceProvider
             'category' => [
                 'module_name' => ['label' => 'Categories', 'icon' => 'bi bi-grid'],
                 'title'            => ['label' => 'Category Name',        'required' => true,  'show_in_table' => true,  'type' => 'text'],
+                'short'            => ['label' => 'Contact Form Title',   'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'slug'             => ['label' => 'Slug',                 'required' => true,  'show_in_table' => true,  'type' => 'text'],
                 'prev_slug'        => ['label' => 'Previous Slug',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'description'      => ['label' => 'Description',          'required' => false, 'show_in_table' => false, 'type' => 'editor'],

@@ -171,7 +171,14 @@ class Content extends Model
     // Slug helper — generate unique slug from a given string
     public static function generateSlug(string $title, ?int $ignoreId = null): string
     {
-        $base = Str::slug($title);
+        // Generate slug supporting unicode (Bengali)
+        $base = preg_replace('/\s+/u', '-', trim($title));
+        $base = preg_replace('/[^\p{L}\p{M}\p{N}\-]+/u', '', $base);
+        $base = mb_strtolower($base, 'UTF-8');
+        
+        if (empty(trim($base, '-'))) {
+            $base = 'content-' . time();
+        }
         $slug = $base;
         $i    = 1;
 

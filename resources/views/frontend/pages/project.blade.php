@@ -363,9 +363,9 @@
     @php
         $page = $allMeta->get('project');
     @endphp
-    @if($page)
+    {{-- @if($page)
         @include('frontend.partials.page_descriptions', ['model' => $page])
-    @endif
+    @endif --}}
     @include('frontend.partials.location_modal')
 
     <script>

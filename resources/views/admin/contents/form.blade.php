@@ -855,7 +855,7 @@
             const title = this.previousElementSibling?.value.trim();
             if (!title) return alert('Please enter a title first.');
             const slugInput = document.getElementById('slug');
-            if (slugInput) slugInput.value = title.toLowerCase().trim().replace(/[^a-z0-9\s\-]/g, '').replace(/\s+/g, '-').replace(/^-+|-+$/g, '');
+            if (slugInput) slugInput.value = title.toLowerCase().trim().replace(/[^\p{L}\p{M}\p{N}\s\-]/gu, '').replace(/\s+/g, '-').replace(/^-+|-+$/g, '');
         });
 
         // ── Features Key-Value (Vanilla JS Update) ────────────────────────────
