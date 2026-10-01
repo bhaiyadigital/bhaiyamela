@@ -75,7 +75,6 @@ class RequirementController extends Controller
             'location'      => 'nullable|string|max:255',
             'name'          => 'required|string|max:255',
             'email'         => 'nullable|email|max:255',
-            'country_code'  => 'required|string|max:10',
             'phone'      => ['required', 'string', new ValidPhoneNumber()],
             'recaptcha_token' => ['required', new Recaptcha()],
 
@@ -86,7 +85,7 @@ class RequirementController extends Controller
         ]);
 
         try {
-            $fullPhone = $request->input('country_code') . ' ' . $request->input('phone');
+            $fullPhone = $request->input('phone');
 
             // 3. Create the record in database
             Requirement::create([

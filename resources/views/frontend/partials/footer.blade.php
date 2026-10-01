@@ -1,10 +1,10 @@
 <!-- FOOTER SECTION -->
-<footer class="bg-[#050a18] text-white pt-20 pb-8">
+<footer class="bg-[#050a18] text-white pt-10 md:pt-20 pb-8">
     <div class="container mx-auto">
         <!-- Main Content Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch border-b border-[#2c4294]">
             <!-- Column 1: Logo & Social -->
-            <div class="px-4 pb-16 lg:pb-20">
+            <div class="px-4 pb-10 lg:pb-20">
                 <!-- Mobile: Row containing Logo & Socials | Desktop: Vertical Stack -->
                 <div
                     class="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start gap-4 md:gap-0 mb-6">
@@ -49,7 +49,7 @@
             </div>
 
             <div
-                class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:px-12 flex flex-col items-center text-center pb-16 lg:pb-20 pt-12 lg:pt-0">
+                class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:px-12 flex flex-col items-center text-center pb-10 lg:pb-20 pt-10 lg:pt-0">
                 <h3 class="text-xl font-bold uppercase mb-4">
                     সাবস্ক্রাইব
                 </h3>
@@ -89,7 +89,7 @@
             </div>
 
             <!-- Column 3: MENU -->
-            <div class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:pl-20 pb-16 lg:pb-20 pt-12 lg:pt-0">
+            <div class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:pl-20 pb-10 lg:pb-20 pt-10 lg:pt-0">
                 <h3 class="text-xl font-bold uppercase  mb-8">
                     মেনু
                 </h3>
@@ -121,7 +121,7 @@
             </div>
 
             <!-- Column 4: RECENT PROJECTS -->
-            <div class="border-t lg:border-t-0 px-6 lg:pl-10 pb-16 lg:pb-20 pt-12 lg:pt-0">
+            <div class="border-t lg:border-t-0 border-[#2c4294] px-6 lg:pl-10 pb-10 lg:pb-20 pt-10 lg:pt-0">
                 <h3 class="text-xl font-bold uppercase  mb-8">
                     সাম্প্রতিক প্রকল্প
                 </h3>

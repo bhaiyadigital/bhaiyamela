@@ -20,11 +20,11 @@
                 padding-left: 16px;
                 padding-right: 16px;
             }
-            
+
             #projectGrid::-webkit-scrollbar {
                 display: none;
             }
-            
+
             #projectGrid > div {
                 flex: 0 0 85% !important;
                 scroll-snap-align: center;
@@ -70,11 +70,11 @@
             </div>
         </div>
     </section>
-    <div class="container py-8 mx-auto px-4">
+    <div class="container py-0 md:py-10 mx-auto px-4">
 
         @if(isset($activeCategory) || isset($activeCompany))
             <!-- White Card Container for Filter Titles & Descriptions -->
-            <div class="bg-white p-6 mb-10 text-left rounded-xl">
+            <div class="bg-white p-6 md:mb-10 text-left rounded-xl">
                 <div class="flex justify-between items-start md:items-center mb-3">
                     <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
                         {{ $pageTitle }}
@@ -97,7 +97,7 @@
                 @endif
             </div>
         @else
-            <div class="bg-white p-6 mb-10 text-left rounded-xl">
+            <div class="bg-white p-6 md:mb-10 text-left rounded-xl">
                 <div class="flex justify-between items-start md:items-center mb-3">
                     <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
                         আমাদের প্রপার্টিজ
@@ -113,9 +113,9 @@
                 </p>
             </div>
         @endif
-        
+
         <!-- Mobile Filter Block -->
-        <div class="block lg:hidden mb-6">
+        <div class="block lg:hidden mt-6">
             <div id="mobileFilterContent" class="{{ (request('search') || request('category') || request('destination') || request('company')) ? '' : 'hidden' }} bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                 <form action="{{ route('web.project') }}" method="GET" class="flex flex-col gap-4">
                     <div>
