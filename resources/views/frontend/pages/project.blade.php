@@ -80,7 +80,7 @@
                         {{ $pageTitle }}
                     </h2>
                     <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"
-                        class="lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
+                        class="cursor-pointer lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
                         <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
                     </button>
                 </div>
@@ -103,7 +103,7 @@
                         আমাদের প্রপার্টিজ
                     </h2>
                     <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"
-                        class="lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
+                        class="cursor-pointer lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
                         <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
                     </button>
                 </div>
@@ -168,7 +168,7 @@
                     </div>
                     
                     <button type="submit"
-                        class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 mt-4 rounded-xl font-bold text-sm shadow-md transition-all">
+                        class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 mt-4 rounded-xl font-bold text-sm shadow-md transition-all">
                         ফিল্টার করুন
                     </button>
                     @if(request('search') || request('category') || request('destination') || request('company') || request('city_area') || request('sub_area'))
@@ -243,7 +243,7 @@
 
                         <!-- IMPROVED: Background changed from bg-[#2c4294] to bg-[#2c4294] for color contrast compliance -->
                         <button type="submit"
-                            class="w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs transition-all">
+                            class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs transition-all">
                             ফিল্টার করুন
                         </button>
 
