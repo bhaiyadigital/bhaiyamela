@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Subscription;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Rules\ValidPhoneNumber;
@@ -542,20 +543,21 @@ class WebController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
-            'email'       => 'required|email|max:255',
+            'email'       => 'nullable|email|max:255',
             'phone'      => ['required', 'string', new ValidPhoneNumber()],
             'designation' => 'nullable|string|max:255',
             'category_id' => 'nullable|exists:contents,id',
             'message'     => 'nullable|string|max:2000',
+            'recaptcha_token' => ['required', new Recaptcha()],
         ]);
 
         Contact::create([
             'name'        => $validated['name'],
             'email'       => $validated['email'],
-            'phone'      => ['required', 'string', new ValidPhoneNumber()],
-            'designation' => $validated['designation'],
-            'category_id' => $validated['category_id'],
-            'message'     => $validated['message'],
+            'phone'       => $request->input('phone'),
+            'designation' => $validated['designation'] ?? null,
+            'category_id' => $validated['category_id'] ?? null,
+            'message'     => $validated['message'] ?? null,
         ]);
 
         \App\Services\FacebookConversionApi::sendEvent('Lead', null, ['lead_type' => 'contact'], [
@@ -564,7 +566,14 @@ class WebController extends Controller
             'fn' => $validated['name']
         ]);
 
-        return redirect()->back()->with('success', 'Thank you! Your message has been sent.');
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।'
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।');
     }
 
     /**

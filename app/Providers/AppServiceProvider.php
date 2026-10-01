@@ -37,22 +37,22 @@ class AppServiceProvider extends ServiceProvider
                 'img_path'         => ['label' => 'Slider Image',     'required' => false, 'show_in_table' => false, 'type' => 'image'],
                 'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
             ],
-            'login-benefits' => [
-                'module_name' => ['label' => 'Login Benefits', 'icon' => 'bi bi-tag'],
-                'title'            => ['label' => 'Benefits Text',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
-            'helpline' => [
-                'module_name' => ['label' => 'Helpline', 'icon' => 'bi bi-telephone'],
+            // 'login-benefits' => [
+            //     'module_name' => ['label' => 'Login Benefits', 'icon' => 'bi bi-tag'],
+            //     'title'            => ['label' => 'Benefits Text',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
+            // 'helpline' => [
+            //     'module_name' => ['label' => 'Helpline', 'icon' => 'bi bi-telephone'],
 
-                'title'            => ['label' => 'Title',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'short'            => ['label' => 'Sub Heading',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'location'            => ['label' => 'Helpline Number',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'description'            => ['label' => 'Opening Day',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'description_1'            => ['label' => 'Opening Hour',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'title'            => ['label' => 'Title',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'short'            => ['label' => 'Sub Heading',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'location'            => ['label' => 'Helpline Number',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'description'            => ['label' => 'Opening Day',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'description_1'            => ['label' => 'Opening Hour',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
 
-                'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
+            //     'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
 
             // ------------------------------------------------------------------
             // Destination — travel destinations with tabs
@@ -135,71 +135,71 @@ class AppServiceProvider extends ServiceProvider
             // ------------------------------------------------------------------
             // Blog — blog posts with rich text and SEO
             // ------------------------------------------------------------------
-            'blog' => [
-                'module_name'      => ['label' => 'Blogs', 'icon' => 'bi bi-pencil-square'],
-                'parent_id'        => ['label' => 'Select Category',      'required' => true,  'show_in_table' => false, 'type' => 'select'],
-                'title'            => ['label' => 'Title',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'slug'             => ['label' => 'Slug',                 'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'prev_slug'        => ['label' => 'Previous Slug',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
-                'short'            => ['label' => 'Short Description',    'required' => true,  'show_in_table' => false, 'type' => 'textarea'],
-                'description'      => ['label' => 'Description 1',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
+            // 'blog' => [
+            //     'module_name'      => ['label' => 'Blogs', 'icon' => 'bi bi-pencil-square'],
+            //     'parent_id'        => ['label' => 'Select Category',      'required' => true,  'show_in_table' => false, 'type' => 'select'],
+            //     'title'            => ['label' => 'Title',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'slug'             => ['label' => 'Slug',                 'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'prev_slug'        => ['label' => 'Previous Slug',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
+            //     'short'            => ['label' => 'Short Description',    'required' => true,  'show_in_table' => false, 'type' => 'textarea'],
+            //     'description'      => ['label' => 'Description 1',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
 
-                'description_1'    => ['label' => 'Description 2',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
-                'description_2'    => ['label' => 'Description 3',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
-                'img_path'         => ['label' => 'Thumbnail',            'required' => true,  'show_in_table' => true,  'type' => 'image'],
+            //     'description_1'    => ['label' => 'Description 2',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
+            //     'description_2'    => ['label' => 'Description 3',        'required' => false, 'show_in_table' => false, 'type' => 'editor'],
+            //     'img_path'         => ['label' => 'Thumbnail',            'required' => true,  'show_in_table' => true,  'type' => 'image'],
 
-                'extra'            => ['label' => 'Extra Data',           'required' => false, 'show_in_table' => false, 'type' => 'json'],
-                'start_date'       => ['label' => 'Publish Date',         'required' => false, 'show_in_table' => true,  'type' => 'datetime'],
-                'end_date'         => ['label' => 'End Date',             'required' => false, 'show_in_table' => false, 'type' => 'datetime'],
-                'meta_title'       => ['label' => 'Meta Title',           'required' => false, 'show_in_table' => false, 'type' => 'text'],
-                'meta_description' => ['label' => 'Meta Description',     'required' => false, 'show_in_table' => false, 'type' => 'textarea'],
-                'meta_keywords'    => ['label' => 'Meta Keywords',        'required' => false, 'show_in_table' => false, 'type' => 'tag'],
-                'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
-                'admin_approved'   => ['label' => 'Approve Status',       'required' => false,  'show_in_table' => true,  'type' => 'number'],
+            //     'extra'            => ['label' => 'Extra Data',           'required' => false, 'show_in_table' => false, 'type' => 'json'],
+            //     'start_date'       => ['label' => 'Publish Date',         'required' => false, 'show_in_table' => true,  'type' => 'datetime'],
+            //     'end_date'         => ['label' => 'End Date',             'required' => false, 'show_in_table' => false, 'type' => 'datetime'],
+            //     'meta_title'       => ['label' => 'Meta Title',           'required' => false, 'show_in_table' => false, 'type' => 'text'],
+            //     'meta_description' => ['label' => 'Meta Description',     'required' => false, 'show_in_table' => false, 'type' => 'textarea'],
+            //     'meta_keywords'    => ['label' => 'Meta Keywords',        'required' => false, 'show_in_table' => false, 'type' => 'tag'],
+            //     'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            //     'admin_approved'   => ['label' => 'Approve Status',       'required' => false,  'show_in_table' => true,  'type' => 'number'],
 
-            ],
+            // ],
 
-            'faq' => [
-                'module_name' => ['label' => 'FAQs', 'icon' => 'bi bi-question-circle'],
-                'title'       => ['label' => 'Question', 'required' => true, 'show_in_table' => true, 'type' => 'text'],
-                'description' => ['label' => 'Answer',   'required' => true, 'show_in_table' => false, 'type' => 'editor'],
-                'sort_order'  => ['label' => 'Sort Order', 'required' => false, 'show_in_table' => true, 'type' => 'number'],
-                'status'      => ['label' => 'Status',     'required' => true, 'show_in_table' => true, 'type' => 'select'],
-            ],
-            'partner' => [
-                'module_name' => ['label' => 'Loan Partners', 'icon' => 'bi bi-bank'],
-                'title'       => ['label' => 'Bank / FI Name', 'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'short'       => ['label' => 'Interest Rate',  'required' => true,  'show_in_table' => true,  'type' => 'text'], // e.g. Starting from 7.99%
-                'img_path'    => ['label' => 'Bank Logo',      'required' => true,  'show_in_table' => true,  'type' => 'image'],
-                'description' => ['label' => 'Loan Details',   'required' => false, 'show_in_table' => false, 'type' => 'editor'], // Max loan tenure, processing fee, etc.
-                'sort_order'  => ['label' => 'Sort Order',     'required' => false, 'show_in_table' => true,  'type' => 'number'],
-                'status'      => ['label' => 'Status',         'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
-            'area_guide' => [
-                'module_name'    => ['label' => 'Area Guides', 'icon' => 'bi bi-map'],
-                'destination_id' => ['label' => 'Select Location (Destination)', 'required' => true, 'show_in_table' => true, 'type' => 'select'],
-                'title'          => ['label' => 'Area Name',    'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'slug'           => ['label' => 'Slug',         'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'short'          => ['label' => 'Tagline',      'required' => false, 'show_in_table' => false, 'type' => 'text'],
-                'features'       => [
-                    'label' => 'Area Key Metrics / Sights',
-                    'required' => false,
-                    'show_in_table' => false,
-                    'type' => 'features',
-                    'keys' => ['Average Price', 'Popular Schools', 'Top Hospitals', 'Metro Access', 'Development Status']
-                ],
-                // 3 Description Rich Text Editors
-                'description'    => ['label' => 'Detailed Guide Part 1', 'required' => false, 'show_in_table' => false, 'type' => 'editor'],
-                'description_1'  => ['label' => 'Detailed Guide Part 2', 'required' => false, 'show_in_table' => false, 'type' => 'editor'],
-                'description_2'  => ['label' => 'Detailed Guide Part 3', 'required' => false, 'show_in_table' => false, 'type' => 'editor'],
+            // 'faq' => [
+            //     'module_name' => ['label' => 'FAQs', 'icon' => 'bi bi-question-circle'],
+            //     'title'       => ['label' => 'Question', 'required' => true, 'show_in_table' => true, 'type' => 'text'],
+            //     'description' => ['label' => 'Answer',   'required' => true, 'show_in_table' => false, 'type' => 'editor'],
+            //     'sort_order'  => ['label' => 'Sort Order', 'required' => false, 'show_in_table' => true, 'type' => 'number'],
+            //     'status'      => ['label' => 'Status',     'required' => true, 'show_in_table' => true, 'type' => 'select'],
+            // ],
+            // 'partner' => [
+            //     'module_name' => ['label' => 'Loan Partners', 'icon' => 'bi bi-bank'],
+            //     'title'       => ['label' => 'Bank / FI Name', 'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'short'       => ['label' => 'Interest Rate',  'required' => true,  'show_in_table' => true,  'type' => 'text'], // e.g. Starting from 7.99%
+            //     'img_path'    => ['label' => 'Bank Logo',      'required' => true,  'show_in_table' => true,  'type' => 'image'],
+            //     'description' => ['label' => 'Loan Details',   'required' => false, 'show_in_table' => false, 'type' => 'editor'], // Max loan tenure, processing fee, etc.
+            //     'sort_order'  => ['label' => 'Sort Order',     'required' => false, 'show_in_table' => true,  'type' => 'number'],
+            //     'status'      => ['label' => 'Status',         'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
+            // 'area_guide' => [
+            //     'module_name'    => ['label' => 'Area Guides', 'icon' => 'bi bi-map'],
+            //     'destination_id' => ['label' => 'Select Location (Destination)', 'required' => true, 'show_in_table' => true, 'type' => 'select'],
+            //     'title'          => ['label' => 'Area Name',    'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'slug'           => ['label' => 'Slug',         'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'short'          => ['label' => 'Tagline',      'required' => false, 'show_in_table' => false, 'type' => 'text'],
+            //     'features'       => [
+            //         'label' => 'Area Key Metrics / Sights',
+            //         'required' => false,
+            //         'show_in_table' => false,
+            //         'type' => 'features',
+            //         'keys' => ['Average Price', 'Popular Schools', 'Top Hospitals', 'Metro Access', 'Development Status']
+            //     ],
+            //     // 3 Description Rich Text Editors
+            //     'description'    => ['label' => 'Detailed Guide Part 1', 'required' => false, 'show_in_table' => false, 'type' => 'editor'],
+            //     'description_1'  => ['label' => 'Detailed Guide Part 2', 'required' => false, 'show_in_table' => false, 'type' => 'editor'],
+            //     'description_2'  => ['label' => 'Detailed Guide Part 3', 'required' => false, 'show_in_table' => false, 'type' => 'editor'],
 
-                // Single and Multiple Images config
-                'img_path'       => ['label' => 'Featured Image', 'required' => true,  'show_in_table' => true,  'type' => 'image'],
-                'img_paths'      => ['label' => 'Gallery Images',  'required' => false, 'show_in_table' => false, 'type' => 'image_multiple'],
+            //     // Single and Multiple Images config
+            //     'img_path'       => ['label' => 'Featured Image', 'required' => true,  'show_in_table' => true,  'type' => 'image'],
+            //     'img_paths'      => ['label' => 'Gallery Images',  'required' => false, 'show_in_table' => false, 'type' => 'image_multiple'],
 
-                'sort_order'     => ['label' => 'Sort Order',   'required' => false, 'show_in_table' => true,  'type' => 'number'],
-                'status'         => ['label' => 'Status',       'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
+            //     'sort_order'     => ['label' => 'Sort Order',   'required' => false, 'show_in_table' => true,  'type' => 'number'],
+            //     'status'         => ['label' => 'Status',       'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
             // ------------------------------------------------------------------
             // Pages — static pages (about, contact, etc.)
             // ------------------------------------------------------------------
@@ -251,29 +251,29 @@ class AppServiceProvider extends ServiceProvider
                 'meta_keywords'    => ['label' => 'Meta Keywords', 'required' => false, 'show_in_table' => false,],
                 'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
             ],
-            'about_hero' => [
-                'module_name' => ['label' => 'About Hero', 'icon' => 'bi bi-person-badge'],
-                'title'       => ['label' => 'Hero Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'short'       => ['label' => 'Hero Description',      'required' => true,  'show_in_table' => false, 'type' => 'textarea'],
-                'img_path'         => ['label' => 'Hero Image',            'required' => true,  'show_in_table' => true,  'type' => 'image'],
-                'sort_order'  => ['label' => 'Sort Order',             'required' => false, 'show_in_table' => true,  'type' => 'number'],
-                'status'      => ['label' => 'Status',                 'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
-            'about_value' => [
-                'module_name' => ['label' => 'About Core Values', 'icon' => 'bi bi-gem'],
-                'title'       => ['label' => 'Value Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'short'       => ['label' => 'Value Description',      'required' => true,  'show_in_table' => false, 'type' => 'textarea'],
-                'url'         => ['label' => 'FontAwesome Icon Class', 'required' => true,  'show_in_table' => true,  'type' => 'text'], // e.g. fa-solid fa-lightbulb
-                'sort_order'  => ['label' => 'Sort Order',             'required' => false, 'show_in_table' => true,  'type' => 'number'],
-                'status'      => ['label' => 'Status',                 'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
-            'stat' => [
-                'module_name' => ['label' => 'Statistics', 'icon' => 'bi bi-bar-chart'],
-                'title'       => ['label' => 'Value Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
-                'short'       => ['label' => 'Value',      'required' => true,  'show_in_table' => false, 'type' => 'text'],
-                'sort_order'  => ['label' => 'Sort Order',             'required' => false, 'show_in_table' => true,  'type' => 'number'],
-                'status'      => ['label' => 'Status',                 'required' => true,  'show_in_table' => true,  'type' => 'select'],
-            ],
+            // 'about_hero' => [
+            //     'module_name' => ['label' => 'About Hero', 'icon' => 'bi bi-person-badge'],
+            //     'title'       => ['label' => 'Hero Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'short'       => ['label' => 'Hero Description',      'required' => true,  'show_in_table' => false, 'type' => 'textarea'],
+            //     'img_path'         => ['label' => 'Hero Image',            'required' => true,  'show_in_table' => true,  'type' => 'image'],
+            //     'sort_order'  => ['label' => 'Sort Order',             'required' => false, 'show_in_table' => true,  'type' => 'number'],
+            //     'status'      => ['label' => 'Status',                 'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
+            // 'about_value' => [
+            //     'module_name' => ['label' => 'About Core Values', 'icon' => 'bi bi-gem'],
+            //     'title'       => ['label' => 'Value Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'short'       => ['label' => 'Value Description',      'required' => true,  'show_in_table' => false, 'type' => 'textarea'],
+            //     'url'         => ['label' => 'FontAwesome Icon Class', 'required' => true,  'show_in_table' => true,  'type' => 'text'], // e.g. fa-solid fa-lightbulb
+            //     'sort_order'  => ['label' => 'Sort Order',             'required' => false, 'show_in_table' => true,  'type' => 'number'],
+            //     'status'      => ['label' => 'Status',                 'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
+            // 'stat' => [
+            //     'module_name' => ['label' => 'Statistics', 'icon' => 'bi bi-bar-chart'],
+            //     'title'       => ['label' => 'Value Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
+            //     'short'       => ['label' => 'Value',      'required' => true,  'show_in_table' => false, 'type' => 'text'],
+            //     'sort_order'  => ['label' => 'Sort Order',             'required' => false, 'show_in_table' => true,  'type' => 'number'],
+            //     'status'      => ['label' => 'Status',                 'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            // ],
 
         ];
 
