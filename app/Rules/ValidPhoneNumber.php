@@ -9,22 +9,22 @@ class ValidPhoneNumber implements ValidationRule
 {
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        // শুধু সংখ্যা রেখে বাকি সব (space, dash, +, parentheses) ফেলে দিন
+        $bengali = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $value = str_replace($bengali, $english, $value);
+        
         $digits = preg_replace('/\D/', '', $value);
 
-        // ১. সঠিক length কিনা (যেকোনো দেশের জন্য সাধারণ রেঞ্জ)
         if (strlen($digits) < 7 || strlen($digits) > 15) {
             $fail('Please enter a valid phone number.');
             return;
         }
 
-        // ২. সব ডিজিট একই কিনা (01111111111, 00000000000)
         if (preg_match('/^(\d)\1+$/', $digits)) {
             $fail('Please enter a valid phone number.');
             return;
         }
 
-        // ৩. সরল ধারাবাহিক সংখ্যা কিনা (12345678, 87654321)
         $ascending = '0123456789';
         $descending = '9876543210';
         if (str_contains($ascending, $digits) || str_contains($descending, $digits)) {
