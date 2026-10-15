@@ -366,15 +366,16 @@ class ContentController extends Controller
                 $rules['feature_values.*'] = ['nullable', 'string'];
             } else {
                 $rules[$field] = match ($type) {
-                    'url'      => [$required, 'url'],
-                    'number'   => [$required, 'integer'],
-                    'select'   => ($field === 'status')
+                    'url'              => [$required, 'url'],
+                    'number'           => [$required, 'integer'],
+                    'select'           => ($field === 'status')
                         ? [$required, 'in:0,1,2,3']
                         : [$required, 'integer', 'exists:contents,id'],
-                    'datetime' => [$required, 'date'],
-                    'tag'      => [$required, 'string'],
-                    'extra'      => [$required],
-                    default    => [$required, 'string'],
+                    'datetime'         => [$required, 'date'],
+                    'tag'              => [$required, 'string'],
+                    'extra'            => [$required],
+                    'project_multiple' => [$required],
+                    default            => [$required, 'string'],
                 };
             }
 
@@ -432,16 +433,14 @@ class ContentController extends Controller
 
             $data[$field] = $request->input($field);
         }
-        if (!empty($extraExtra = isset($content) ? ($content->extra ?? []) : [])) {
-            $data['extra'] = array_merge($extraExtra, $extraData ?? []);
-        } else {
-            $data['extra'] = $extraData ?? [];
+
+        if (!empty($extraData)) {
+            $data['extra'] = array_merge(
+                is_array($data['extra'] ?? null) ? $data['extra'] : [],
+                $extraData
+            );
         }
 
-        // Handle specific case for saving compiled array of extra fields
-        if (!empty($extraData)) {
-            $data['extra'] = $extraData;
-        }
         if ($request->filled('scheduled_at')) {
             $data['scheduled_at'] = \Carbon\Carbon::parse(
                 $request->input('scheduled_at')

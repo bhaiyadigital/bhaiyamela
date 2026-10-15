@@ -338,6 +338,46 @@ class WebController extends Controller
 
         return view('frontend.pages.details', compact('project', 'similarProjects', 'recentProjects'));
     }
+
+    /**
+     * Campaign Details Page
+     */
+    public function campaignDetails($slug)
+    {
+        $campaign = Content::where('module', 'campaign')
+            ->where('slug', $slug)
+            ->active()
+            ->firstOrFail();
+
+        $campaign->increment('views');
+
+        // Extract attached project IDs
+        $pIds = $campaign->extra ?? [];
+        if (is_string($pIds)) {
+            $pIds = json_decode($pIds, true) ?? [];
+        }
+        $pIds = is_array($pIds) ? array_map('intval', $pIds) : [];
+
+        $projects = collect();
+        if (!empty($pIds)) {
+            $projects = Content::with(['company', 'category', 'destination'])
+                ->where('module', 'project')
+                ->whereIn('id', $pIds)
+                ->where('status', 1)
+                ->get();
+        }
+
+        // Other active campaigns
+        $otherCampaigns = Content::where('module', 'campaign')
+            ->where('id', '!=', $campaign->id)
+            ->where('status', 1)
+            ->orderBy('start_date', 'asc')
+            ->limit(3)
+            ->get();
+
+        return view('frontend.pages.campaign_details', compact('campaign', 'projects', 'otherCampaigns'));
+    }
+
     /**
      * Project/Property Details Page
      */
@@ -762,5 +802,59 @@ class WebController extends Controller
             ->get();
 
         return view('frontend.pages.about', compact('aboutValues', 'stats', 'aboutHero'));
+    }
+
+    /**
+     * Campaign inquiry form submission
+     */
+    public function campaignInquiry(Request $request)
+    {
+        $request->validate([
+            'lead_name'    => 'required|string|max:255',
+            'lead_phone'   => 'required|string|max:30',
+            'lead_email'   => 'nullable|email|max:255',
+            'lead_message' => 'nullable|string',
+            'project_id'   => 'nullable|integer',
+            'campaign_id'  => 'nullable|integer',
+        ], [
+            'lead_name.required'  => 'আপনার নাম লিখুন।',
+            'lead_phone.required' => 'ফোন নম্বর লিখুন।',
+        ]);
+
+        try {
+            $subject = 'ক্যাম্পেইন অনুসন্ধান';
+
+            // Build message
+            $message = $request->input('lead_message', '');
+
+            if ($request->filled('project_id')) {
+                $proj = Content::find($request->input('project_id'));
+                if ($proj) {
+                    $subject .= ' — প্রজেক্ট: ' . $proj->title;
+                    $message .= "\n\nনির্বাচিত প্রজেক্ট: " . $proj->title;
+                }
+            }
+
+            if ($request->filled('campaign_id')) {
+                $camp = Content::find($request->input('campaign_id'));
+                if ($camp) {
+                    $subject .= ' (' . $camp->title . ')';
+                }
+            }
+
+            Contact::create([
+                'name'    => $request->input('lead_name'),
+                'email'   => $request->input('lead_email'),
+                'phone'   => $request->input('lead_phone'),
+                'subject' => $subject,
+                'message' => $message ?: 'ক্যাম্পেইন সম্পর্কে বিস্তারিত জানতে চাই।',
+                'is_read' => false,
+            ]);
+
+            return back()->with('campaign_inquiry_success', 'আপনার বার্তা সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।');
+
+        } catch (\Exception $e) {
+            return back()->with('campaign_inquiry_error', 'দুঃখিত, বার্তা পাঠাতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।')->withInput();
+        }
     }
 }
