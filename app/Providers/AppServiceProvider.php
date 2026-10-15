@@ -251,6 +251,24 @@ class AppServiceProvider extends ServiceProvider
                 'meta_keywords'    => ['label' => 'Meta Keywords', 'required' => false, 'show_in_table' => false,],
                 'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
             ],
+            // ------------------------------------------------------------------
+            // Campaign — campaigns with projects and dates
+            // ------------------------------------------------------------------
+            'campaign' => [
+                'module_name'      => ['label' => 'Campaigns', 'icon' => 'bi bi-megaphone'],
+                'title'            => ['label' => 'Campaign Title',       'required' => true,  'show_in_table' => true,  'type' => 'text'],
+                'slug'             => ['label' => 'Slug',                 'required' => true,  'show_in_table' => true,  'type' => 'text'],
+                'location'         => ['label' => 'Location / Venue',     'required' => false, 'show_in_table' => true,  'type' => 'text'],
+                'img_path'         => ['label' => 'Campaign Thumbnail / Banner', 'required' => false, 'show_in_table' => true, 'type' => 'image'],
+                'start_date'       => ['label' => 'Start Date & Time',    'required' => true,  'show_in_table' => true,  'type' => 'datetime'],
+                'end_date'         => ['label' => 'End Date & Time',      'required' => true,  'show_in_table' => true,  'type' => 'datetime'],
+                'short'            => ['label' => 'Short Tag', 'required' => false, 'show_in_table' => false, 'type' => 'text'],
+                'description'          => ['label' => 'Description ', 'required' => false, 'type' => 'editor'],
+
+                'extra'            => ['label' => 'Select Projects',      'required' => false, 'show_in_table' => false, 'type' => 'project_multiple'],
+                'sort_order'       => ['label' => 'Sort Order',           'required' => false, 'show_in_table' => true,  'type' => 'number'],
+                'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
+            ],
             // 'about_hero' => [
             //     'module_name' => ['label' => 'About Hero', 'icon' => 'bi bi-person-badge'],
             //     'title'       => ['label' => 'Hero Title',            'required' => true,  'show_in_table' => true,  'type' => 'text'],
@@ -328,5 +346,13 @@ class AppServiceProvider extends ServiceProvider
             ->get();
 
         View::share('destination', $destination);
+
+        $campaigns = Content::where('module', 'campaign')
+            ->where('status', 1)
+            ->orderBy('sort_order')
+            ->latest('id')
+            ->get();
+
+        View::share('campaigns', $campaigns);
     }
 }

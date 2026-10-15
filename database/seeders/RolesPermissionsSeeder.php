@@ -25,6 +25,7 @@ class RolesPermissionsSeeder extends Seeder
             'about',
             'about_value',
             'meta_info',
+            'campaign',
             'stat',
             'message',
             'support-ticket',

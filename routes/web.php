@@ -134,6 +134,9 @@ Route::get('/properties', [WebController::class, 'project'])->name('web.project'
 Route::get('/properties/{slug}', [WebController::class, 'projectCat'])->name('web.project.category');
 Route::get('/gallery', [WebController::class, 'gallery'])->name('web.gallery');
 Route::get('/property/{slug}', [WebController::class, 'details'])->name('project.details');
+Route::get('/campaign/{slug}', [WebController::class, 'campaignDetails'])->name('campaign.details');
+Route::post('/campaign-inquiry', [WebController::class, 'campaignInquiry'])->name('campaign.inquiry');
+
 Route::get('/blog', [WebController::class, 'blog'])->name('web.blog');
 Route::get('/blog/{slug}', [WebController::class, 'blogDetails'])->name('web.blog.details');
 Route::get('/page/{slug}', [WebController::class, 'pageDetails'])->name('web.page');

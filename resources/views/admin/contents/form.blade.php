@@ -190,7 +190,7 @@
             <div class="col-xl-8 col-lg-7">
 
                 @php
-                $leftTypes = ['text','slug','url','number','textarea','editor','select','features','extra','parent_id','datetime','select_status'];
+                $leftTypes = ['text','slug','url','number','textarea','editor','select','features','extra','project_multiple','parent_id','datetime','select_status'];
                 $seoFields = ['meta_title','meta_description','meta_keywords'];
                 $hasLeftFields = false;
                 @endphp
@@ -419,7 +419,7 @@
                                     <option value="1" {{ (string)$old === '1' ? 'selected' : '' }}>Active</option>
                                     <option value="0" {{ (string)$old === '0' ? 'selected' : '' }}>Inactive</option>
                                 </select>
-                            @elseif($type === 'extra' || $field === 'extra')
+                            @elseif($type === 'extra')
                                 @php
                                     $extraVal = isset($content) ? $content->extra : [];
                                     // Handles raw JSON string or PHP array fallback smoothly
@@ -451,7 +451,131 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                </div>                            {{-- Parent / Category Selection --}}
+                                </div>
+                            @elseif($type === 'project_multiple')
+                                @php
+                                    $selectedProjects = isset($content) ? ($content->extra ?? []) : [];
+                                    if (is_string($selectedProjects)) {
+                                        $selectedProjects = json_decode($selectedProjects, true) ?? [];
+                                    }
+                                    if (old('extra')) {
+                                        $selectedProjects = old('extra');
+                                    }
+                                    $selectedProjects = is_array($selectedProjects) ? array_map('strval', $selectedProjects) : [];
+                                    
+                                    // Fetch all dynamic projects created under module 'project'
+                                    $allProjects = \App\Models\Content::where('module', 'project')
+                                        ->with('company')
+                                        ->latest()
+                                        ->get();
+                                @endphp
+
+                                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+                                <style>
+                                    .select2-container--bootstrap-5 .select2-selection,
+                                    .select2-container .select2-selection--multiple {
+                                        min-height: 42px;
+                                        border-color: #dee2e6;
+                                        border-radius: 8px;
+                                        padding: 4px 8px;
+                                    }
+                                    .select2-container .select2-selection--multiple .select2-selection__choice {
+                                        background-color: #0d6efd;
+                                        border: none;
+                                        color: #fff;
+                                        border-radius: 5px;
+                                        padding: 3px 8px;
+                                        font-size: 0.825rem;
+                                    }
+                                    .select2-container .select2-selection--multiple .select2-selection__choice__remove {
+                                        color: #fff;
+                                        margin-right: 5px;
+                                    }
+                                </style>
+
+                                <div class="card border border-light-subtle shadow-sm mb-3">
+                                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
+                                        <span class="small fw-bold text-dark">
+                                            <i class="bi bi-building-check me-1 text-primary"></i> 
+                                            প্রজেক্ট নির্বাচন করুন (মোট প্রজেক্ট: {{ $allProjects->count() }} টি)
+                                        </span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-outline-primary btn-sm py-0" id="btn-select-all-projects">Select All</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm py-0" id="btn-deselect-all-projects">Deselect All</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-3">
+                                        <!-- Quick Live Filter -->
+                                        <div class="mb-2">
+                                            <div class="input-group input-group-sm">
+                                                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                                                <input type="text" id="campaign-project-search" class="form-control" placeholder="প্রজেক্ট বা কোম্পানির নাম দিয়ে খুঁজুন...">
+                                            </div>
+                                        </div>
+
+                                        <!-- Project Checkbox List (name="extra[]") -->
+                                        <div class="project-checkbox-list border rounded p-2 bg-light-subtle" style="max-height: 280px; overflow-y: auto;">
+                                            <div class="row g-2" id="campaign-project-items">
+                                                @forelse($allProjects as $pItem)
+                                                <div class="col-md-6 campaign-project-col" data-title="{{ strtolower($pItem->title . ' ' . ($pItem->company?->company_name ?? '')) }}">
+                                                    <div class="p-2.5 border rounded bg-white h-100 d-flex align-items-start gap-2 shadow-xs hover-shadow transition">
+                                                        <input class="form-check-input campaign-project-check mt-1 flex-shrink-0" 
+                                                               type="checkbox" 
+                                                               name="extra[]" 
+                                                               value="{{ $pItem->id }}"
+                                                               id="proj-check-{{ $pItem->id }}"
+                                                               {{ in_array((string)$pItem->id, $selectedProjects) ? 'checked' : '' }}>
+                                                        <label class="form-check-label w-100 m-0" for="proj-check-{{ $pItem->id }}" style="cursor: pointer; font-size: 0.85rem;">
+                                                            <div class="fw-bold text-dark text-truncate">{{ $pItem->title }}</div>
+                                                            <div class="text-muted small">
+                                                                <i class="bi bi-building me-1"></i>{{ $pItem->company?->company_name ?? 'Global / Bhaiyamela' }}
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                @empty
+                                                <div class="col-12 text-center py-4 text-muted small">
+                                                    কোনো প্রজেক্ট পাওয়া যায়নি।
+                                                </div>
+                                                @endforelse
+                                            </div>
+                                        </div>
+                                        <small class="text-muted mt-1 d-block" style="font-size: 0.75rem;">
+                                            <i class="bi bi-info-circle me-1"></i> টিকচিহ্ন দিয়ে আপনি একাধিক প্রজেক্ট এই ক্যাম্পেইনে যুক্ত করতে পারবেন।
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        // Select All
+                                        document.getElementById('btn-select-all-projects')?.addEventListener('click', function() {
+                                            document.querySelectorAll('.campaign-project-check').forEach(chk => {
+                                                chk.checked = true;
+                                            });
+                                        });
+
+                                        // Deselect All
+                                        document.getElementById('btn-deselect-all-projects')?.addEventListener('click', function() {
+                                            document.querySelectorAll('.campaign-project-check').forEach(chk => {
+                                                chk.checked = false;
+                                            });
+                                        });
+
+                                        // Checkbox live search
+                                        const pSearch = document.getElementById('campaign-project-search');
+                                        if (pSearch) {
+                                            pSearch.addEventListener('input', function() {
+                                                const q = this.value.toLowerCase().trim();
+                                                document.querySelectorAll('.campaign-project-col').forEach(col => {
+                                                    const text = col.getAttribute('data-title') || '';
+                                                    col.style.display = text.includes(q) ? '' : 'none';
+                                                });
+                                            });
+                                        }
+                                    });
+                                </script>
+                            {{-- Parent / Category Selection --}}
                             @elseif($field === 'parent_id')
                             <select name="parent_id" id="parent_id" class="form-select {{ $hasError?'is-invalid':'' }}" {{ $required }}>
                                 <option value="">-- Select Category --</option>
