@@ -281,20 +281,22 @@
                 </div>
 
                 <!-- 2. Lead / Inquiry Contact Form -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <div id="campaignInquiryCard" class="relative bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden scroll-mt-24">
                     <h3 class="font-bold text-gray-900 text-base border-b border-gray-100 pb-3 mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-paper-plane text-[#2c4294]"></i>
                         <span>ক্যাম্পেইন সংক্রান্ত তথ্য চান?</span>
                     </h3>
                     <p class="text-xs text-gray-500 mb-4">আমাদের প্রতিনিধির সাথে যোগাযোগ করতে নিচের ফর্মটি পূরণ করুন:</p>
 
-                    {{-- Success Message --}}
-                    @if(session('campaign_inquiry_success'))
-                        <div class="flex items-start gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl px-4 py-3 mb-4 text-sm">
-                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 flex-shrink-0"></i>
-                            <span>{{ session('campaign_inquiry_success') }}</span>
-                        </div>
-                    @endif
+                    {{-- Success Popup Modal (Centered within this form) --}}
+                    <x-modal-alert 
+                        id="campaignInquirySuccessModal"
+                        type="success"
+                        title="বার্তা পাঠানো হয়েছে!"
+                        sessionKey="campaign_inquiry_success"
+                        buttonText="ঠিক আছে"
+                        :scoped="true"
+                    />
 
                     {{-- Error Message --}}
                     @if(session('campaign_inquiry_error'))
@@ -312,9 +314,10 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('campaign.inquiry') }}" method="POST" class="flex flex-col gap-3">
+                    <form id="campaignInquiryForm" action="{{ route('campaign.inquiry') }}" method="POST" class="flex flex-col gap-3">
                         @csrf
                         <input type="hidden" name="campaign_id" value="{{ $campaign->id }}">
+                        <input type="hidden" name="recaptcha_token" id="campaign_recaptcha_token">
 
                         <input type="text" name="lead_name" placeholder="আপনার নাম লিখুন" required
                             value="{{ old('lead_name', auth()->check() ? auth()->user()->name : '') }}"
@@ -345,10 +348,10 @@
                         <textarea name="lead_message" rows="3" placeholder="আপনার বার্তা লিখুন..."
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', $campaign->title . ' সম্পর্কে বিস্তারিত জানতে চাই।') }}</textarea>
 
-                        <button type="submit"
+                        <button type="button" id="campaignInquirySubmitBtn"
                             class="w-full bg-[#2c4294] hover:bg-[#152960] text-white py-3 rounded-xl font-bold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane text-xs"></i>
-                            মেসেজ পাঠান
+                            <span>মেসেজ পাঠান</span>
                         </button>
                     </form>
                 </div>
@@ -439,6 +442,55 @@
 
         update();
         setInterval(update, 1000);
+    });
+</script>
+
+{{-- Google reCAPTCHA v3 --}}
+@include('partials.recaptcha')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('campaignInquirySubmitBtn');
+        const form = document.getElementById('campaignInquiryForm');
+
+        if (!btn || !form) {
+            return;
+        }
+
+        btn.addEventListener('click', async function (e) {
+            e.preventDefault();
+
+            // Check standard HTML5 validation
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>অপেক্ষা করুন...</span>';
+
+            try {
+                const token = await window.getRecaptchaToken('campaign_inquiry');
+                const tokenInput = document.getElementById('campaign_recaptcha_token');
+                if (tokenInput) {
+                    tokenInput.value = token;
+                }
+                form.submit();
+            } catch (error) {
+                console.error('reCAPTCHA error:', error);
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+                alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+            }
+        });
+
+        @if($errors->any() || session('campaign_inquiry_error'))
+            const inquiryCard = document.getElementById('campaignInquiryCard');
+            if (inquiryCard) {
+                inquiryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        @endif
     });
 </script>
 @endpush
