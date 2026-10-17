@@ -55,14 +55,20 @@
 @section('content')
 
     <!-- BREADCRUMB BAR -->
-    <section class="border-b border-gray-100 bg-gray-50">
+    <section style="border: 1px solid gainsboro; margin-bottom: 20px;">
         <div class="container mx-auto px-4">
-            <div class="flex items-center gap-2 text-sm py-3 text-gray-600">
-                <a href="{{ url('/') }}" class="hover:text-[#2c4294] transition-colors">হোম</a>
+            <div class="flex items-center gap-2 text-base py-2 border-gray-100">
+                <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
+                    হোম
+                </a>
                 <span class="text-gray-300">›</span>
-                <a href="{{ url('/') }}#campaign-section" class="hover:text-[#2c4294] transition-colors">ক্যাম্পেইনসমূহ</a>
+                <a href="{{ url('/') }}#campaign-section" class="text-gray-600 hover:text-black">
+                    ক্যাম্পেইনসমূহ
+                </a>
                 <span class="text-gray-300">›</span>
-                <span class="text-gray-900 font-semibold truncate">{{ $campaign->title }}</span>
+                <span class="text-black font-semibold truncate">
+                    {{ $campaign->title }}
+                </span>
             </div>
         </div>
     </section>
@@ -107,8 +113,19 @@
 
                 <!-- Right Side Details -->
                 <div class="flex-1 text-center lg:text-left space-y-4">
-                    <div class="inline-flex items-center gap-2 bg-[#2c4294] text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
-                        <i class="fa-solid fa-bullhorn text-xs"></i> স্পেশাল ক্যাম্পেইন
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                        <div class="inline-flex items-center gap-2 bg-[#2c4294] text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                            <i class="fa-solid fa-bullhorn text-xs"></i> স্পেশাল ক্যাম্পেইন
+                        </div>
+
+                        @if(auth()->check() && (auth()->user()->isSuperAdmin() || auth()->user()->hasPermission('campaign.edit')))
+                            <a href="{{ route('admin.contents.edit', ['campaign', $campaign->id]) }}"
+                                target="_blank"
+                                class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all hover:shadow">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <span>এডিট ক্যাম্পেইন</span>
+                            </a>
+                        @endif
                     </div>
 
                     <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900">
