@@ -150,7 +150,7 @@
                         @if(auth()->check() && (auth()->user()->isSuperAdmin() || auth()->user()->hasPermission('campaign.edit')))
                             <a href="{{ route('admin.contents.edit', ['campaign', $campaign->id]) }}"
                                 target="_blank"
-                                class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all hover:shadow">
+                                class="inline-flex items-center gap-1.5 bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all hover:shadow">
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 <span>এডিট ক্যাম্পেইন</span>
                             </a>
@@ -395,9 +395,9 @@
                     <x-modal-alert 
                         id="campaignInquirySuccessModal"
                         type="success"
-                        title="বার্তা পাঠানো হয়েছে!"
+                        title="Thank you for your interest!"
                         sessionKey="campaign_inquiry_success"
-                        buttonText="ঠিক আছে"
+                        buttonText="Okay"
                         :scoped="true"
                     />
 
@@ -474,6 +474,14 @@
                             <i class="fa-solid fa-paper-plane text-xs" aria-hidden="true"></i>
                             <span>মেসেজ পাঠান</span>
                         </button>
+
+                        <div class="text-[11px] text-gray-500 text-center leading-relaxed mt-2.5 flex items-center justify-center gap-1 flex-wrap">
+                            <i class="fa-solid fa-shield-halved text-[#2c4294] text-[11px]"></i>
+                            <span>reCAPTCHA দ্বারা সুরক্ষিত — গুগলের</span>
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">গোপনীয়তা নীতি</a>
+                            <span>ও</span>
+                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">শর্তাবলী</a>
+                        </div>
                     </form>
                 </div>
 

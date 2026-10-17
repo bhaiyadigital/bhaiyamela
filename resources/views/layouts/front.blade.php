@@ -98,6 +98,9 @@
         body {
             font-family: 'Noto Sans Bengali', sans-serif !important;
         }
+        .grecaptcha-badge {
+            visibility: hidden !important;
+        }
     </style>
 </head>
 

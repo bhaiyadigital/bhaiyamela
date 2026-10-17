@@ -129,7 +129,7 @@ class ContactController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Your message has been sent successfully to the property owner.'
+                'message' => "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!"
             ], 200);
         } catch (\Exception $e) {
             Log::error('Lead Submission Error: ' . $e->getMessage());
