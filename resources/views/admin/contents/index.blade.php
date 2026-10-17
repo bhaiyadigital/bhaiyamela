@@ -136,6 +136,22 @@
     .btn-action:hover {
         transform: translateY(-1px);
     }
+
+    .drag-handle {
+        color: #475569;
+        cursor: move;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .drag-handle:hover {
+        color: #0d6efd;
+        transform: scale(1.15);
+    }
+
+    .drag-handle:active {
+        cursor: move;
+        color: #0b5ed7;
+    }
 </style>
 
 <div class="container-fluid mt-4">
@@ -257,7 +273,7 @@
                                 <input type="checkbox" id="check-all" class="form-check-input" title="Select all">
                             </th>
                             <th style="width:32px; text-align: center;">
-                                <i class="bi bi-arrows-move text-muted" title="Drag to reorder"></i>
+                                <i class="bi bi-arrows-move text-secondary" title="Drag to reorder"></i>
                             </th>
 
                             <th style="width: 50px; text-align: center;">#</th>
@@ -284,7 +300,7 @@
                             </td>
 
                             {{-- Drag handle --}}
-                            <td class="drag-handle text-muted text-center" style="cursor:grab; opacity: 0.6;" title="Drag to reorder">
+                            <td class="drag-handle text-center" title="Drag to reorder">
                                 <i class="bi bi-grip-vertical fs-5"></i>
                             </td>
 

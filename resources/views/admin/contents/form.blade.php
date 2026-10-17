@@ -463,8 +463,9 @@
                                     }
                                     $selectedProjects = is_array($selectedProjects) ? array_map('strval', $selectedProjects) : [];
                                     
-                                    // Fetch all dynamic projects created under module 'project'
+                                    // Fetch active dynamic projects created under module 'project'
                                     $allProjects = \App\Models\Content::where('module', 'project')
+                                        ->active()
                                         ->with('company')
                                         ->latest()
                                         ->get();
