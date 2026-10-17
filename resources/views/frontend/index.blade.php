@@ -112,9 +112,7 @@
 
         @foreach($hero as $index => $slide)
         @php
-        $redirectUrl = $slide->company_id
-        ? route('web.project', ['company' => $slide->company?->slug])
-        : route('web.project');
+        $redirectUrl = $slide->url ? $slide->url : "#";
         @endphp
 
         <a href="{{ $redirectUrl }}"
