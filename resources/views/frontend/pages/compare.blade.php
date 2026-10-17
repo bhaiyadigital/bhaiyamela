@@ -27,8 +27,8 @@
 
         <!-- 2. Header Section -->
         <div class="text-center mb-10">
-            <h1 class="text-xl md:text-xl font-black text-[#2ba351] uppercase tracking-wide">Property Comparison</h1>
-            <div class="w-24 h-1 bg-[#2ba351] mx-auto mt-2"></div>
+            <h1 class="text-xl md:text-xl font-black text-[#1a285a] uppercase tracking-wide">Property Comparison</h1>
+            <div class="w-24 h-1 bg-[#1a285a] mx-auto mt-2"></div>
         </div>
 
         @if($projects->isEmpty())
@@ -39,7 +39,7 @@
                 <p class="text-xs text-gray-400 mb-6 leading-relaxed">Select up to 3 properties from our listing page to compare
                     them side by side.</p>
                 <a href="{{ route('projects.index') }}"
-                    class="inline-block bg-[#2ba351] hover:bg-[#1a285a] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">Go
+                    class="inline-block bg-[#1a285a] hover:bg-[#2ba351] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">Go
                     to Properties</a>
             </div>
         @else
@@ -48,19 +48,20 @@
                 $specs = [];
                 foreach ($projects as $p) {
                     $featuresList = $p->features ?? [];
-                    $bedrooms = '00';
-                    $baths = '00';
-                    $size = '00';
+                    $bedrooms = null;
+                    $baths = null;
+                    $size = null;
 
                     foreach ($featuresList as $f) {
                         if (is_array($f) && isset($f['key'])) {
                             $keyLower = strtolower($f['key']);
-                            if ($keyLower == 'bedrooms')
-                                $bedrooms = $f['value'];
-                            if ($keyLower == 'baths')
-                                $baths = $f['value'];
-                            if (str_contains($keyLower, 'size'))
-                                $size = $f['value'];
+                            $val = trim((string)($f['value'] ?? ''));
+                            if ($keyLower == 'bedrooms' && !in_array($val, ['', '0', '00', 'null']))
+                                $bedrooms = $val;
+                            if ($keyLower == 'baths' && !in_array($val, ['', '0', '00', 'null']))
+                                $baths = $val;
+                            if (str_contains($keyLower, 'size') && !in_array($val, ['', '0', '00', 'null']))
+                                $size = $val;
                         }
                     }
 
@@ -70,6 +71,11 @@
                         'size' => $size
                     ];
                 }
+
+                // Check if any compared property has these specs (if not, full row will be hidden)
+                $hasBedrooms = collect($specs)->contains(fn($s) => !empty($s['bedrooms']));
+                $hasBaths    = collect($specs)->contains(fn($s) => !empty($s['baths']));
+                $hasSize     = collect($specs)->contains(fn($s) => !empty($s['size']));
             @endphp
 
 
@@ -105,7 +111,7 @@
                             <tr>
                                 <td class="p-6 font-bold text-gray-500 bg-gray-50/50">Price</td>
                                 @foreach($projects as $project)
-                                    <td class="p-6 font-black text-[#2ba351] text-base">{{ $project->short }}</td>
+                                    <td class="p-6 font-black text-[#1a285a] text-base">{{ $project->short }}</td>
                                 @endforeach
                             </tr>
                             <tr>
@@ -113,28 +119,34 @@
                                 @foreach($projects as $project)
                                     <td class="p-6 text-gray-700 font-medium">
                                         <i class="fa-solid fa-location-dot me-1 text-gray-400"></i>
-                                        {{ $project->location ?? 'N/A' }}
+                                        {{ $project->destination->title ?? ($project->location ?? 'Dhaka') }}
                                     </td>
                                 @endforeach
                             </tr>
+                            @if($hasBedrooms)
                             <tr>
                                 <td class="p-6 font-bold text-gray-500 bg-gray-50/50">Bedrooms</td>
                                 @foreach($projects as $project)
-                                    <td class="p-6 text-gray-800 font-semibold">{{ $specs[$project->id]['bedrooms'] }} Beds</td>
+                                    <td class="p-6 text-gray-800 font-semibold">{{ $specs[$project->id]['bedrooms'] ? $specs[$project->id]['bedrooms'] . ' Beds' : '-' }}</td>
                                 @endforeach
                             </tr>
+                            @endif
+                            @if($hasBaths)
                             <tr>
                                 <td class="p-6 font-bold text-gray-500 bg-gray-50/50">Baths</td>
                                 @foreach($projects as $project)
-                                    <td class="p-6 text-gray-800 font-semibold">{{ $specs[$project->id]['baths'] }} Baths</td>
+                                    <td class="p-6 text-gray-800 font-semibold">{{ $specs[$project->id]['baths'] ? $specs[$project->id]['baths'] . ' Baths' : '-' }}</td>
                                 @endforeach
                             </tr>
+                            @endif
+                            @if($hasSize)
                             <tr>
                                 <td class="p-6 font-bold text-gray-500 bg-gray-50/50">Property Size</td>
                                 @foreach($projects as $project)
-                                    <td class="p-6 text-gray-800 font-semibold">{{ $specs[$project->id]['size'] }}</td>
+                                    <td class="p-6 text-gray-800 font-semibold">{{ $specs[$project->id]['size'] ?? '-' }}</td>
                                 @endforeach
                             </tr>
+                            @endif
                             <tr>
                                 <td class="p-6 font-bold text-gray-500 bg-gray-50/50">Property Type</td>
                                 @foreach($projects as $project)
@@ -152,7 +164,7 @@
                                                         class="w-full h-full object-cover" alt="Logo">
                                                 </div>
                                                 <span
-                                                    class="font-bold text-[#2ba351] text-xs">{{ $project->company->company_name }}</span>
+                                                    class="font-bold text-[#1a285a] text-xs">{{ $project->company->company_name }}</span>
                                             </div>
                                         @else
                                             <div class="flex items-center gap-2">
@@ -161,7 +173,7 @@
                                                         class="w-full h-full object-cover" alt="Logo">
                                                 </div>
                                                 <span
-                                                    class="font-bold text-[#2ba351] text-xs">{{ $setting ? $setting->site_name : 'Bhaiya Group' }}</span>
+                                                    class="font-bold text-[#1a285a] text-xs">{{ $setting ? $setting->site_name : 'Bhaiya Group' }}</span>
                                             </div>
 
                                         @endif
@@ -173,7 +185,7 @@
                                 @foreach($projects as $project)
                                     <td class="p-6">
                                         <a href="{{ route('project.details', $project->slug) }}"
-                                            class="inline-block w-full text-center bg-[#2ba351] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">View
+                                            class="inline-block w-full text-center bg-[#1a285a] hover:bg-[#2ba351] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">View
                                             Details</a>
                                     </td>
                                 @endforeach
@@ -218,7 +230,7 @@
                             @foreach($projects as $project)
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
-                                    <span class="text-xs md:text-base font-black text-[#2ba351] mt-0.5">{{ $project->short }}</span>
+                                    <span class="text-xs md:text-base font-black text-[#1a285a] mt-0.5">{{ $project->short }}</span>
                                 </div>
                             @endforeach
                         </div>
@@ -232,12 +244,15 @@
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
                                     <span class="text-xs font-bold text-gray-700 mt-0.5 truncate"
-                                        title="{{ $project->location }}">{{ $project->location ?? 'N/A' }}</span>
+                                        title="{{ $project->destination->title ?? ($project->location ?? 'Dhaka') }}">
+                                        {{ $project->destination->title ?? ($project->location ?? 'Dhaka') }}
+                                    </span>
                                 </div>
                             @endforeach
                         </div>
                     </div>
 
+                    @if($hasBedrooms)
                     <!-- Bedrooms comparison card -->
                     <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
                         <span class="block text-xs font-bold text-gray-400 uppercase mb-2.5 tracking-wider">Bedrooms</span>
@@ -245,13 +260,16 @@
                             @foreach($projects as $project)
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
-                                    <span class="text-xs font-extrabold text-gray-800 mt-0.5">{{ $specs[$project->id]['bedrooms'] }}
-                                        Beds</span>
+                                    <span class="text-xs font-extrabold text-gray-800 mt-0.5">
+                                        {{ $specs[$project->id]['bedrooms'] ? $specs[$project->id]['bedrooms'] . ' Beds' : '-' }}
+                                    </span>
                                 </div>
                             @endforeach
                         </div>
                     </div>
+                    @endif
 
+                    @if($hasBaths)
                     <!-- Baths comparison card -->
                     <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
                         <span class="block text-xs font-bold text-gray-400 uppercase mb-2.5 tracking-wider">Baths</span>
@@ -259,13 +277,16 @@
                             @foreach($projects as $project)
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
-                                    <span class="text-xs font-extrabold text-gray-800 mt-0.5">{{ $specs[$project->id]['baths'] }}
-                                        Baths</span>
+                                    <span class="text-xs font-extrabold text-gray-800 mt-0.5">
+                                        {{ $specs[$project->id]['baths'] ? $specs[$project->id]['baths'] . ' Baths' : '-' }}
+                                    </span>
                                 </div>
                             @endforeach
                         </div>
                     </div>
+                    @endif
 
+                    @if($hasSize)
                     <!-- Size comparison card -->
                     <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
                         <span class="block text-xs font-bold text-gray-400 uppercase mb-2.5 tracking-wider">Property Size</span>
@@ -274,11 +295,12 @@
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
                                     <span
-                                        class="text-xs font-extrabold text-gray-800 mt-0.5 truncate">{{ $specs[$project->id]['size'] }}</span>
+                                        class="text-xs font-extrabold text-gray-800 mt-0.5 truncate">{{ $specs[$project->id]['size'] ?? '-' }}</span>
                                 </div>
                             @endforeach
                         </div>
                     </div>
+                    @endif
 
                     <!-- Developer comparison card -->
                     <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
@@ -288,7 +310,7 @@
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
                                     @if($project->company)
-                                        <span class="text-xs font-bold text-[#2ba351] mt-0.5 truncate"
+                                        <span class="text-xs font-bold text-[#1a285a] mt-0.5 truncate"
                                             title="{{ $project->company->company_name }}">{{ $project->company->company_name }}</span>
                                     @else
                                         <span class="text-xs text-gray-400 mt-0.5">Admin</span>
@@ -306,7 +328,7 @@
                                 <div class="flex flex-col gap-1 min-w-0">
                                     <span class="text-[9px] font-bold text-gray-400">Property {{ $loop->iteration }}</span>
                                     <a href="{{ route('project.details', $project->slug) }}"
-                                        class="inline-block w-full text-center bg-[#2ba351] hover:bg-[#1a285a] text-white py-2 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all">Details</a>
+                                        class="inline-block w-full text-center bg-[#1a285a] hover:bg-[#2ba351] text-white py-2 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all">Details</a>
                                 </div>
                             @endforeach
                         </div>
