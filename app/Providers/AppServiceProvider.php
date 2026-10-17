@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 'module_name' => ['label' => 'Hero', 'icon' => 'bi bi-image'],
                 'title'            => ['label' => 'Title',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
                 'img_path'         => ['label' => 'Slider Image',     'required' => false, 'show_in_table' => false, 'type' => 'image'],
-                'url'              => ['label' => 'Link URL',             'required' => false, 'show_in_table' => false, 'type' => 'url'],
+                'url'              => ['label' => 'Link URL(Full Url)',             'required' => false, 'show_in_table' => false, 'type' => 'url'],
                 'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
             ],
             // 'login-benefits' => [
@@ -263,7 +263,7 @@ class AppServiceProvider extends ServiceProvider
                 'img_path'         => ['label' => 'Campaign Thumbnail / Banner', 'required' => false, 'show_in_table' => true, 'type' => 'image'],
                 'start_date'       => ['label' => 'Start Date & Time',    'required' => true,  'show_in_table' => true,  'type' => 'datetime'],
                 'end_date'         => ['label' => 'End Date & Time',      'required' => true,  'show_in_table' => true,  'type' => 'datetime'],
-                'short'            => ['label' => 'Short Tag', 'required' => false, 'show_in_table' => false, 'type' => 'text'],
+                'short'            => ['label' => 'Short Description', 'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'description'          => ['label' => 'Description ', 'required' => false, 'type' => 'editor'],
 
                 'extra'            => ['label' => 'Select Projects',      'required' => false, 'show_in_table' => false, 'type' => 'project_multiple'],
