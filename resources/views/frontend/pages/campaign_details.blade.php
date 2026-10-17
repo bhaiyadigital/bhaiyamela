@@ -38,6 +38,28 @@
         'November' => 'নভেম্বর',
         'December' => 'ডিসেম্বর',
     ];
+    $formatBnTime = function($date) use ($bnDigits) {
+        if (!$date) return '';
+        $c = \Carbon\Carbon::parse($date);
+        $h24 = (int)$c->format('G');
+        $period = 'রাত';
+        if ($h24 >= 4 && $h24 < 6) {
+            $period = 'ভোর';
+        } elseif ($h24 >= 6 && $h24 < 12) {
+            $period = 'সকাল';
+        } elseif ($h24 >= 12 && $h24 < 15) {
+            $period = 'দুপুর';
+        } elseif ($h24 >= 15 && $h24 < 18) {
+            $period = 'বিকাল';
+        } elseif ($h24 >= 18 && $h24 < 20) {
+            $period = 'সন্ধ্যা';
+        }
+
+        $timeStr = $c->format('h:i');
+        $bnTimeStr = strtr($timeStr, $bnDigits);
+        return "{$period} {$bnTimeStr} টা";
+    };
+
     $formatBnDate = function($date) use ($bnDigits, $bnMonths) {
         if (!$date) return '';
         $c = \Carbon\Carbon::parse($date);
@@ -45,6 +67,13 @@
         $m = $bnMonths[$c->format('F')] ?? $c->format('M');
         $y = strtr($c->format('Y'), $bnDigits);
         return "{$d} {$m}, {$y}";
+    };
+
+    $formatBnDateTime = function($date) use ($formatBnDate, $formatBnTime) {
+        if (!$date) return '';
+        $datePart = $formatBnDate($date);
+        $timePart = $formatBnTime($date);
+        return "{$datePart} ({$timePart})";
     };
 
     $bannerImage = $campaign->img_path ? asset('storage/' . $campaign->img_path) : asset('assets/images/placeholder.webp');
@@ -150,8 +179,35 @@
                         @if($start)
                             <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-gray-700 shadow-sm">
                                 <i class="fa-regular fa-calendar-days text-amber-500"></i>
-                                <span>{{ $formatBnDate($start) }} - {{ $formatBnDate($end) }}</span>
+                                <span>
+                                    {{ $formatBnDateTime($start) }}
+                                    @if($end)
+                                        - {{ $formatBnDateTime($end) }}
+                                    @endif
+                                </span>
                             </div>
+                        @endif
+
+                        @if($campaign->description_1)
+                            <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-gray-700 shadow-sm">
+                                <i class="fa-solid fa-store text-indigo-600"></i>
+                                <span>স্টল নং: <strong class="text-gray-900">{{ $campaign->description_1 }}</strong></span>
+                            </div>
+                        @endif
+
+                        @if($campaign->description_2)
+                            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-amber-900 shadow-sm font-semibold">
+                                <i class="fa-solid fa-tags text-amber-600"></i>
+                                <span>{{ $campaign->description_2 }}</span>
+                            </div>
+                        @endif
+
+                        @if($campaign->description_3)
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}" 
+                               class="flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-emerald-800 shadow-sm transition-colors font-semibold">
+                                <i class="fa-solid fa-phone-volume text-emerald-600"></i>
+                                <span>হটলাইন: {{ $campaign->description_3 }}</span>
+                            </a>
                         @endif
 
                         <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-gray-700 shadow-sm">
@@ -284,14 +340,39 @@
                         @if($start)
                             <div class="flex justify-between items-start py-1 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">শুরুর সময়:</span>
-                                <span class="text-gray-900 font-bold text-right">{{ $formatBnDate($start) }}</span>
+                                <span class="text-gray-900 font-bold text-right">{{ $formatBnDateTime($start) }}</span>
                             </div>
                         @endif
 
                         @if($end)
                             <div class="flex justify-between items-start py-1 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">সমাপ্তির সময়:</span>
-                                <span class="text-gray-900 font-bold text-right">{{ $formatBnDate($end) }}</span>
+                                <span class="text-gray-900 font-bold text-right">{{ $formatBnDateTime($end) }}</span>
+                            </div>
+                        @endif
+
+                        @if($campaign->description_1)
+                            <div class="flex justify-between items-start py-1 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">স্টল নম্বর:</span>
+                                <span class="text-gray-900 font-bold text-right">{{ $campaign->description_1 }}</span>
+                            </div>
+                        @endif
+
+                        @if($campaign->description_2)
+                            <div class="flex justify-between items-start py-1 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">বিশেষ অফার:</span>
+                                <span class="text-amber-700 font-bold text-right bg-amber-50 px-2 py-0.5 rounded text-xs border border-amber-200">{{ $campaign->description_2 }}</span>
+                            </div>
+                        @endif
+
+                        @if($campaign->description_3)
+                            <div class="flex justify-between items-center py-1 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">যোগাযোগ / হেল্পলাইন:</span>
+                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}" 
+                                   class="text-[#2c4294] hover:text-blue-800 font-bold text-right inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-phone text-xs"></i>
+                                    <span>{{ $campaign->description_3 }}</span>
+                                </a>
                             </div>
                         @endif
 
