@@ -292,7 +292,7 @@
                     fbq('track', 'Lead');
                 @endif
 
-                @if(in_array(Route::currentRouteName(), ['project.details', 'web.project.category', 'web.page', 'web.blog.details', 'area-guides.show']))
+                @if(in_array(Route::currentRouteName(), ['project.details', 'campaign.details', 'web.project.category', 'web.page', 'web.blog.details', 'area-guides.show']))
                     fbq('track', 'ViewContent');
                 @endif
 

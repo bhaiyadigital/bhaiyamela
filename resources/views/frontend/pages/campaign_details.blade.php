@@ -517,4 +517,7 @@
         @endif
     });
 </script>
+
+{{-- Project Compare Scripts (Localstorage, drawer & toggle) --}}
+@include('frontend.partials.project_scripts')
 @endpush

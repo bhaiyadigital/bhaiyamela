@@ -351,6 +351,12 @@ class WebController extends Controller
 
         $campaign->increment('views');
 
+        \App\Services\FacebookConversionApi::sendEvent('ViewContent', null, [
+            'content_type' => 'campaign',
+            'content_id'   => $campaign->id,
+            'content_name' => $campaign->title
+        ]);
+
         // Extract attached project IDs
         $pIds = $campaign->extra ?? [];
         if (is_string($pIds)) {
@@ -650,7 +656,7 @@ class WebController extends Controller
             $projects = Content::where('module', 'project')
                 ->whereIn('id', $ids)
                 ->where('status', 1)
-                ->with(['company', 'category'])
+                ->with(['company', 'category', 'destination'])
                 ->get();
         }
 
