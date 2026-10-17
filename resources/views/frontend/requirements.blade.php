@@ -8,13 +8,13 @@
             <!-- Image Overlap using Negative Margin -->
             <div class="flex gap-2 text-base py-2  border-gray-100">
                 <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
-                    হোম
+                    Home
                 </a>
 
                 <span class="text-gray-300">›</span>
 
                 <a href="#" class="text-gray-600 hover:text-black">
-                    রিকোয়ারমেন্ট
+                    Requirements
                 </a>
 
 
@@ -48,12 +48,12 @@
                 <div
                     class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-5 mb-2 md:mb-6">
                     <h2 class="text-[#2c4294] text-lg md:text-xl font-extrabold uppercase tracking-wide">
-                        আমি যে ধরণের প্রপার্টি খুঁজছি
+                        The Type of Property I Am Looking For
                     </h2>
                     <div class="flex gap-5 text-base text-gray-700 font-bold">
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input type="radio" name="purpose" value="buy" {{ old('purpose', 'buy') === 'buy' ? 'checked' : '' }} class="text-[#2c4294] focus:ring-[#2c4294]/20">
-                            ক্রয়
+                            Buy
                         </label>
                     </div>
                 </div>
@@ -64,24 +64,22 @@
                     <!-- Left Column: Property Information -->
                     <div class="flex flex-col gap-4">
                         <!-- IMPROVED: Swapped h4 for h3 to avoid skipped heading levels -->
-                        <h3 class="text-gray-800 font-extrabold text-base border-b border-blue-100 pb-2 mb-2">প্রপার্টির
-                            তথ্য</h3>
+                        <h3 class="text-gray-800 font-extrabold text-base border-b border-blue-100 pb-2 mb-2">Property Information</h3>
 
                         <!-- Property Type Select -->
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
                             <label for="property_type_select"
-                                class="text-sm font-bold text-gray-600 uppercase pl-1">প্রপার্টির ধরণ <span
+                                class="text-sm font-bold text-gray-600 uppercase pl-1">Property Type <span
                                     class="text-red-500">*</span></label>
                             <div class="relative">
                                 <!-- Added: id="property_type_select" -->
                                 <select id="property_type_select" name="property_type" required
                                     class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all appearance-none cursor-pointer">
-                                    <option value="Apartment/Flats" {{ old('property_type') === 'Apartment/Flats' ? 'selected' : '' }}>অ্যাপার্টমেন্ট/ফ্ল্যাট</option>
-                                    <option value="Independent House" {{ old('property_type') === 'Independent House' ? 'selected' : '' }}>ইন্ডিপেন্ডেন্ট বাড়ি</option>
-                                    <option value="Commercial Space" {{ old('property_type') === 'Commercial Space' ? 'selected' : '' }}>কমার্শিয়াল স্পেস</option>
-                                    <option value="Land/Plot" {{ old('property_type') === 'Land/Plot' ? 'selected' : '' }}>জমি
-                                        / প্লট</option>
+                                    <option value="Apartment/Flats" {{ old('property_type') === 'Apartment/Flats' ? 'selected' : '' }}>Apartment/Flats</option>
+                                    <option value="Independent House" {{ old('property_type') === 'Independent House' ? 'selected' : '' }}>Independent House</option>
+                                    <option value="Commercial Space" {{ old('property_type') === 'Commercial Space' ? 'selected' : '' }}>Commercial Space</option>
+                                    <option value="Land/Plot" {{ old('property_type') === 'Land/Plot' ? 'selected' : '' }}>Land / Plot</option>
                                 </select>
                                 <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
@@ -94,20 +92,19 @@
                         <!-- Size Select -->
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
-                            <label for="size_select" class="text-sm font-bold text-gray-600 uppercase pl-1">সাইজ (স্কয়ার
-                                ফিট) <span class="text-red-500">*</span></label>
+                            <label for="size_select" class="text-sm font-bold text-gray-600 uppercase pl-1">Size (Sq Ft) <span class="text-red-500">*</span></label>
                             <div class="relative">
                                 <!-- Added: id="size_select" -->
                                 <select id="size_select" name="size" required
                                     class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all appearance-none cursor-pointer">
-                                    <option value="any" {{ old('size') === 'any' ? 'selected' : '' }}>যেকোনো</option>
-                                    <option value="500-1000" {{ old('size') === '500-1000' ? 'selected' : '' }}>৫০০ - ১০০০
+                                    <option value="any" {{ old('size') === 'any' ? 'selected' : '' }}>Any</option>
+                                    <option value="500-1000" {{ old('size') === '500-1000' ? 'selected' : '' }}>500 - 1000
                                     </option>
-                                    <option value="1000-1500" {{ old('size') === '1000-1500' ? 'selected' : '' }}>১০০০ - ১৫০০
+                                    <option value="1000-1500" {{ old('size') === '1000-1500' ? 'selected' : '' }}>1000 - 1500
                                     </option>
-                                    <option value="1500-2000" {{ old('size') === '1500-2000' ? 'selected' : '' }}>১৫০০ - ২০০০
+                                    <option value="1500-2000" {{ old('size') === '1500-2000' ? 'selected' : '' }}>1500 - 2000
                                     </option>
-                                    <option value="2000+" {{ old('size') === '2000+' ? 'selected' : '' }}>২০০০+</option>
+                                    <option value="2000+" {{ old('size') === '2000+' ? 'selected' : '' }}>2000+</option>
                                 </select>
                                 <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
@@ -120,17 +117,17 @@
                         <!-- City Select -->
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
-                            <label for="city_select" class="text-sm font-bold text-gray-600 uppercase pl-1">শহর <span
+                            <label for="city_select" class="text-sm font-bold text-gray-600 uppercase pl-1">City <span
                                     class="text-red-500">*</span></label>
                             <div class="relative">
                                 <!-- Added: id="city_select" -->
                                 <select id="city_select" name="city" required
                                     class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all appearance-none cursor-pointer">
-                                    <option value="any" {{ old('city') === 'any' ? 'selected' : '' }}>যেকোনো</option>
-                                    <option value="Dhaka" {{ old('city') === 'Dhaka' ? 'selected' : '' }}>ঢাকা</option>
-                                    <option value="Chittagong" {{ old('city') === 'Chittagong' ? 'selected' : '' }}>চট্টগ্রাম
+                                    <option value="any" {{ old('city') === 'any' ? 'selected' : '' }}>Any</option>
+                                    <option value="Dhaka" {{ old('city') === 'Dhaka' ? 'selected' : '' }}>Dhaka</option>
+                                    <option value="Chittagong" {{ old('city') === 'Chittagong' ? 'selected' : '' }}>Chittagong
                                     </option>
-                                    <option value="Sylhet" {{ old('city') === 'Sylhet' ? 'selected' : '' }}>সিলেট</option>
+                                    <option value="Sylhet" {{ old('city') === 'Sylhet' ? 'selected' : '' }}>Sylhet</option>
                                 </select>
                                 <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
@@ -144,9 +141,9 @@
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
                             <label for="location_input"
-                                class="text-sm font-bold text-gray-600 uppercase pl-1">লোকেশন</label>
+                                class="text-sm font-bold text-gray-600 uppercase pl-1">Location</label>
                             <input type="text" id="location_input" name="location" value="{{ old('location') }}"
-                                placeholder="যেমন: উত্তরা, বনানী"
+                                placeholder="e.g. Uttara, Banani"
                                 class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all">
                             @error('location') <span
                             class="text-red-500 text-sm mt-1 pl-1 font-semibold">{{ $message }}</span> @enderror
@@ -177,16 +174,16 @@
 
                     <div class="flex flex-col gap-4">
                         <!-- IMPROVED: Swapped h4 for h3 -->
-                        <h3 class="text-gray-800 font-extrabold text-base border-b border-blue-100 pb-2 mb-2">ব্যক্তিগত তথ্য
+                        <h3 class="text-gray-800 font-extrabold text-base border-b border-blue-100 pb-2 mb-2">Personal Information
                         </h3>
 
                         <!-- Name Input -->
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
-                            <label for="personal_name" class="text-sm font-bold text-gray-600 uppercase pl-1">নাম <span
+                            <label for="personal_name" class="text-sm font-bold text-gray-600 uppercase pl-1">Name <span
                                     class="text-red-500">*</span></label>
                             <input type="text" id="personal_name" name="name" value="{{ old('name', $defaultName) }}"
-                                required placeholder="আপনার নাম লিখুন"
+                                required placeholder="Enter your name"
                                 class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all">
                             @error('name') <span class="text-red-500 text-sm mt-1 pl-1 font-semibold">{{ $message }}</span>
                             @enderror
@@ -195,9 +192,9 @@
                         <!-- E-mail Input -->
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
-                            <label for="personal_email" class="text-sm font-bold text-gray-600 uppercase pl-1">ইমেইল</label>
+                            <label for="personal_email" class="text-sm font-bold text-gray-600 uppercase pl-1">Email</label>
                             <input type="email" id="personal_email" name="email" value="{{ old('email', $defaultEmail) }}"
-                                required placeholder="আপনার ইমেইল লিখুন"
+                                required placeholder="Enter your email"
                                 class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all">
                             @error('email') <span class="text-red-500 text-sm mt-1 pl-1 font-semibold">{{ $message }}</span>
                             @enderror
@@ -206,11 +203,11 @@
                         <!-- Mobile Number Input -->
                         <div class="flex flex-col gap-1.5">
                             <!-- IMPROVED: text-gray-500 changed to text-gray-600 and added for attribute -->
-                            <label for="personal_phone" class="text-sm font-bold text-gray-600 uppercase pl-1">মোবাইল নম্বর
+                            <label for="personal_phone" class="text-sm font-bold text-gray-600 uppercase pl-1">Mobile Number
                                 <span class="text-red-500">*</span></label>
                             <!-- Added: id="personal_phone" to match the label's for attribute -->
                             <input type="tel" id="personal_phone" name="phone" value="{{ old('phone', $defaultPhone) }}"
-                                required placeholder="আপনার ফোন নম্বর লিখুন"
+                                required placeholder="Enter your phone number"
                                 class="w-full bg-white px-5 py-4 rounded-2xl border border-gray-150 outline-none text-base font-bold text-gray-700 focus:ring-2 focus:ring-[#2C4798]/20 transition-all">
                             @error('phone') <span class="text-red-500 text-sm mt-1 pl-1 font-semibold">{{ $message }}</span>
                             @enderror
@@ -224,16 +221,16 @@
                     <!-- IMPROVED: bg-[#2ba351] changed to bg-[#2c4294] for color contrast compliance -->
                     <button type="button" id="requirementSubmitBtn"
                         class="bg-[#2c4294] hover:bg-[#1a285a] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-[#2c4294]/10 active:scale-[0.98] cursor-pointer">
-                        রিকোয়ারমেন্ট সাবমিট করুন
+                        Submit Requirement
                     </button>
 
                     <div class="text-[11px] text-gray-700 leading-relaxed mt-3 flex items-center justify-start gap-1.5 flex-wrap font-medium">
                         <i class="fa-solid fa-shield-halved text-[#1e2d6b] text-[12px]"></i>
-                        <span>এই সাইটটি reCAPTCHA দ্বারা সুরক্ষিত এবং গুগলের</span>
-                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">গোপনীয়তা নীতি</a>
-                        <span>ও</span>
-                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">সেবার শর্তাবলী</a>
-                        <span>প্রযোজ্য।</span>
+                        <span>This site is protected by reCAPTCHA and the Google</span>
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">Privacy Policy</a>
+                        <span>and</span>
+                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">Terms of Service</a>
+                        <span>apply.</span>
                     </div>
                 </div>
 
@@ -243,7 +240,7 @@
         <!-- 3. How It Works Section -->
         <div class="bg-white rounded-xl p-6 mb-4 md:p-10 border border-gray-100 shadow-sm">
             <h3 class="text-center font-black text-gray-800 text-lg md:text-xl uppercase tracking-widest mb-4 md:mb-10">
-                এটি কীভাবে কাজ করে?
+                How It Works
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -256,11 +253,11 @@
                         <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
                     </div>
                     <div class="flex flex-col">
-                        <h4 class="text-gray-800 font-extrabold text-base mb-1.5 uppercase">আপনার রিকোয়ারমেন্ট পোস্ট করুন
+                        <h4 class="text-gray-800 font-extrabold text-base mb-1.5 uppercase">Post Your Requirement
                         </h4>
                         <!-- IMPROVED: text-gray-500 changed to text-gray-600 -->
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            সম্পূর্ণ বিনামূল্যে আপনার রিকোয়ারমেন্ট পোস্ট করুন এবং সেরা লোকেশনে চমৎকার প্রপার্টি খুঁজে নিন।
+                            Post your requirement completely free and discover great properties in prime locations.
                         </p>
                     </div>
                 </div>
@@ -273,10 +270,10 @@
                         <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
                     </div>
                     <div class="flex flex-col">
-                        <h4 class="text-gray-800 font-extrabold text-base mb-1.5 uppercase">আমরা শেয়ার করব</h4>
+                        <h4 class="text-gray-800 font-extrabold text-base mb-1.5 uppercase">We Will Share</h4>
                         <!-- IMPROVED: text-gray-500 changed to text-gray-600 -->
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            আপনার রিকোয়ারমেন্ট প্রপার্টি মালিক এবং রিয়েল এস্টেট কনসালটেন্টদের সাথে শেয়ার করা হবে।
+                            Your requirement will be shared with verified property owners and real estate consultants.
                         </p>
                     </div>
                 </div>
@@ -289,11 +286,10 @@
                         <i class="fa-solid fa-bell" aria-hidden="true"></i>
                     </div>
                     <div class="flex flex-col">
-                        <h4 class="text-gray-800 font-extrabold text-base mb-1.5 uppercase">ইমেইলে আপডেট</h4>
+                        <h4 class="text-gray-800 font-extrabold text-base mb-1.5 uppercase">Email Updates</h4>
                         <!-- IMPROVED: text-gray-500 changed to text-gray-600 -->
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            আপনার পছন্দের রিকোয়ারমেন্টের সাথে মিলে যাওয়া নতুন কোনো প্রপার্টি যুক্ত হলে আপনাকে ইমেইলের
-                            মাধ্যমে জানানো হবে।
+                            You will receive email notifications whenever a new property matching your preference is added.
                         </p>
                     </div>
                 </div>
@@ -319,7 +315,7 @@
 
                 const originalText = btn.innerHTML;
                 btn.disabled = true;
-                btn.innerHTML = 'অপেক্ষা করুন...';
+                btn.innerHTML = 'Please wait...';
 
                 try {
                     const token = await window.getRecaptchaToken('post_requirement');
@@ -329,7 +325,7 @@
                     console.error('reCAPTCHA error:', error);
                     btn.disabled = false;
                     btn.innerHTML = originalText;
-                    alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                    alert('Verification failed. Please try again.');
                 }
             });
         });

@@ -191,7 +191,7 @@
                         @if($campaign->description_1)
                             <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-gray-700 shadow-sm">
                                 <i class="fa-solid fa-store text-indigo-600"></i>
-                                <span>স্টল নং: <strong class="text-gray-900">{{ $campaign->description_1 }}</strong></span>
+                                <span>Stall No: <strong class="text-gray-900">{{ $campaign->description_1 }}</strong></span>
                             </div>
                         @endif
 
@@ -206,13 +206,13 @@
                             <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}"
                                class="flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-emerald-800 shadow-sm transition-colors font-semibold">
                                 <i class="fa-solid fa-phone-volume text-emerald-600"></i>
-                                <span>হটলাইন: {{ $campaign->description_3 }}</span>
+                                <span>Hotline: {{ $campaign->description_3 }}</span>
                             </a>
                         @endif
 
                         <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-gray-700 shadow-sm">
                             <i class="fa-solid fa-city text-[#2c4294]"></i>
-                            <span>{{ $bnProjCount }} টি প্রজেক্ট অন্তর্ভুক্ত</span>
+                            <span>{{ $projCount }} Projects Included</span>
                         </div>
                     </div>
 
@@ -268,8 +268,8 @@
                     <div id="section-description" class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
                         <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-5">
                             <div>
-                                <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">বিস্তারিত তথ্য</span>
-                                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">ইভেন্টের বিবরণ</h2>
+                                <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">Detailed Information</span>
+                                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">Event Details</h2>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-[#2c4294]/10 flex items-center justify-center text-[#2c4294]">
                                 <i class="fa-solid fa-file-lines text-lg"></i>
@@ -287,13 +287,13 @@
                     <div id="section-projects" class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4 mb-6">
                             <div>
-                                <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">বিশেষ অফার ও সুযোগ</span>
+                                <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">Special Offers & Opportunities</span>
                                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">
-                                    ইভেন্ট এর অন্তর্ভুক্ত প্রজেক্টসমূহ
+                                    Projects Included in this Event
                                 </h2>
                             </div>
                             <span class="bg-[#2c4294]/10 text-[#2c4294] px-3.5 py-1.5 rounded-full text-xs font-extrabold w-fit">
-                                মোট {{ $bnProjCount }} টি প্রজেক্ট
+                                Total {{ $projCount }} Projects
                             </span>
                         </div>
 
@@ -398,9 +398,9 @@
                 <div id="campaignInquiryCard" class="hidden lg:block relative bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden scroll-mt-24">
                     <h3 class="font-bold text-gray-900 text-base border-b border-gray-100 pb-3 mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-paper-plane text-[#2c4294]"></i>
-                        <span>ইভেন্ট সংক্রান্ত তথ্য চান?</span>
+                        <span>Want Info About This Event?</span>
                     </h3>
-                    <p class="text-xs text-gray-500 mb-4">আমাদের প্রতিনিধির সাথে যোগাযোগ করতে নিচের ফর্মটি পূরণ করুন:</p>
+                    <p class="text-xs text-gray-500 mb-4">Fill out the form below to get in touch with our representative:</p>
 
                     {{-- Error Message --}}
                     @if(session('campaign_inquiry_error'))
@@ -424,25 +424,25 @@
                         <input type="hidden" name="recaptcha_token" id="campaign_recaptcha_token">
 
                         <div>
-                            <label for="lead_name" class="sr-only">আপনার নাম</label>
-                            <input type="text" id="lead_name" name="lead_name" placeholder="আপনার নাম লিখুন" required
-                                aria-label="আপনার নাম"
+                            <label for="lead_name" class="sr-only">Your Name</label>
+                            <input type="text" id="lead_name" name="lead_name" placeholder="Enter your name" required
+                                aria-label="Your Name"
                                 value="{{ old('lead_name', auth()->check() ? auth()->user()->name : '') }}"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 @error('lead_name') border-red-400 @enderror">
                         </div>
 
                         <div>
-                            <label for="lead_phone" class="sr-only">ফোন নম্বর</label>
-                            <input type="tel" id="lead_phone" name="lead_phone" placeholder="ফোন নম্বর লিখুন" required
-                                aria-label="ফোন নম্বর"
+                            <label for="lead_phone" class="sr-only">Phone Number</label>
+                            <input type="tel" id="lead_phone" name="lead_phone" placeholder="Enter phone number" required
+                                aria-label="Phone Number"
                                 value="{{ old('lead_phone', auth()->check() ? auth()->user()->phone : '') }}"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 @error('lead_phone') border-red-400 @enderror">
                         </div>
 
                         <div>
-                            <label for="lead_email" class="sr-only">ইমেইল (ঐচ্ছিক)</label>
-                            <input type="email" id="lead_email" name="lead_email" placeholder="ইমেইল (ঐচ্ছিক)"
-                                aria-label="ইমেইল (ঐচ্ছিক)"
+                            <label for="lead_email" class="sr-only">Email (Optional)</label>
+                            <input type="email" id="lead_email" name="lead_email" placeholder="Email (Optional)"
+                                aria-label="Email (Optional)"
                                 value="{{ old('lead_email', auth()->check() ? auth()->user()->email : '') }}"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
                         </div>
@@ -450,11 +450,11 @@
                         {{-- Optional: Project selector --}}
                         @if($projects->isNotEmpty())
                             <div>
-                                <label for="inquiry_project_id" class="block text-xs font-semibold text-gray-500 mb-1.5">কোন প্রজেক্ট সম্পর্কে জানতে চান? <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
+                                <label for="inquiry_project_id" class="block text-xs font-semibold text-gray-500 mb-1.5">Which project are you inquiring about? <span class="text-gray-400 font-normal">(Optional)</span></label>
                                 <select id="inquiry_project_id" name="project_id"
-                                    aria-label="প্রজেক্ট নির্বাচন করুন"
+                                    aria-label="Select a Project"
                                     class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 cursor-pointer">
-                                    <option value="">— প্রজেক্ট নির্বাচন করুন —</option>
+                                    <option value="">— Select a Project —</option>
                                     @foreach($projects as $proj)
                                         <option value="{{ $proj->id }}" {{ old('project_id') == $proj->id ? 'selected' : '' }}>{{ $proj->title }}</option>
                                     @endforeach
@@ -463,25 +463,25 @@
                         @endif
 
                         <div>
-                            <label for="lead_message" class="sr-only">আপনার বার্তা</label>
-                            <textarea id="lead_message" name="lead_message" rows="3" placeholder="আপনার বার্তা লিখুন..."
-                                aria-label="আপনার বার্তা"
-                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', $campaign->title . ' সম্পর্কে বিস্তারিত জানতে চাই।') }}</textarea>
+                            <label for="lead_message" class="sr-only">Your Message</label>
+                            <textarea id="lead_message" name="lead_message" rows="3" placeholder="Write your message..."
+                                aria-label="Your Message"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', 'I would like to know more about ' . $campaign->title . '.') }}</textarea>
                         </div>
 
                         <button type="button" id="campaignInquirySubmitBtn"
-                            aria-label="বার্তা পাঠান"
+                            aria-label="Send Message"
                             class="w-full bg-[#2c4294] hover:bg-[#152960] text-white py-3 rounded-xl font-bold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane text-xs" aria-hidden="true"></i>
-                            <span>মেসেজ পাঠান</span>
+                            <span>Send Message</span>
                         </button>
 
                         <div class="text-[11px] text-gray-500 text-center leading-relaxed mt-2.5 flex items-center justify-center gap-1 flex-wrap">
                             <i class="fa-solid fa-shield-halved text-[#2c4294] text-[11px]"></i>
-                            <span>reCAPTCHA দ্বারা সুরক্ষিত — গুগলের</span>
-                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">গোপনীয়তা নীতি</a>
-                            <span>ও</span>
-                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">শর্তাবলী</a>
+                            <span>Protected by reCAPTCHA — Google</span>
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">Privacy Policy</a>
+                            <span>and</span>
+                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">Terms</a>
                         </div>
                     </form>
                 </div>
@@ -490,7 +490,7 @@
                 <!-- 3. Other Campaigns -->
                 @if($otherCampaigns->isNotEmpty())
                     <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider mb-3">অন্যান্য ইভেন্ট</h3>
+                        <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider mb-3">Other Events</h3>
                         <div class="space-y-3">
                             @foreach($otherCampaigns as $oc)
                                 <a href="{{ route('campaign.details', $oc->slug) }}" class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all group">
@@ -501,7 +501,7 @@
                                     </div>
                                     <div class="min-w-0">
                                         <h4 class="text-sm font-bold text-gray-900 truncate group-hover:text-[#2c4294] transition-colors">{{ $oc->title }}</h4>
-                                        <span class="text-xs text-gray-500 block truncate">{{ $oc->location ?? 'স্পেশাল ইভেন্ট' }}</span>
+                                        <span class="text-xs text-gray-500 block truncate">{{ $oc->location ?? 'Special Event' }}</span>
                                     </div>
                                 </a>
                             @endforeach
@@ -533,12 +533,12 @@
             <div class="mb-4 pr-8">
                 <div class="inline-flex items-center gap-2 text-[#2c4294] font-bold text-xs uppercase tracking-wider mb-1">
                     <i class="fa-solid fa-comments"></i>
-                    <span>ইনকোয়ারি ও যোগাযোগ</span>
+                    <span>Inquiry & Contact</span>
                 </div>
                 <h3 id="mobileInquiryModalTitle" class="text-xl font-extrabold text-gray-900 leading-tight">
                     Ask Me Question
                 </h3>
-                <p class="text-xs text-gray-500 mt-1">আমাদের প্রতিনিধির সাথে যোগাযোগ করতে তথ্যগুলো পূরণ করুন:</p>
+                <p class="text-xs text-gray-500 mt-1">Fill out the details to get in touch with our representative:</p>
             </div>
 
             <!-- Mobile Inquiry Form -->
@@ -548,21 +548,21 @@
                 <input type="hidden" name="recaptcha_token" id="mobile_campaign_recaptcha_token">
 
                 <div>
-                    <label for="mob_lead_name" class="block text-xs font-bold text-gray-600 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
-                    <input type="text" id="mob_lead_name" name="lead_name" placeholder="যেমন: মোহাম্মদ রফিক" required
+                    <label for="mob_lead_name" class="block text-xs font-bold text-gray-600 mb-1">Your Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="mob_lead_name" name="lead_name" placeholder="e.g. John Doe" required
                         value="{{ old('lead_name', auth()->check() ? auth()->user()->name : '') }}"
                         class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
                 </div>
 
                 <div>
-                    <label for="mob_lead_phone" class="block text-xs font-bold text-gray-600 mb-1">ফোন নম্বর <span class="text-red-500">*</span></label>
-                    <input type="tel" id="mob_lead_phone" name="lead_phone" placeholder="যেমন: 017XXXXXXXX" required
+                    <label for="mob_lead_phone" class="block text-xs font-bold text-gray-600 mb-1">Phone Number <span class="text-red-500">*</span></label>
+                    <input type="tel" id="mob_lead_phone" name="lead_phone" placeholder="e.g. 017XXXXXXXX" required
                         value="{{ old('lead_phone', auth()->check() ? auth()->user()->phone : '') }}"
                         class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
                 </div>
 
                 <div>
-                    <label for="mob_lead_email" class="block text-xs font-bold text-gray-600 mb-1">ইমেইল <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
+                    <label for="mob_lead_email" class="block text-xs font-bold text-gray-600 mb-1">Email <span class="text-gray-400 font-normal">(Optional)</span></label>
                     <input type="email" id="mob_lead_email" name="lead_email" placeholder="example@mail.com"
                         value="{{ old('lead_email', auth()->check() ? auth()->user()->email : '') }}"
                         class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
@@ -570,10 +570,10 @@
 
                 @if($projects->isNotEmpty())
                     <div>
-                        <label for="mob_inquiry_project_id" class="block text-xs font-bold text-gray-600 mb-1">কোন প্রজেক্ট সম্পর্কে জানতে চান? <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
+                        <label for="mob_inquiry_project_id" class="block text-xs font-bold text-gray-600 mb-1">Which project are you inquiring about? <span class="text-gray-400 font-normal">(Optional)</span></label>
                         <select id="mob_inquiry_project_id" name="project_id"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 cursor-pointer">
-                            <option value="">— প্রজেক্ট নির্বাচন করুন —</option>
+                            <option value="">— Select a Project —</option>
                             @foreach($projects as $proj)
                                 <option value="{{ $proj->id }}" {{ old('project_id') == $proj->id ? 'selected' : '' }}>{{ $proj->title }}</option>
                             @endforeach
@@ -582,23 +582,23 @@
                 @endif
 
                 <div>
-                    <label for="mob_lead_message" class="block text-xs font-bold text-gray-600 mb-1">আপনার বার্তা</label>
-                    <textarea id="mob_lead_message" name="lead_message" rows="3" placeholder="আপনার প্রশ্ন বা বার্তা লিখুন..."
-                        class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', $campaign->title . ' সম্পর্কে বিস্তারিত জানতে চাই।') }}</textarea>
+                    <label for="mob_lead_message" class="block text-xs font-bold text-gray-600 mb-1">Your Message</label>
+                    <textarea id="mob_lead_message" name="lead_message" rows="3" placeholder="Write your question or message..."
+                        class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', 'I would like to know more about ' . $campaign->title . '.') }}</textarea>
                 </div>
 
                 <button type="button" id="mobileCampaignInquirySubmitBtn"
                     class="w-full bg-[#2c4294] hover:bg-[#152960] text-white py-3.5 rounded-xl font-bold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 mt-2">
                     <i class="fa-solid fa-paper-plane text-xs"></i>
-                    <span>বার্তা পাঠান</span>
+                    <span>Send Message</span>
                 </button>
 
                 <div class="text-[11px] text-gray-500 text-center leading-relaxed mt-1 flex items-center justify-center gap-1 flex-wrap">
                     <i class="fa-solid fa-shield-halved text-[#2c4294] text-[11px]"></i>
-                    <span>reCAPTCHA দ্বারা সুরক্ষিত — গুগলের</span>
-                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">গোপনীয়তা নীতি</a>
-                    <span>ও</span>
-                    <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">শর্তাবলী</a>
+                    <span>Protected by reCAPTCHA — Google</span>
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">Privacy Policy</a>
+                    <span>and</span>
+                    <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">Terms</a>
                 </div>
             </form>
         </div>
@@ -744,7 +744,7 @@
 
                 const originalHtml = btn.innerHTML;
                 btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>অপেক্ষা করুন...</span>';
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>Please wait...</span>';
 
                 try {
                     const token = await window.getRecaptchaToken('campaign_inquiry');
@@ -757,7 +757,7 @@
                     console.error('reCAPTCHA error:', error);
                     btn.disabled = false;
                     btn.innerHTML = originalHtml;
-                    alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                    alert('Verification failed. Please try again.');
                 }
             });
         }
@@ -777,7 +777,7 @@
 
                 const originalHtml = mobBtn.innerHTML;
                 mobBtn.disabled = true;
-                mobBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>অপেক্ষা করুন...</span>';
+                mobBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>Please wait...</span>';
 
                 try {
                     const token = await window.getRecaptchaToken('campaign_inquiry');
@@ -790,7 +790,7 @@
                     console.error('reCAPTCHA error:', error);
                     mobBtn.disabled = false;
                     mobBtn.innerHTML = originalHtml;
-                    alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                    alert('Verification failed. Please try again.');
                 }
             });
         }

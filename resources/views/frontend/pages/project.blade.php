@@ -49,13 +49,13 @@
             <div class="flex gap-2 text-base py-2  border-gray-100">
 
                 <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
-                    হোম
+                    Home
                 </a>
 
                 <span class="text-gray-300">›</span>
 
                 <a href="/properties" class="text-gray-600 hover:text-black">
-                    প্রপার্টিজ
+                    Properties
                 </a>
                 @if(isset($activeCategory))
 
@@ -81,7 +81,7 @@
                     </h2>
                     <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"
                         class="cursor-pointer lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
-                        <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
+                        <i class="fa-solid fa-filter text-[#2c4294]"></i> Filter
                     </button>
                 </div>
                 <div class="w-16 h-1 bg-[#2c4294] mb-6"></div>
@@ -92,7 +92,7 @@
                     </div>
                 @else
                     <p class="text-gray-500 text-base leading-relaxed">
-                        {{ $activeCategory->title ?? "জেনারেল" }} ক্যাটাগরিতে আমাদের প্রিমিয়াম প্রপার্টির বিশাল কালেকশন ব্রাউজ করুন। আজই আপনার স্বপ্নের বাড়ি বা বিনিয়োগের সুযোগটি খুঁজে নিন।
+                        Browse our vast collection of premium properties in {{ $activeCategory->title ?? "General" }} category. Find your dream home or investment opportunity today.
                     </p>
                 @endif
             </div>
@@ -100,16 +100,16 @@
             <div class="bg-white p-6 md:mb-10 text-left rounded-xl">
                 <div class="flex justify-between items-start md:items-center mb-3">
                     <h2 class="text-xl md:text-xl font-black text-[#2c4294] uppercase tracking-wide">
-                        আমাদের প্রপার্টিজ
+                        Our Properties
                     </h2>
                     <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')"
                         class="cursor-pointer lg:hidden flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 transition-all">
-                        <i class="fa-solid fa-filter text-[#2c4294]"></i> ফিল্টার
+                        <i class="fa-solid fa-filter text-[#2c4294]"></i> Filter
                     </button>
                 </div>
                 <div class="w-16 h-1 bg-[#2c4294] mb-6"></div>
                 <p class="text-gray-500 text-base leading-relaxed max-w-3xl">
-                    বাংলাদেশের শীর্ষস্থানীয় ডেভেলপারদের তৈরি আমাদের প্রিমিয়াম আবাসিক ও বাণিজ্যিক প্রজেক্টগুলোর বিশাল ক্যাটালগ ব্রাউজ করুন।
+                    Browse our extensive catalog of premium residential and commercial projects developed by leading developers.
                 </p>
             </div>
         @endif
@@ -120,7 +120,7 @@
             
             <div class="absolute left-0 top-0 h-full w-[300px] bg-white p-6 shadow-2xl flex flex-col overflow-y-auto">
                 <div class="flex justify-between items-center mb-6">
-                    <span class="font-black text-lg text-[#2c4294] uppercase">ফিল্টার করুন</span>
+                    <span class="font-black text-lg text-[#2c4294] uppercase">Filter Properties</span>
                     <button type="button" onclick="document.getElementById('mobileFilterDrawer').classList.toggle('-translate-x-full')" class="text-gray-500 hover:text-red-500 text-xl transition-colors" aria-label="Close Filter">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -128,16 +128,16 @@
                 
                 <form action="{{ route('web.project') }}" method="GET" class="flex flex-col gap-4">
                     <div>
-                        <label for="mob-search-input" class="block text-xs font-bold text-gray-600 mb-1.5">কী-ওয়ার্ড দিয়ে খুঁজুন</label>
+                        <label for="mob-search-input" class="block text-xs font-bold text-gray-600 mb-1.5">Search by Keywords</label>
                         <input id="mob-search-input" type="text" name="search" value="{{ request('search') }}"
-                            placeholder="যেমন: উত্তরায় ফ্ল্যাট"
+                            placeholder="e.g. Luxury Apartment"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all">
                     </div>
                     <div>
-                        <label for="mob-filter-company" class="block text-xs font-bold text-gray-600 mb-1.5">ডেভেলপার কোম্পানি</label>
+                        <label for="mob-filter-company" class="block text-xs font-bold text-gray-600 mb-1.5">Developer Company</label>
                         <select id="mob-filter-company" name="company"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
-                            <option value="">সব কোম্পানি</option>
+                            <option value="">All Companies</option>
                             @foreach($companies as $company)
                                 <option value="{{ $company->slug }}" {{ request('company') == $company->slug ? 'selected' : '' }}>
                                     {{ $company->company_name }}</option>
@@ -145,10 +145,10 @@
                         </select>
                     </div>
                     <div>
-                        <label for="mob-filter-category" class="block text-xs font-bold text-gray-600 mb-1.5">ক্যাটাগরি</label>
+                        <label for="mob-filter-category" class="block text-xs font-bold text-gray-600 mb-1.5">Category</label>
                         <select id="mob-filter-category" name="category"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
-                            <option value="">সব ক্যাটাগরি</option>
+                            <option value="">All Categories</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
                                     {{ $category->title }}</option>
@@ -156,10 +156,10 @@
                         </select>
                     </div>
                     <div>
-                        <label for="mob-filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
-                        <select id="mob-filter-destination" name="dest" aria-label="লোকেশন বা এলাকা নির্বাচন করুন"
+                        <label for="mob-filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">Location / Area</label>
+                        <select id="mob-filter-destination" name="dest" aria-label="Select Location or Area"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
-                            <option value="">সব লোকেশন</option>
+                            <option value="">All Locations</option>
                             @foreach($destinations as $dest)
                                 <option value="{{ $dest->id }}" {{ request('dest') == $dest->id ? 'selected' : '' }}>
                                     {{ $dest->title }}</option>
@@ -169,12 +169,12 @@
                     
                     <button type="submit"
                         class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 mt-4 rounded-xl font-bold text-sm shadow-md transition-all">
-                        ফিল্টার করুন
+                        Apply Filter
                     </button>
                     @if(request('search') || request('category') || request('destination') || request('company') || request('city_area') || request('sub_area'))
                         <a href="{{ route('web.project') }}"
                             class="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-sm transition-all mt-2">
-                            ফিল্টার মুছুন
+                            Clear Filter
                         </a>
                     @endif
                 </form>
@@ -187,23 +187,23 @@
 
                 <div class="hidden lg:block bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                     <p class="text-xs font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                        প্রপার্টি ফিল্টার করুন
+                        Filter Properties
                     </p>
                     <form action="{{ route('web.project') }}" method="GET" class="flex flex-col gap-4">
                         <div>
-                            <label for="search-input" class="block text-xs font-bold text-gray-600 mb-1.5">কী-ওয়ার্ড দিয়ে খুঁজুন</label>
+                            <label for="search-input" class="block text-xs font-bold text-gray-600 mb-1.5">Search by Keywords</label>
                             <input id="search-input" type="text" name="search" value="{{ request('search') }}"
-                                placeholder="যেমন: উত্তরায় ফ্ল্যাট"
+                                placeholder="e.g. Luxury Apartment"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all">
                         </div>
 
                         <div>
                             <!-- Added: for="filter-company" -->
-                            <label for="filter-company" class="block text-xs font-bold text-gray-600 mb-1.5">ডেভেলপার কোম্পানি</label>
+                            <label for="filter-company" class="block text-xs font-bold text-gray-600 mb-1.5">Developer Company</label>
                             <!-- Added: id="filter-company" -->
                             <select id="filter-company" name="company"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
-                                <option value="">সব কোম্পানি</option>
+                                <option value="">All Companies</option>
                                 @foreach($companies as $company)
                                     <option value="{{ $company->slug }}" {{ request('company') == $company->slug ? 'selected' : '' }}>
                                         {{ $company->company_name }}
@@ -215,11 +215,11 @@
                         <div>
                             <!-- Added: for="filter-category" -->
                             <label for="filter-category"
-                                class="block text-xs font-bold text-gray-600 mb-1.5">ক্যাটাগরি</label>
+                                class="block text-xs font-bold text-gray-600 mb-1.5">Category</label>
                             <!-- Added: id="filter-category" -->
                             <select id="filter-category" name="category"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
-                                <option value="">সব ক্যাটাগরি</option>
+                                <option value="">All Categories</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
                                         {{ $category->title }}
@@ -229,10 +229,10 @@
                         </div>
 
                         <div>
-                            <label for="filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
+                            <label for="filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">Location / Area</label>
                             <select id="filter-destination" name="dest"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
-                                <option value="">সব লোকেশন</option>
+                                <option value="">All Locations</option>
                                 @foreach($destinations as $dest)
                                     <option value="{{ $dest->id }}" {{ request('dest') == $dest->id ? 'selected' : '' }}>
                                         {{ $dest->title }}
@@ -244,13 +244,13 @@
                         <!-- IMPROVED: Background changed from bg-[#2c4294] to bg-[#2c4294] for color contrast compliance -->
                         <button type="submit"
                             class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-2.5 rounded-xl font-bold text-xs transition-all">
-                            ফিল্টার করুন
+                            Apply Filter
                         </button>
 
                         @if(request('search') || request('category') || request('destination') || request('company'))
                             <a href="{{ route('web.project') }}"
                                 class="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl font-bold text-xs transition-all">
-                                ফিল্টার মুছুন
+                                Clear Filter
                             </a>
                         @endif
                     </form>
@@ -262,7 +262,7 @@
                     <div class="hidden lg:block bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                         <!-- IMPROVED: Changed text-gray-500 to text-gray-600 for contrast compliance -->
                         <p class="text-xs font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                            সম্প্রতি যুক্ত করা হয়েছে
+                            Recently Added
                         </p>
                         <div class="flex flex-col gap-4">
                             @foreach($recentlyAdded as $recAdd)
@@ -301,7 +301,7 @@
                     <div class="hidden lg:block bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
                         <!-- IMPROVED: Changed text-gray-500 to text-gray-600 for contrast compliance -->
                         <p class="text-xs font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                            সম্প্রতি দেখেছেন
+                            Recently Viewed
                         </p>
                         <div class="flex flex-col gap-4">
                             @foreach($recentlyViewed as $recView)
@@ -362,21 +362,21 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <button type="button" onclick="clearCompareList()"
-                            class="text-xs text-red-500 font-bold hover:underline px-2 py-1">মুছুন</button>
+                            class="text-xs text-red-500 font-bold hover:underline px-2 py-1">Clear</button>
                         <a id="compareBtnLink" href="#"
-                            class="bg-[#2c4294] hover:bg-[#1a285a] text-white text-xs font-extrabold px-4 py-3 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#2c4294]/10">তুলনা করুন</a>
+                            class="bg-[#2c4294] hover:bg-[#1a285a] text-white text-xs font-extrabold px-4 py-3 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#2c4294]/10">Compare</a>
                     </div>
                 </div>
                 <div id="loadMoreSentinel" class="text-center py-8 {{ $projects->hasMorePages() ? '' : 'hidden' }}">
                     <div class="inline-flex items-center gap-2 text-gray-500 font-semibold text-base">
                         <i class="fa-solid fa-spinner fa-spin text-lg text-[#2c4294]"></i>
-                        আরও প্রপার্টি লোড হচ্ছে...
+                        Loading more properties...
                     </div>
                 </div>
 
                 <div id="noMoreProjectsMessage"
                     class="text-center py-8 text-gray-600 font-semibold text-base {{ !$projects->hasMorePages() ? '' : 'hidden' }}">
-                    দেখানোর মতো আর কোন প্রপার্টি নেই।
+                    No more properties to display.
                 </div>
             </div>
 
