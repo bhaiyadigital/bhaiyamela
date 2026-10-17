@@ -619,11 +619,11 @@ class WebController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'message' => 'ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।'
+                'message' => "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!"
             ]);
         }
 
-        return redirect()->back()->with('success', 'ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।');
+        return redirect()->back()->with('success', "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!");
     }
 
     /**
@@ -863,7 +863,7 @@ class WebController extends Controller
                 'is_read' => false,
             ]);
 
-            return back()->with('campaign_inquiry_success', 'আপনার বার্তা সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।');
+            return back()->with('campaign_inquiry_success', "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!");
         } catch (\Exception $e) {
             return back()->with('campaign_inquiry_error', 'দুঃখিত, বার্তা পাঠাতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।')->withInput();
         }

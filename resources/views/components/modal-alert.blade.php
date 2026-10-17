@@ -4,7 +4,7 @@
     'title' => null,
     'message' => null,
     'sessionKey' => null,
-    'buttonText' => 'ঠিক আছে',
+    'buttonText' => 'Okay',
     'autoClose' => 0, // milliseconds
     'scoped' => false, // if true, modal stays centered inside its parent container
 ])
@@ -15,7 +15,7 @@
     $shouldShow = !empty($finalMessage);
 
     $defaultTitles = [
-        'success' => 'সফল হয়েছে!',
+        'success' => 'Thank you for your interest!',
         'error' => 'ত্রুটি!',
         'warning' => 'সতর্কতা!',
         'info' => 'তথ্য',
@@ -124,7 +124,7 @@
 
             const config = {
                 success: {
-                    title: 'সফল হয়েছে!',
+                    title: 'Thank you for your interest!',
                     bg: 'bg-green-100',
                     color: 'text-green-500',
                     icon: 'fa-solid fa-check'

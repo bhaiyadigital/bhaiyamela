@@ -156,8 +156,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
-                        <select id="mob-filter-destination" name="dest"
+                        <label for="mob-filter-destination" class="block text-xs font-bold text-gray-600 mb-1.5">লোকেশন / এলাকা</label>
+                        <select id="mob-filter-destination" name="dest" aria-label="লোকেশন বা এলাকা নির্বাচন করুন"
                             class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-600">
                             <option value="">সব লোকেশন</option>
                             @foreach($destinations as $dest)
@@ -342,7 +342,7 @@
 
                 <div class="relative mobile-scroll-container">
                     <button type="button" aria-label="Scroll left"
-                        class="scroll-btn scroll-left absolute left-1 top-[45%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                        class="scroll-btn scroll-left cursor-pointer absolute -left-1 sm:left-1 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 bg-white shadow-lg border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] hover:bg-[#2c4294] hover:text-white transition-all hidden lg:hidden">
                         <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
                     </button>
 
@@ -351,7 +351,7 @@
                     </div>
 
                     <button type="button" aria-label="Scroll right"
-                        class="scroll-btn scroll-right absolute right-1 top-[45%] -translate-y-1/2 z-10 w-10 h-10 bg-white/90 shadow-md border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] transition-all hidden lg:hidden">
+                        class="scroll-btn scroll-right cursor-pointer absolute -right-1 sm:right-1 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 bg-white shadow-lg border border-gray-200 rounded-full flex items-center justify-center text-[#2c4294] hover:bg-[#2c4294] hover:text-white transition-all hidden lg:hidden">
                         <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
                     </button>
                 </div>

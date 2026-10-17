@@ -126,6 +126,15 @@
                             <i class="fa-solid fa-paper-plane text-base"></i>
                             সাবমিট করুন
                         </button>
+
+                        <div class="text-[11px] text-gray-700 text-center leading-relaxed mt-2.5 flex items-center justify-center gap-1.5 flex-wrap font-medium">
+                            <i class="fa-solid fa-shield-halved text-[#1e2d6b] text-[12px]"></i>
+                            <span>এই সাইটটি reCAPTCHA দ্বারা সুরক্ষিত এবং গুগলের</span>
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">গোপনীয়তা নীতি</a>
+                            <span>ও</span>
+                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">সেবার শর্তাবলী</a>
+                            <span>প্রযোজ্য।</span>
+                        </div>
                     </form>
 
                     @if (session('success'))
@@ -140,22 +149,9 @@
     </div>
 </section>
 
-<!-- Message Modal -->
-<div id="messageModal" class="fixed inset-0 z-[9999] flex items-center justify-center hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-all" onclick="closeMessageModal()"></div>
-    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 text-center transform scale-95 opacity-0 transition-all duration-300 mx-4"
-        id="messageModalContent">
-        <div id="messageModalIconBg" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i id="messageModalIcon" class="fa-solid text-4xl"></i>
-        </div>
-        <h2 id="messageModalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h2>
-        <p id="messageModalText" class="text-gray-600 mb-6 font-medium text-base"></p>
-        <button type="button" onclick="closeMessageModal()"
-            class="w-full bg-[#2c4294] text-white rounded-xl py-3.5 font-bold text-base hover:bg-[#1a285a] shadow-md hover:shadow-lg transition-all active:scale-95">
-            বন্ধ করুন
-        </button>
-    </div>
-</div>
+<!-- Common Alert Modal Component -->
+<x-modal-alert id="contactAlertModal" />
+
 @include('partials.recaptcha')
 
 @push('scripts')
@@ -188,57 +184,26 @@
 
                 if (response.ok && result.success) {
                     if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-                    showMessageModal(result.message || "ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।", "success");
+                    const successMsg = result.message || "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!";
+                    showAlertModal(successMsg, "success", "Thank you for your interest!", "contactAlertModal");
                     form.reset();
                 } else {
                     let errorMsg = result.message || "দুঃখিত, কোনো একটি সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।";
                     if (result.errors) {
-                        errorMsg = Object.values(result.errors).map(err => err[0]).join("\\n");
+                        errorMsg = Object.values(result.errors).map(err => err[0]).join("\n");
                     }
-                    showMessageModal(errorMsg, "error");
+                    showAlertModal(errorMsg, "error", "ত্রুটি!", "contactAlertModal");
                 }
             } catch (error) {
                 console.error("Contact form error:", error);
-                showMessageModal("দুঃখিত, কোনো একটি সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।", "error");
+                showAlertModal("দুঃখিত, কোনো একটি সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।", "error", "ত্রুটি!", "contactAlertModal");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
             }
         });
     }
-
-    function showMessageModal(message, type = 'success') {
-        const modal = document.getElementById('messageModal');
-        const content = document.getElementById('messageModalContent');
-        const iconBg = document.getElementById('messageModalIconBg');
-        const icon = document.getElementById('messageModalIcon');
-        const title = document.getElementById('messageModalTitle');
-
-        document.getElementById('messageModalText').textContent = message;
-
-        if (type === 'success') {
-            iconBg.className = 'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-green-100 text-green-600';
-            icon.className = 'fa-solid fa-check text-4xl';
-            title.textContent = 'ধন্যবাদ!';
-        } else {
-            iconBg.className = 'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-red-100 text-red-600';
-            icon.className = 'fa-solid fa-xmark text-4xl';
-            title.textContent = 'ত্রুটি!';
-        }
-
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            content.classList.remove('scale-95', 'opacity-0');
-            content.classList.add('scale-100', 'opacity-100');
-        }, 10);
-    }
-
-    function closeMessageModal() {
-        const modal = document.getElementById('messageModal');
-        const content = document.getElementById('messageModalContent');
-
-        content.classList.remove('scale-100', 'opacity-100');
-        content.classList.add('scale-95', 'opacity-0');
+</script>
 
         setTimeout(() => {
             modal.classList.add('hidden');

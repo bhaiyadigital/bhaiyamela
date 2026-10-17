@@ -52,7 +52,7 @@
             @if(auth()->check() && (auth()->user()->isSuperAdmin() || auth()->user()->hasPermission('project.edit')))
                 <a href="{{ route('admin.contents.edit', ['project', $project->id]) }}"
                     target="_blank"
-                    class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs md:text-sm font-bold px-3.5 py-2 rounded-xl shadow-sm transition-all hover:shadow">
+                    class="inline-flex items-center gap-1.5 bg-amber-700 hover:bg-amber-800 text-white text-xs md:text-sm font-bold px-3.5 py-2 rounded-xl shadow-sm transition-all hover:shadow">
                     <i class="fa-solid fa-pen-to-square"></i>
                     <span>এডিট প্রজেক্ট</span>
                 </a>
@@ -503,6 +503,14 @@
                                 class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 rounded-xl font-bold text-lg transition-all active:scale-[0.98]">
                                 মেসেজ পাঠান
                             </button>
+
+                            <div class="text-[11px] text-gray-500 text-center leading-relaxed mt-2.5 flex items-center justify-center gap-1 flex-wrap">
+                                <i class="fa-solid fa-shield-halved text-[#2c4294] text-[11px]"></i>
+                                <span>reCAPTCHA দ্বারা সুরক্ষিত — গুগলের</span>
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#1a285a]">গোপনীয়তা নীতি</a>
+                                <span>ও</span>
+                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#1a285a]">শর্তাবলী</a>
+                            </div>
                         </form>
                         @if($project->company)
                             <div class="flex justify-between items-center text-xs mt-4 px-1">
@@ -655,7 +663,8 @@
 
                     if (response.ok && result.success) {
                         if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-                        showAlertModal(result.message || "আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।", "success");
+                        const defaultSuccess = "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!";
+                        showAlertModal(result.message || defaultSuccess, "success", "Thank you for your interest!");
                         form.reset();
                     } else {
                         let errorMsg = result.message || "কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।";
