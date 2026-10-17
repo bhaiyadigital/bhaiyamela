@@ -347,17 +347,17 @@
                                                 class="w-auto h-full object-cover transition-transform duration-700 group-hover:scale-105 {{ $isUpcoming ? 'brightness-90' : '' }}"
                                                 alt="{{ $camp->title }}" />
 
-                                            <!-- Upcoming Countdown (ইমেজের নিচে বাম পাশে - আপনার লাল মার্ক করা স্থানে) -->
+                                            <!-- Upcoming Countdown (কার্ড ইমেজের মাঝখানে) -->
                                             @if($isUpcoming && $start)
                                                 <div
-                                                    class="absolute left-2.5 bottom-0 z-20 flex flex-col items-start gap-1 bg-black/45 backdrop-blur-md p-1.5 rounded-xl border border-white/20 shadow-lg">
+                                                    class="absolute left-1/2 -translate-x-1/2 bottom-2 z-20 flex flex-col items-center gap-1 bg-black/45 backdrop-blur-md p-1.5 rounded-xl border border-white/20 shadow-lg w-fit whitespace-nowrap">
                                                     <div
                                                         class="inline-flex items-center gap-1 bg-red-600 text-white px-2 py-0.5 rounded-md text-[9px] font-bold tracking-wider uppercase shadow-md">
                                                         <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
                                                         শুরু হতে বাকি
                                                     </div>
 
-                                                    <div class="campaign-countdown flex items-center gap-1"
+                                                    <div class="campaign-countdown flex items-center justify-center gap-1"
                                                         data-target-date="{{ $start->toIso8601String() }}">
                                                         <!-- Dynamic Live Boxes -->
                                                     </div>
@@ -1315,26 +1315,26 @@
                         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
                         el.innerHTML = `
-                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
-                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(days)}</span>
-                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">দিন</span>
-                                                                </div>
-                                                                <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
-                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
-                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(hours))}</span>
-                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">ঘণ্টা</span>
-                                                                </div>
-                                                                <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
-                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
-                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(minutes))}</span>
-                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">মি.</span>
-                                                                </div>
-                                                                <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
-                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
-                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(seconds))}</span>
-                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">সে.</span>
-                                                                </div>
-                                                            `;
+                                <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                                    <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(days)}</span>
+                                    <span class="text-[12px] text-gray-300 font-medium leading-tight">দিন</span>
+                                </div>
+                                <span class="text-white/70 font-bold text-xs self-center leading-none animate-pulse">:</span>
+                                <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                                    <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(pad(hours))}</span>
+                                    <span class="text-[12px] text-gray-300 font-medium leading-tight">ঘণ্টা</span>
+                                </div>
+                                <span class="text-white/70 font-bold text-xs self-center leading-none animate-pulse">:</span>
+                                <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                                    <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(pad(minutes))}</span>
+                                    <span class="text-[12px] text-gray-300 font-medium leading-tight">মি.</span>
+                                </div>
+                                <span class="text-white/70 font-bold text-xs self-center leading-none animate-pulse">:</span>
+                                <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                                    <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(pad(seconds))}</span>
+                                    <span class="text-[12px] text-gray-300 font-medium leading-tight">সে.</span>
+                                </div>
+                            `;
                     });
                 }
 

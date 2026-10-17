@@ -25,9 +25,9 @@
 <div class="project-card cursor-pointer bg-white h-full flex flex-col rounded-xl overflow-hidden shadow-[0_1px_1px_rgba(0,0,0,0.1)] border border-gray-100 group transition-all duration-300 hover:shadow-[0_2px_22px_rgba(0,0,0,0.12)] relative"
     data-section="{{ $section ?? 'grid' }}" data-category="{{ $project->parent_id }}"
     onclick="if(!event.target.closest('button')) window.location.href='{{ route('project.details', $project->slug) }}'">
-    <div class="relative aspect-[16/11] overflow-hidden">
+    <div class="relative overflow-hidden">
         <img src="{{ asset('storage/' . $firstImage) }}"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            class="w-auto h-full object-cover transition-transform duration-700 group-hover:scale-110"
             alt="{{ $project->title }}" />
 
         <!-- Price / Call for Price Ribbon -->

@@ -84,7 +84,7 @@
 @section('content')
 
     <!-- BREADCRUMB BAR -->
-    <section style="border: 1px solid gainsboro; margin-bottom: 20px;">
+    <section style="border: 1px solid gainsboro;">
         <div class="container mx-auto px-4">
             <div class="flex items-center gap-2 text-base py-2 border-gray-100">
                 <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
@@ -647,24 +647,24 @@
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
                 el.innerHTML = `
-                    <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
-                        <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(days)}</span>
-                        <span class="text-[8px] text-gray-300 font-medium mt-0.5">দিন</span>
+                    <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                        <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(days)}</span>
+                        <span class="text-[12px] text-gray-300 font-medium leading-tight">দিন</span>
                     </div>
-                    <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
-                    <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
-                        <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(hours))}</span>
-                        <span class="text-[8px] text-gray-300 font-medium mt-0.5">ঘণ্টা</span>
+                    <span class="text-white/70 font-bold text-xs self-center leading-none animate-pulse">:</span>
+                    <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                        <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(pad(hours))}</span>
+                        <span class="text-[12px] text-gray-300 font-medium leading-tight">ঘণ্টা</span>
                     </div>
-                    <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
-                    <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
-                        <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(minutes))}</span>
-                        <span class="text-[8px] text-gray-300 font-medium mt-0.5">মি.</span>
+                    <span class="text-white/70 font-bold text-xs self-center leading-none animate-pulse">:</span>
+                    <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                        <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(pad(minutes))}</span>
+                        <span class="text-[12px] text-gray-300 font-medium leading-tight">মি.</span>
                     </div>
-                    <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
-                    <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
-                        <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(seconds))}</span>
-                        <span class="text-[8px] text-gray-300 font-medium mt-0.5">সে.</span>
+                    <span class="text-white/70 font-bold text-xs self-center leading-none animate-pulse">:</span>
+                    <div class="inline-flex items-center justify-center gap-1 bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-2 py-1 shadow-md">
+                        <span class="text-[14px] font-extrabold text-white leading-tight font-mono">${toBn(pad(seconds))}</span>
+                        <span class="text-[12px] text-gray-300 font-medium leading-tight">সে.</span>
                     </div>
                 `;
             });
