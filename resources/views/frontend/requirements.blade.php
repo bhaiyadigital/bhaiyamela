@@ -29,10 +29,9 @@
             <x-modal-alert 
                 id="requirementSuccessModal"
                 type="success"
-                title="রিকোয়ারমেন্ট সাবমিট হয়েছে!"
+                title="Thank you for your interest!"
                 sessionKey="success"
-                buttonText="ঠিক আছে"
-                :scoped="true"
+                buttonText="Okay"
             />
 
             @if(session('error'))
@@ -227,6 +226,15 @@
                         class="bg-[#2c4294] hover:bg-[#1a285a] text-white px-10 py-4 rounded-2xl font-bold text-base transition-all shadow-lg shadow-[#2c4294]/10 active:scale-[0.98] cursor-pointer">
                         রিকোয়ারমেন্ট সাবমিট করুন
                     </button>
+
+                    <div class="text-[11px] text-gray-700 leading-relaxed mt-3 flex items-center justify-start gap-1.5 flex-wrap font-medium">
+                        <i class="fa-solid fa-shield-halved text-[#1e2d6b] text-[12px]"></i>
+                        <span>এই সাইটটি reCAPTCHA দ্বারা সুরক্ষিত এবং গুগলের</span>
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">গোপনীয়তা নীতি</a>
+                        <span>ও</span>
+                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">সেবার শর্তাবলী</a>
+                        <span>প্রযোজ্য।</span>
+                    </div>
                 </div>
 
             </form>

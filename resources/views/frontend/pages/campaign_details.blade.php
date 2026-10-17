@@ -88,11 +88,11 @@
         <div class="container mx-auto px-4">
             <div class="flex items-center gap-2 text-base py-2 border-gray-100">
                 <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
-                    হোম
+                    Home
                 </a>
                 <span class="text-gray-300">›</span>
                 <a href="{{ url('/') }}#campaign-section" class="text-gray-600 hover:text-black">
-                    ক্যাম্পেইনসমূহ
+                    Events
                 </a>
                 <span class="text-gray-300">›</span>
                 <span class="text-black font-semibold truncate">
@@ -116,24 +116,24 @@
 
                 <!-- Poster / Thumbnail -->
                 <div class="w-full sm:w-72 md:w-80 flex-shrink-0">
-                    <div class="relative aspect-[16/11] sm:aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200 bg-gray-100 group">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200 bg-gray-100 group">
                         <img src="{{ $bannerImage }}" alt="{{ $campaign->title }}"
                             width="320" height="240" fetchpriority="high" decoding="async"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            class="w-auto h-full object-cover group-hover:scale-105 transition-transform duration-500" />
 
                         <!-- Status Badge on Poster -->
                         <div class="absolute top-3 left-3 z-20">
                             @if($isOngoing)
                                 <span class="inline-flex items-center gap-1.5 bg-emerald-600/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> চলমান
+                                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Ongoing
                                 </span>
                             @elseif($isUpcoming)
                                 <span class="inline-flex items-center gap-1.5 bg-amber-600/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                    <i class="fa-regular fa-clock text-xs"></i> আসন্ন
+                                    <i class="fa-regular fa-clock text-xs"></i> Upcoming
                                 </span>
                             @elseif($isCompleted)
                                 <span class="inline-flex items-center gap-1.5 bg-gray-700/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                    <i class="fa-solid fa-check text-xs"></i> সম্পন্ন
+                                    <i class="fa-solid fa-check text-xs"></i> Completed
                                 </span>
                             @endif
                         </div>
@@ -143,8 +143,8 @@
                 <!-- Right Side Details -->
                 <div class="flex-1 text-center lg:text-left space-y-4">
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
-                        <div class="inline-flex items-center gap-2 bg-[#2c4294] text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
-                            <i class="fa-solid fa-bullhorn text-xs"></i> স্পেশাল ক্যাম্পেইন
+                        <div class="inline-flex items-center gap-2 bg-[#2c4294] text-white px-3.5 py-1 rounded-full text-xs font-bold tracking-wider shadow-sm">
+                            <i class="fa-solid fa-bullhorn text-xs"></i> Event
                         </div>
 
                         @if(auth()->check() && (auth()->user()->isSuperAdmin() || auth()->user()->hasPermission('campaign.edit')))
@@ -152,7 +152,7 @@
                                 target="_blank"
                                 class="inline-flex items-center gap-1.5 bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm transition-all hover:shadow">
                                 <i class="fa-solid fa-pen-to-square"></i>
-                                <span>এডিট ক্যাম্পেইন</span>
+                                <span>Edit event</span>
                             </a>
                         @endif
                     </div>
@@ -203,7 +203,7 @@
                         @endif
 
                         @if($campaign->description_3)
-                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}" 
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}"
                                class="flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-emerald-800 shadow-sm transition-colors font-semibold">
                                 <i class="fa-solid fa-phone-volume text-emerald-600"></i>
                                 <span>হটলাইন: {{ $campaign->description_3 }}</span>
@@ -218,7 +218,7 @@
 
                     <!-- Upcoming Countdown Timer Box (If upcoming) -->
                     @if($isUpcoming && $start)
-                        <div class="pt-2">
+                        <div class="pt-2 flex flex-col sm:flex-row items-center lg:items-start gap-3">
                             <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-white border border-amber-300 rounded-2xl p-3 px-4 shadow-md">
                                 <div class="inline-flex items-center gap-1.5 text-amber-600 text-xs font-bold uppercase tracking-wider">
                                     <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
@@ -229,6 +229,22 @@
                                     <!-- Dynamic Live Boxes -->
                                 </div>
                             </div>
+
+                            <!-- Ask Me Question Button (Mobile popup trigger / visible on all or mobile) -->
+                            <button type="button" onclick="openCampaignInquiryModal()"
+                                class="lg:hidden inline-flex items-center justify-center gap-2 bg-[#2c4294] hover:bg-[#1a285a] text-white px-5 py-3 rounded-2xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer w-full sm:w-auto">
+                                <i class="fa-solid fa-comment-dots text-base"></i>
+                                <span>Ask Me Question</span>
+                            </button>
+                        </div>
+                    @else
+                        <!-- Ask Me Question Button for Ongoing/Completed or general campaigns on mobile -->
+                        <div class="pt-2 lg:hidden">
+                            <button type="button" onclick="openCampaignInquiryModal()"
+                                class="inline-flex items-center justify-center gap-2 bg-[#2c4294] hover:bg-[#1a285a] text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer w-full sm:w-auto">
+                                <i class="fa-solid fa-comment-dots text-base"></i>
+                                <span>Ask Me Question</span>
+                            </button>
                         </div>
                     @endif
 
@@ -253,7 +269,7 @@
                         <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-5">
                             <div>
                                 <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">বিস্তারিত তথ্য</span>
-                                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">ক্যাম্পেইনের বিবরণ</h2>
+                                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">ইভেন্টের বিবরণ</h2>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-[#2c4294]/10 flex items-center justify-center text-[#2c4294]">
                                 <i class="fa-solid fa-file-lines text-lg"></i>
@@ -266,21 +282,21 @@
                     </div>
                 @endif
 
-                {{-- 2. PROJECTS INCLUDED IN THIS CAMPAIGN (As requested: description-এর পরে প্রজেক্ট কার্ড শো হবে) --}}
-                <div id="section-projects" class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4 mb-6">
-                        <div>
-                            <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">বিশেষ অফার ও সুযোগ</span>
-                            <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">
-                                ক্যাম্পেইনের অন্তর্ভুক্ত প্রজেক্টসমূহ
-                            </h2>
+                {{-- 2. PROJECTS INCLUDED IN THIS CAMPAIGN (কোনো প্রজেক্ট না থাকলে সেকশন হাইড থাকবে) --}}
+                @if($projects->isNotEmpty())
+                    <div id="section-projects" class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4 mb-6">
+                            <div>
+                                <span class="text-xs font-bold text-[#2c4294] uppercase tracking-wider block">বিশেষ অফার ও সুযোগ</span>
+                                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">
+                                    ইভেন্ট এর অন্তর্ভুক্ত প্রজেক্টসমূহ
+                                </h2>
+                            </div>
+                            <span class="bg-[#2c4294]/10 text-[#2c4294] px-3.5 py-1.5 rounded-full text-xs font-extrabold w-fit">
+                                মোট {{ $bnProjCount }} টি প্রজেক্ট
+                            </span>
                         </div>
-                        <span class="bg-[#2c4294]/10 text-[#2c4294] px-3.5 py-1.5 rounded-full text-xs font-extrabold w-fit">
-                            মোট {{ $bnProjCount }} টি প্রজেক্ট
-                        </span>
-                    </div>
 
-                    @if($projects->isNotEmpty())
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             @foreach($projects as $project)
                                 <div>
@@ -288,13 +304,8 @@
                                 </div>
                             @endforeach
                         </div>
-                    @else
-                        <div class="py-12 text-center text-gray-500 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
-                            <i class="fa-solid fa-city text-3xl text-gray-400 mb-2"></i>
-                            <p class="font-medium text-sm">এই ক্যাম্পেইনে এখনও কোনো প্রজেক্ট যুক্ত করা হয়নি।</p>
-                        </div>
-                    @endif
-                </div>
+                    </div>
+                @endif
 
             </div>
 
@@ -304,10 +315,10 @@
             <div class="lg:col-span-4 flex flex-col gap-6 sticky top-24">
 
                 <!-- 1. Campaign Summary Card -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                {{-- <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                     <h3 class="font-bold text-gray-900 text-base border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-circle-info text-[#2c4294]"></i>
-                        <span>ক্যাম্পেইন তথ্য</span>
+                        <span>ইভেন্ট তথ্য</span>
                     </h3>
 
                     <div class="space-y-3.5 text-sm">
@@ -368,7 +379,7 @@
                         @if($campaign->description_3)
                             <div class="flex justify-between items-center py-1 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">যোগাযোগ / হেল্পলাইন:</span>
-                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}" 
+                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $campaign->description_3) }}"
                                    class="text-[#2c4294] hover:text-blue-800 font-bold text-right inline-flex items-center gap-1">
                                     <i class="fa-solid fa-phone text-xs"></i>
                                     <span>{{ $campaign->description_3 }}</span>
@@ -381,25 +392,15 @@
                             <span class="text-[#2c4294] font-extrabold text-right">{{ $bnProjCount }} টি</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <!-- 2. Lead / Inquiry Contact Form -->
-                <div id="campaignInquiryCard" class="relative bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden scroll-mt-24">
+                <!-- 2. Lead / Inquiry Contact Form (Hidden on mobile, visible on desktop sidebar) -->
+                <div id="campaignInquiryCard" class="hidden lg:block relative bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden scroll-mt-24">
                     <h3 class="font-bold text-gray-900 text-base border-b border-gray-100 pb-3 mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-paper-plane text-[#2c4294]"></i>
-                        <span>ক্যাম্পেইন সংক্রান্ত তথ্য চান?</span>
+                        <span>ইভেন্ট সংক্রান্ত তথ্য চান?</span>
                     </h3>
                     <p class="text-xs text-gray-500 mb-4">আমাদের প্রতিনিধির সাথে যোগাযোগ করতে নিচের ফর্মটি পূরণ করুন:</p>
-
-                    {{-- Success Popup Modal (Centered within this form) --}}
-                    <x-modal-alert 
-                        id="campaignInquirySuccessModal"
-                        type="success"
-                        title="Thank you for your interest!"
-                        sessionKey="campaign_inquiry_success"
-                        buttonText="Okay"
-                        :scoped="true"
-                    />
 
                     {{-- Error Message --}}
                     @if(session('campaign_inquiry_error'))
@@ -489,18 +490,18 @@
                 <!-- 3. Other Campaigns -->
                 @if($otherCampaigns->isNotEmpty())
                     <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider mb-3">অন্যান্য ক্যাম্পেইন</h3>
+                        <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider mb-3">অন্যান্য ইভেন্ট</h3>
                         <div class="space-y-3">
                             @foreach($otherCampaigns as $oc)
                                 <a href="{{ route('campaign.details', $oc->slug) }}" class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all group">
                                     <div class="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                                         <img src="{{ $oc->img_path ? asset('storage/' . $oc->img_path) : asset('assets/images/placeholder.webp') }}"
                                             width="56" height="56" loading="lazy" decoding="async"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform" alt="{{ $oc->title }}">
+                                            class="w-auto h-full object-cover group-hover:scale-105 transition-transform" alt="{{ $oc->title }}">
                                     </div>
                                     <div class="min-w-0">
                                         <h4 class="text-sm font-bold text-gray-900 truncate group-hover:text-[#2c4294] transition-colors">{{ $oc->title }}</h4>
-                                        <span class="text-xs text-gray-500 block truncate">{{ $oc->location ?? 'স্পেশাল ক্যাম্পেইন' }}</span>
+                                        <span class="text-xs text-gray-500 block truncate">{{ $oc->location ?? 'স্পেশাল ইভেন্ট' }}</span>
                                     </div>
                                 </a>
                             @endforeach
@@ -510,8 +511,107 @@
 
             </div>
 
+    <!-- Mobile Inquiry Popup Modal (Triggered by Ask Me Question button on mobile) -->
+    <div id="mobileCampaignInquiryModal"
+        class="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 opacity-0 pointer-events-none hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobileInquiryModalTitle">
+
+        <div id="mobileCampaignInquiryModalContent"
+            class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto p-6 sm:p-7 transform transition-all duration-300 scale-95 opacity-0">
+
+            <!-- Close Modal Button -->
+            <button type="button"
+                onclick="closeCampaignInquiryModal()"
+                class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+                aria-label="Close dialog">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-4 pr-8">
+                <div class="inline-flex items-center gap-2 text-[#2c4294] font-bold text-xs uppercase tracking-wider mb-1">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>ইনকোয়ারি ও যোগাযোগ</span>
+                </div>
+                <h3 id="mobileInquiryModalTitle" class="text-xl font-extrabold text-gray-900 leading-tight">
+                    Ask Me Question
+                </h3>
+                <p class="text-xs text-gray-500 mt-1">আমাদের প্রতিনিধির সাথে যোগাযোগ করতে তথ্যগুলো পূরণ করুন:</p>
+            </div>
+
+            <!-- Mobile Inquiry Form -->
+            <form id="mobileCampaignInquiryForm" action="{{ route('campaign.inquiry') }}" method="POST" class="flex flex-col gap-3">
+                @csrf
+                <input type="hidden" name="campaign_id" value="{{ $campaign->id }}">
+                <input type="hidden" name="recaptcha_token" id="mobile_campaign_recaptcha_token">
+
+                <div>
+                    <label for="mob_lead_name" class="block text-xs font-bold text-gray-600 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
+                    <input type="text" id="mob_lead_name" name="lead_name" placeholder="যেমন: মোহাম্মদ রফিক" required
+                        value="{{ old('lead_name', auth()->check() ? auth()->user()->name : '') }}"
+                        class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                </div>
+
+                <div>
+                    <label for="mob_lead_phone" class="block text-xs font-bold text-gray-600 mb-1">ফোন নম্বর <span class="text-red-500">*</span></label>
+                    <input type="tel" id="mob_lead_phone" name="lead_phone" placeholder="যেমন: 017XXXXXXXX" required
+                        value="{{ old('lead_phone', auth()->check() ? auth()->user()->phone : '') }}"
+                        class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                </div>
+
+                <div>
+                    <label for="mob_lead_email" class="block text-xs font-bold text-gray-600 mb-1">ইমেইল <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
+                    <input type="email" id="mob_lead_email" name="lead_email" placeholder="example@mail.com"
+                        value="{{ old('lead_email', auth()->check() ? auth()->user()->email : '') }}"
+                        class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                </div>
+
+                @if($projects->isNotEmpty())
+                    <div>
+                        <label for="mob_inquiry_project_id" class="block text-xs font-bold text-gray-600 mb-1">কোন প্রজেক্ট সম্পর্কে জানতে চান? <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
+                        <select id="mob_inquiry_project_id" name="project_id"
+                            class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 cursor-pointer">
+                            <option value="">— প্রজেক্ট নির্বাচন করুন —</option>
+                            @foreach($projects as $proj)
+                                <option value="{{ $proj->id }}" {{ old('project_id') == $proj->id ? 'selected' : '' }}>{{ $proj->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+
+                <div>
+                    <label for="mob_lead_message" class="block text-xs font-bold text-gray-600 mb-1">আপনার বার্তা</label>
+                    <textarea id="mob_lead_message" name="lead_message" rows="3" placeholder="আপনার প্রশ্ন বা বার্তা লিখুন..."
+                        class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', $campaign->title . ' সম্পর্কে বিস্তারিত জানতে চাই।') }}</textarea>
+                </div>
+
+                <button type="button" id="mobileCampaignInquirySubmitBtn"
+                    class="w-full bg-[#2c4294] hover:bg-[#152960] text-white py-3.5 rounded-xl font-bold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 mt-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    <span>বার্তা পাঠান</span>
+                </button>
+
+                <div class="text-[11px] text-gray-500 text-center leading-relaxed mt-1 flex items-center justify-center gap-1 flex-wrap">
+                    <i class="fa-solid fa-shield-halved text-[#2c4294] text-[11px]"></i>
+                    <span>reCAPTCHA দ্বারা সুরক্ষিত — গুগলের</span>
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">গোপনীয়তা নীতি</a>
+                    <span>ও</span>
+                    <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#152960]">শর্তাবলী</a>
+                </div>
+            </form>
         </div>
     </div>
+
+    <!-- Common Global Success Alert Modal (Works for both mobile popup and desktop sidebar submissions) -->
+    <x-modal-alert
+        id="campaignInquirySuccessModal"
+        type="success"
+        title="Thank you for your interest!"
+        sessionKey="campaign_inquiry_success"
+        buttonText="Okay"
+    />
 
 @endsection
 
@@ -537,7 +637,7 @@
                 const diff = target - now;
 
                 if (diff <= 0) {
-                    el.innerHTML = '<span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">ক্যাম্পেইন শুরু হয়েছে!</span>';
+                    el.innerHTML = '<span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">ইভেন্ট শুরু হয়েছে!</span>';
                     return;
                 }
 
@@ -551,20 +651,20 @@
                         <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(days)}</span>
                         <span class="text-[8px] text-gray-300 font-medium mt-0.5">দিন</span>
                     </div>
-                    <span class="text-amber-400 font-bold text-xs -mt-1 animate-pulse">:</span>
+                    <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
                     <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
                         <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(hours))}</span>
                         <span class="text-[8px] text-gray-300 font-medium mt-0.5">ঘণ্টা</span>
                     </div>
-                    <span class="text-amber-400 font-bold text-xs -mt-1 animate-pulse">:</span>
+                    <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
                     <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
                         <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(minutes))}</span>
                         <span class="text-[8px] text-gray-300 font-medium mt-0.5">মি.</span>
                     </div>
-                    <span class="text-amber-400 font-bold text-xs -mt-1 animate-pulse">:</span>
-                    <div class="flex flex-col items-center bg-amber-500/90 backdrop-blur-md border border-amber-300/40 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
+                    <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
+                    <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] shadow-md">
                         <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(seconds))}</span>
-                        <span class="text-[8px] text-amber-100 font-medium mt-0.5">সে.</span>
+                        <span class="text-[8px] text-gray-300 font-medium mt-0.5">সে.</span>
                     </div>
                 `;
             });
@@ -583,42 +683,126 @@
         const btn = document.getElementById('campaignInquirySubmitBtn');
         const form = document.getElementById('campaignInquiryForm');
 
-        if (!btn || !form) {
-            return;
+        // Modal Open / Close Logic for Mobile
+        window.openCampaignInquiryModal = function () {
+            const modal = document.getElementById('mobileCampaignInquiryModal');
+            const content = document.getElementById('mobileCampaignInquiryModalContent');
+            if (!modal || !content) return;
+
+            modal.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            document.body.classList.add('overflow-hidden');
+
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        };
+
+        window.closeCampaignInquiryModal = function () {
+            const modal = document.getElementById('mobileCampaignInquiryModal');
+            const content = document.getElementById('mobileCampaignInquiryModalContent');
+            if (!modal || !content) return;
+
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.classList.remove('overflow-hidden');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        };
+
+        // Close on backdrop click
+        const mobModal = document.getElementById('mobileCampaignInquiryModal');
+        if (mobModal) {
+            mobModal.addEventListener('click', function (e) {
+                if (e.target === mobModal) {
+                    closeCampaignInquiryModal();
+                }
+            });
         }
 
-        btn.addEventListener('click', async function (e) {
-            e.preventDefault();
-
-            // Check standard HTML5 validation
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            const originalHtml = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>অপেক্ষা করুন...</span>';
-
-            try {
-                const token = await window.getRecaptchaToken('campaign_inquiry');
-                const tokenInput = document.getElementById('campaign_recaptcha_token');
-                if (tokenInput) {
-                    tokenInput.value = token;
-                }
-                form.submit();
-            } catch (error) {
-                console.error('reCAPTCHA error:', error);
-                btn.disabled = false;
-                btn.innerHTML = originalHtml;
-                alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+        // Close on Escape
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeCampaignInquiryModal();
             }
         });
 
+        // Desktop Submit Handler
+        if (btn && form) {
+            btn.addEventListener('click', async function (e) {
+                e.preventDefault();
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const originalHtml = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>অপেক্ষা করুন...</span>';
+
+                try {
+                    const token = await window.getRecaptchaToken('campaign_inquiry');
+                    const tokenInput = document.getElementById('campaign_recaptcha_token');
+                    if (tokenInput) {
+                        tokenInput.value = token;
+                    }
+                    form.submit();
+                } catch (error) {
+                    console.error('reCAPTCHA error:', error);
+                    btn.disabled = false;
+                    btn.innerHTML = originalHtml;
+                    alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                }
+            });
+        }
+
+        // Mobile Modal Form Submit Handler
+        const mobBtn = document.getElementById('mobileCampaignInquirySubmitBtn');
+        const mobForm = document.getElementById('mobileCampaignInquiryForm');
+
+        if (mobBtn && mobForm) {
+            mobBtn.addEventListener('click', async function (e) {
+                e.preventDefault();
+
+                if (!mobForm.checkValidity()) {
+                    mobForm.reportValidity();
+                    return;
+                }
+
+                const originalHtml = mobBtn.innerHTML;
+                mobBtn.disabled = true;
+                mobBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>অপেক্ষা করুন...</span>';
+
+                try {
+                    const token = await window.getRecaptchaToken('campaign_inquiry');
+                    const tokenInput = document.getElementById('mobile_campaign_recaptcha_token');
+                    if (tokenInput) {
+                        tokenInput.value = token;
+                    }
+                    mobForm.submit();
+                } catch (error) {
+                    console.error('reCAPTCHA error:', error);
+                    mobBtn.disabled = false;
+                    mobBtn.innerHTML = originalHtml;
+                    alert('ভেরিফিকেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                }
+            });
+        }
+
         @if($errors->any() || session('campaign_inquiry_error'))
-            const inquiryCard = document.getElementById('campaignInquiryCard');
-            if (inquiryCard) {
-                inquiryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (window.innerWidth < 1024) {
+                openCampaignInquiryModal();
+            } else {
+                const inquiryCard = document.getElementById('campaignInquiryCard');
+                if (inquiryCard) {
+                    inquiryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }
         @endif
     });

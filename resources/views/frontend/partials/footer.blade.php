@@ -68,15 +68,20 @@
                         সাবস্ক্রাইব
                     </button>
 
-                    @if (session('success'))
-                        <p class="text-green-400 text-xs mt-2">{{ session('success') }}</p>
-                    @endif
                     @error('email')
                         <p class="text-red-400 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </form>
 
-                @if (session('success') || $errors->has('email'))
+                <x-modal-alert 
+                    id="subscriptionSuccessModal"
+                    type="success"
+                    title="Thank you for subscribing!"
+                    sessionKey="subscription_success"
+                    buttonText="Okay"
+                />
+
+                @if ($errors->has('email'))
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
                             const form = document.getElementById('subscribe-id');

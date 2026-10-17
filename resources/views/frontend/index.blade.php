@@ -124,20 +124,17 @@
             @endforeach
 
             @if(count($hero) > 1)
-                <div
-                    class="relative mt-3 md:mt-4 mb-2 left-1/2 -translate-x-1/2 z-20 flex w-fit gap-1 bg-gray-900/40 px-3 py-1 md:py-1.5 rounded-full backdrop-blur-sm items-center justify-center">
-                    @foreach($hero as $index => $slide)
-                        <button type="button" onclick="goToSlide({{ $index }})" aria-label="Go to slide {{ $index + 1 }}"
-                            aria-current="{{ $index === 0 ? 'true' : 'false' }}"
-                            class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center transition-all duration-300 focus:outline-none"
-                            data-index="{{ $index }}">
+                <!-- Hero Slider Left / Prev Button -->
+                <button type="button" onclick="prevHeroSlide()" aria-label="Previous Slide"
+                    class="cursor-pointer absolute left-1.5 sm:left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-8 sm:h-8 md:w-11 md:h-11 bg-white/90 hover:bg-[#2c4294] text-[#2c4294] hover:text-white shadow-md md:shadow-lg border border-gray-200 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95">
+                    <i class="fa-solid fa-chevron-left text-[11px] sm:text-xs md:text-base" aria-hidden="true"></i>
+                </button>
 
-                            <span
-                                class="hero-dot w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-[#2c4294] scale-110' : 'bg-white/50 hover:bg-white' }}"></span>
-
-                        </button>
-                    @endforeach
-                </div>
+                <!-- Hero Slider Right / Next Button -->
+                <button type="button" onclick="nextHeroSlideManual()" aria-label="Next Slide"
+                    class="cursor-pointer absolute right-1.5 sm:right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-8 sm:h-8 md:w-11 md:h-11 bg-white/90 hover:bg-[#2c4294] text-[#2c4294] hover:text-white shadow-md md:shadow-lg border border-gray-200 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95">
+                    <i class="fa-solid fa-chevron-right text-[11px] sm:text-xs md:text-base" aria-hidden="true"></i>
+                </button>
             @endif
 
         </div>
@@ -264,10 +261,10 @@
                         <div class="text-left">
                             <span
                                 class="inline-flex items-center gap-1.5 bg-[#2c4294]/10 border border-[#2c4294]/20 text-[#2c4294] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
-                                <i class="fa-solid fa-bullhorn text-xs"></i> স্পেশাল ক্যাম্পেইন
+                                <i class="fa-solid fa-bullhorn text-xs"></i> স্পেশাল ইভেন্ট
                             </span>
                             <h2 class="text-2xl md:text-3xl font-bold text-[#111111]">
-                                চলমান এবং আসন্ন ক্যাম্পেইনসমূহ
+                                চলমান এবং আসন্ন ইভেন্টসমূহ
                             </h2>
                         </div>
 
@@ -275,29 +272,29 @@
                         <div class="hidden lg:block mb-1">
                             <span
                                 class="text-xs font-bold text-[#2c4294] bg-[#2c4294]/10 border border-[#2c4294]/20 px-3.5 py-1.5 rounded-full">
-                                মোট {{ strtr((string) $campaignList->count(), $bnDigits) }}টি ক্যাম্পেইন
+                                মোট {{ strtr((string) $campaignList->count(), $bnDigits) }}টি ইভেন্ট
                             </span>
                         </div>
                     </div>
 
-                    <!-- Filter Tabs (100% Bangla: সবগুলো, চলমান, আসন্ন, সম্পন্ন) -->
+                    <!-- Filter Tabs (English: All, Ongoing, Upcoming, Completed) -->
                     <div class="flex justify-start overflow-x-auto pb-4 stall-filter-wrapper no-scrollbar">
                         <div class="flex gap-8 whitespace-nowrap">
                             <button type="button" data-campaign-filter="all" aria-pressed="true"
                                 class="campaign-filter-btn cursor-pointer pb-3 text-gray-900 font-bold text-base md:text-base border-b-2 border-[#2c4294] active-filter transition-all duration-300">
-                                সবগুলো
+                                All
                             </button>
                             <button type="button" data-campaign-filter="ongoing" aria-pressed="false"
                                 class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
-                                চলমান
+                                Ongoing
                             </button>
                             <button type="button" data-campaign-filter="upcoming" aria-pressed="false"
                                 class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
-                                আসন্ন
+                                Upcoming
                             </button>
                             <button type="button" data-campaign-filter="completed" aria-pressed="false"
                                 class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
-                                সম্পন্ন
+                                Completed
                             </button>
                         </div>
                     </div>
@@ -345,71 +342,51 @@
                                         class="project-card block cursor-pointer bg-white h-full flex flex-col rounded-xl overflow-hidden shadow-[0_1px_1px_rgba(0,0,0,0.1)] border border-gray-100 group transition-all duration-300 hover:shadow-[0_2px_22px_rgba(0,0,0,0.12)] relative {{ $isUpcoming ? 'opacity-85 hover:opacity-100' : '' }}">
 
                                         <!-- Image Area -->
-                                        <div class="relative aspect-[16/11] overflow-hidden bg-gray-100">
+                                        <div class="relative overflow-hidden bg-gray-100">
                                             <img src="{{ $imageSrc }}"
-                                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 {{ $isUpcoming ? 'brightness-90' : '' }}"
+                                                class="w-auto h-full object-cover transition-transform duration-700 group-hover:scale-105 {{ $isUpcoming ? 'brightness-90' : '' }}"
                                                 alt="{{ $camp->title }}" />
 
-                                            <!-- Project Count Ribbon (Same style as project_card price ribbon) -->
-                                            <div class="absolute left-[-4px] bottom-6 z-10">
+                                            <!-- Upcoming Countdown (ইমেজের নিচে বাম পাশে - আপনার লাল মার্ক করা স্থানে) -->
+                                            @if($isUpcoming && $start)
                                                 <div
-                                                    class="bg-[#2c4294] text-white text-xs font-bold uppercase px-3.5 py-1.5 rounded-r-lg shadow-md relative tracking-wider flex items-center gap-1.5">
-                                                    <i class="fa-solid fa-city text-[10px]"></i>
-                                                    <span>{{ $bnProjCount }} টি প্রজেক্ট</span>
+                                                    class="absolute left-2.5 bottom-0 z-20 flex flex-col items-start gap-1 bg-black/45 backdrop-blur-md p-1.5 rounded-xl border border-white/20 shadow-lg">
                                                     <div
-                                                        class="absolute left-0 bottom-[-4px] w-0 h-0 border-t-[4px] border-t-[#223373] border-l-[4px] border-l-transparent">
+                                                        class="inline-flex items-center gap-1 bg-red-600 text-white px-2 py-0.5 rounded-md text-[9px] font-bold tracking-wider uppercase shadow-md">
+                                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                                                        শুরু হতে বাকি
+                                                    </div>
+
+                                                    <div class="campaign-countdown flex items-center gap-1"
+                                                        data-target-date="{{ $start->toIso8601String() }}">
+                                                        <!-- Dynamic Live Boxes -->
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
 
                                             <!-- Status Badge Top Left -->
                                             <div class="absolute top-3 left-3 z-20">
                                                 @if($isOngoing)
                                                     <span
                                                         class="inline-flex items-center gap-1.5 bg-emerald-600/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                                        <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> চলমান
+                                                        <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Ongoing
                                                     </span>
                                                 @elseif($isUpcoming)
                                                     <span
                                                         class="inline-flex items-center gap-1.5 bg-amber-600/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                                        <i class="fa-regular fa-clock text-xs"></i> আসন্ন
+                                                        <i class="fa-regular fa-clock text-xs"></i> Upcoming
                                                     </span>
                                                 @elseif($isCompleted)
                                                     <span
                                                         class="inline-flex items-center gap-1.5 bg-gray-700/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                                        <i class="fa-solid fa-check text-xs"></i> সম্পন্ন
+                                                        <i class="fa-solid fa-check text-xs"></i> Completed
                                                     </span>
                                                 @endif
                                             </div>
-
-                                            <!-- Upcoming Countdown Overlay (লাইভ টাইমিং কাউন্টডাউন) -->
-                                            @if($isUpcoming && $start)
-                                                <div
-                                                    class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/35 flex flex-col justify-center items-center p-2 text-center z-15 backdrop-blur-[2px]">
-                                                    <div
-                                                        class="inline-flex items-center gap-1.5 bg-red-600/90 text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider mb-2 shadow-sm uppercase">
-                                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                                                        লাইভ টাইমিং
-                                                    </div>
-
-                                                    <div class="campaign-countdown flex items-center justify-center gap-1 sm:gap-1.5 text-white"
-                                                        data-target-date="{{ $start->toIso8601String() }}">
-                                                        <!-- Dynamic Live Boxes -->
-                                                        <span class="text-xs text-amber-300 font-bold">কাউন্টডাউন লোড হচ্ছে...</span>
-                                                    </div>
-
-                                                    <span class="text-amber-300 text-[11px] font-semibold mt-2 flex items-center gap-1">
-                                                        <i class="fa-regular fa-clock text-[10px]"></i> শুরু হতে বাকি
-                                                    </span>
-                                                </div>
-                                            @endif
                                         </div>
 
                                         <!-- Content Area -->
                                         <div class="p-4 flex-grow flex flex-col">
-                                            <!-- Category Tag -->
-
-
                                             <!-- Campaign Title -->
                                             <div class="py-1">
                                                 <h3
@@ -462,7 +439,7 @@
                                     </a>
                                 </div>
                             @empty
-                                <p class="col-span-full text-center text-gray-600 py-10">কোন ক্যাম্পেইন পাওয়া যায়নি।</p>
+                                <p class="col-span-full text-center text-gray-600 py-10">কোন ইভেন্ট পাওয়া যায়নি।</p>
                             @endforelse
                         </div>
 
@@ -478,7 +455,7 @@
 
                 <!-- Empty Notice for Tab Filtering -->
                 <div id="campaign-empty-notice" class="hidden text-center py-10 text-gray-600">
-                    কোন ক্যাম্পেইন পাওয়া যায়নি।
+                    কোন ইভেন্ট পাওয়া যায়নি।
                 </div>
 
             </div>
@@ -521,7 +498,7 @@
                     <div class="flex gap-8  whitespace-nowrap ">
                         <button data-filter="all" aria-pressed="true"
                             class="cursor-pointer filter-btn pb-3 text-gray-900 font-bold text-base md:text-base border-b-2 border-[#2c4294] active-filter transition-all duration-300">
-                            সবগুলো
+                            All
                         </button>
                         @foreach ($categories as $cat)
                             <button data-filter="{{ $cat->id }}" aria-pressed="false"
@@ -1008,6 +985,18 @@
             showHeroSlide(currentSlideIndex + 1);
         }
 
+        window.prevHeroSlide = function () {
+            clearInterval(slideInterval);
+            showHeroSlide(currentSlideIndex - 1);
+            startHeroAutoplay();
+        };
+
+        window.nextHeroSlideManual = function () {
+            clearInterval(slideInterval);
+            showHeroSlide(currentSlideIndex + 1);
+            startHeroAutoplay();
+        };
+
         window.goToSlide = function (index) {
             clearInterval(slideInterval);
             showHeroSlide(index);
@@ -1015,6 +1004,7 @@
         };
 
         function startHeroAutoplay() {
+            clearInterval(slideInterval);
             const slides = document.querySelectorAll('.hero-slide');
             if (slides.length > 1) {
                 slideInterval = setInterval(nextHeroSlide, 5000); // ৫ সেকেন্ড পরপর
@@ -1315,7 +1305,7 @@
                         const diff = target - now;
 
                         if (diff <= 0) {
-                            el.innerHTML = '<span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg"><span class="w-2 h-2 rounded-full bg-white animate-ping"></span>ক্যাম্পেইন শুরু হয়েছে!</span>';
+                            el.innerHTML = '<span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg"><span class="w-2 h-2 rounded-full bg-white animate-ping"></span>ইভেন্ট শুরু হয়েছে!</span>';
                             return;
                         }
 
@@ -1325,26 +1315,26 @@
                         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
                         el.innerHTML = `
-                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[36px] sm:min-w-[40px] shadow-md">
-                                    <span class="text-sm sm:text-base font-extrabold text-white leading-none font-mono">${toBn(days)}</span>
-                                    <span class="text-[9px] text-gray-300 font-medium mt-0.5">দিন</span>
-                                </div>
-                                <span class="text-amber-400 font-bold text-xs -mt-2 animate-pulse">:</span>
-                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[36px] sm:min-w-[40px] shadow-md">
-                                    <span class="text-sm sm:text-base font-extrabold text-white leading-none font-mono">${toBn(pad(hours))}</span>
-                                    <span class="text-[9px] text-gray-300 font-medium mt-0.5">ঘণ্টা</span>
-                                </div>
-                                <span class="text-amber-400 font-bold text-xs -mt-2 animate-pulse">:</span>
-                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[36px] sm:min-w-[40px] shadow-md">
-                                    <span class="text-sm sm:text-base font-extrabold text-white leading-none font-mono">${toBn(pad(minutes))}</span>
-                                    <span class="text-[9px] text-gray-300 font-medium mt-0.5">মি.</span>
-                                </div>
-                                <span class="text-amber-400 font-bold text-xs -mt-2 animate-pulse">:</span>
-                                <div class="flex flex-col items-center bg-amber-500/90 backdrop-blur-md border border-amber-300/40 rounded-md px-1.5 py-1 min-w-[36px] sm:min-w-[40px] shadow-md">
-                                    <span class="text-sm sm:text-base font-extrabold text-white leading-none font-mono">${toBn(pad(seconds))}</span>
-                                    <span class="text-[9px] text-amber-100 font-medium mt-0.5">সে.</span>
-                                </div>
-                            `;
+                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
+                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(days)}</span>
+                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">দিন</span>
+                                                                </div>
+                                                                <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
+                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
+                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(hours))}</span>
+                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">ঘণ্টা</span>
+                                                                </div>
+                                                                <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
+                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
+                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(minutes))}</span>
+                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">মি.</span>
+                                                                </div>
+                                                                <span class="text-white/70 font-bold text-xs -mt-1 animate-pulse">:</span>
+                                                                <div class="flex flex-col items-center bg-black/75 backdrop-blur-md border border-white/20 rounded-md px-1.5 py-1 min-w-[34px] sm:min-w-[38px] shadow-md">
+                                                                    <span class="text-xs sm:text-sm font-extrabold text-white leading-none font-mono">${toBn(pad(seconds))}</span>
+                                                                    <span class="text-[8px] text-gray-300 font-medium mt-0.5">সে.</span>
+                                                                </div>
+                                                            `;
                     });
                 }
 
