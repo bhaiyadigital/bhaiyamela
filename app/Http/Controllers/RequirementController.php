@@ -110,7 +110,7 @@ class RequirementController extends Controller
 
             return redirect()
                 ->back()
-                ->with('success', 'Your property requirement has been posted successfully. We will notify you soon!');
+                ->with('success', "Your information has been submitted successfully. Our team will contact you soon.\nWe appreciate your interest and look forward to helping you find your dream property!");
         } catch (\Exception $e) {
             Log::error('Requirement Saving Error: ' . $e->getMessage());
 
