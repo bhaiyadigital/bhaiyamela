@@ -20,8 +20,14 @@ use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\SupportTicketController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+
+// SEO & Sitemap Routes (Placed at top to prevent wildcard conflicts)
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots.txt');
+Route::get('/llms.txt', [SitemapController::class, 'llms'])->name('llms.txt');
 
 Auth::routes();
 
