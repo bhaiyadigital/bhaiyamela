@@ -264,6 +264,9 @@ class AppServiceProvider extends ServiceProvider
                 'start_date'       => ['label' => 'Start Date & Time',    'required' => true,  'show_in_table' => true,  'type' => 'datetime'],
                 'end_date'         => ['label' => 'End Date & Time',      'required' => true,  'show_in_table' => true,  'type' => 'datetime'],
                 'short'            => ['label' => 'Short Description', 'required' => false, 'show_in_table' => false, 'type' => 'text'],
+                'description_1'    => ['label' => 'Stall No',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
+                'description_2'    => ['label' => 'Discount Offers',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
+                'description_3'    => ['label' => 'Contact Number',        'required' => false, 'show_in_table' => false, 'type' => 'text'],
                 'description'          => ['label' => 'Description ', 'required' => false, 'type' => 'editor'],
 
                 'extra'            => ['label' => 'Select Projects',      'required' => false, 'show_in_table' => false, 'type' => 'project_multiple'],
