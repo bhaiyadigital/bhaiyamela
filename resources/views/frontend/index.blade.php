@@ -349,17 +349,17 @@
                                             <div class="absolute top-3 left-3 z-20">
                                                 @if($isOngoing)
                                                     <span
-                                                        class="inline-flex items-center gap-1.5 bg-emerald-600/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                                                        class="inline-flex items-center gap-1.5 bg-[#2c4294] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
                                                         <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Ongoing
                                                     </span>
                                                 @elseif($isUpcoming)
                                                     <span
-                                                        class="inline-flex items-center gap-1.5 bg-amber-600/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                                                        class="inline-flex items-center gap-1.5 bg-[#2c4294] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
                                                         <i class="fa-regular fa-clock text-xs"></i> Upcoming
                                                     </span>
                                                 @elseif($isCompleted)
                                                     <span
-                                                        class="inline-flex items-center gap-1.5 bg-gray-700/95 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                                                        class="inline-flex items-center gap-1.5 bg-[#2c4294] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
                                                         <i class="fa-solid fa-check text-xs"></i> Completed
                                                     </span>
                                                 @endif
