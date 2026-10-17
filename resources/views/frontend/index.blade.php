@@ -244,7 +244,7 @@
                                 class="inline-flex items-center gap-1.5 bg-[#2c4294]/10 border border-[#2c4294]/20 text-[#2c4294] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
                                 <i class="fa-solid fa-bullhorn text-xs"></i> Special Events
                             </span>
-                            <h2 class="text-2xl md:text-3xl font-bold text-[#111111]">
+                            <h2 class="text-sm md:text-2xl font-bold text-[#111111]">
                                 Ongoing & Upcoming Events
                             </h2>
                         </div>
@@ -262,19 +262,19 @@
                     <div class="flex justify-start overflow-x-auto pb-4 stall-filter-wrapper no-scrollbar">
                         <div class="flex gap-8 whitespace-nowrap">
                             <button type="button" data-campaign-filter="all" aria-pressed="true"
-                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-900 font-bold text-base md:text-base border-b-2 border-[#2c4294] active-filter transition-all duration-300">
+                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-900 font-bold text-xs md:text-base border-b-2 border-[#2c4294] active-filter transition-all duration-300">
                                 All
                             </button>
                             <button type="button" data-campaign-filter="ongoing" aria-pressed="false"
-                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
+                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-xs md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
                                 Ongoing
                             </button>
                             <button type="button" data-campaign-filter="upcoming" aria-pressed="false"
-                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
+                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-xs md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
                                 Upcoming
                             </button>
                             <button type="button" data-campaign-filter="completed" aria-pressed="false"
-                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
+                                class="campaign-filter-btn cursor-pointer pb-3 text-gray-700 font-bold text-xs md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
                                 Completed
                             </button>
                         </div>
@@ -333,7 +333,7 @@
                                                 <div
                                                     class="absolute left-1/2 -translate-x-1/2 bottom-2 z-20 flex flex-col items-center gap-1 bg-black/45 backdrop-blur-md p-1.5 rounded-xl border border-white/20 shadow-lg w-fit whitespace-nowrap">
                                                     <div
-                                                        class="inline-flex items-center gap-1 bg-red-700 text-white px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-wider uppercase shadow-md">
+                                                        class="inline-flex items-center gap-1 bg-red-700 text-white px-2.5 py-0.5 rounded-md text-[11px] md:text-[13px] font-bold tracking-wider uppercase shadow-md">
                                                         <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
                                                         শুরু হতে বাকি
                                                     </div>
@@ -349,7 +349,7 @@
                                             <div class="absolute top-3 left-3 z-20">
                                                 @if($isOngoing)
                                                     <span
-                                                        class="inline-flex items-center gap-1.5 bg-[#2c4294] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                                                        class="inline-flex items-center gap-1.5 bg-[#2c4294] text-white px-3 py-1 rounded-full text-xs  font-bold shadow-md">
                                                         <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Ongoing
                                                     </span>
                                                 @elseif($isUpcoming)
@@ -458,7 +458,7 @@
                             class="inline-flex items-center gap-1.5 bg-[#000678]/10 border border-[#000678]/20 text-[#000678] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
                             <i class="fa-solid fa-fire text-xs"></i> Featured
                         </span>
-                        <h2 class="text-2xl md:text-3xl font-bold text-[#111111]">
+                        <h2 class="text-sm md:text-2xl font-bold text-[#111111]">
                             Choose Your Preferred Property
                         </h2>
                     </div>
@@ -478,12 +478,12 @@
                 <div class="flex justify-start overflow-x-auto pb-4 stall-filter-wrapper">
                     <div class="flex gap-8  whitespace-nowrap ">
                         <button data-filter="all" aria-pressed="true"
-                            class="cursor-pointer filter-btn pb-3 text-gray-900 font-bold text-base md:text-base border-b-2 border-[#2c4294] active-filter transition-all duration-300">
+                            class="cursor-pointer filter-btn pb-3 text-gray-900 font-bold text-xs md:text-base border-b-2 border-[#2c4294] active-filter transition-all duration-300">
                             All
                         </button>
                         @foreach ($categories as $cat)
                             <button data-filter="{{ $cat->id }}" aria-pressed="false"
-                                class="cursor-pointer filter-btn pb-3 text-gray-700 font-bold text-base md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
+                                class="cursor-pointer filter-btn pb-3 text-gray-700 font-bold text-xs md:text-base border-b-2 border-transparent hover:text-gray-900 transition-all duration-300">
                                 {{ $cat->title }}
                             </button>
                         @endforeach
