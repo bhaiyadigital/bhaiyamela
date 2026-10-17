@@ -497,7 +497,7 @@
                                     <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
                                         <span class="small fw-bold text-dark">
                                             <i class="bi bi-building-check me-1 text-primary"></i> 
-                                            প্রজেক্ট নির্বাচন করুন (মোট প্রজেক্ট: {{ $allProjects->count() }} টি)
+                                            Select Projects (Total Projects: {{ $allProjects->count() }})
                                         </span>
                                         <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-outline-primary btn-sm py-0" id="btn-select-all-projects">Select All</button>
@@ -509,7 +509,7 @@
                                         <div class="mb-2">
                                             <div class="input-group input-group-sm">
                                                 <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                                                <input type="text" id="campaign-project-search" class="form-control" placeholder="প্রজেক্ট বা কোম্পানির নাম দিয়ে খুঁজুন...">
+                                                <input type="text" id="campaign-project-search" class="form-control" placeholder="Search by project or company name...">
                                             </div>
                                         </div>
 
@@ -535,13 +535,13 @@
                                                 </div>
                                                 @empty
                                                 <div class="col-12 text-center py-4 text-muted small">
-                                                    কোনো প্রজেক্ট পাওয়া যায়নি।
+                                                    No projects found.
                                                 </div>
                                                 @endforelse
                                             </div>
                                         </div>
                                         <small class="text-muted mt-1 d-block" style="font-size: 0.75rem;">
-                                            <i class="bi bi-info-circle me-1"></i> টিকচিহ্ন দিয়ে আপনি একাধিক প্রজেক্ট এই ক্যাম্পেইনে যুক্ত করতে পারবেন।
+                                            <i class="bi bi-info-circle me-1"></i> Check the boxes to associate multiple projects with this campaign.
                                         </small>
                                     </div>
                                 </div>

@@ -1,12 +1,16 @@
 @extends('layouts.front')
 
 @section('meta')
+    @php
+        $preloadBannerImage = $campaign->img_path ? asset('storage/' . $campaign->img_path) : asset('assets/images/placeholder.webp');
+    @endphp
+    <link rel="preload" as="image" href="{{ $preloadBannerImage }}" fetchpriority="high">
     @include('frontend.partials.meta', [
         'pageKey' => 'campaign',
         'title' => ($campaign->meta_title ?? $campaign->title) . ' | Bhaiya Mela',
         'description' => $campaign->meta_description ?? $campaign->short ?? Str::limit(strip_tags($campaign->description), 150),
         'keywords' => $campaign->meta_keywords ?? 'campaign, bhaiya mela, real estate expo',
-        'image' => $campaign->img_path ? asset('storage/' . $campaign->img_path) : asset('assets/images/placeholder.webp')
+        'image' => $preloadBannerImage
     ])
 @endsection
 
@@ -66,7 +70,7 @@
     <!-- HERO / BANNER SECTION -->
     <section class="relative overflow-hidden py-10 md:py-16 bg-gray-50 text-gray-900">
         <!-- Campaign thumbnail as blurred background with reduced opacity -->
-        <img src="{{ $bannerImage }}" alt=""
+        <img src="{{ $bannerImage }}" alt="" aria-hidden="true" loading="lazy" decoding="async"
             class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
             style="filter: blur(8px); opacity: 0.50; transform: scale(1.08);">
         <!-- Light overlay so text remains readable -->
@@ -79,6 +83,7 @@
                 <div class="w-full sm:w-72 md:w-80 flex-shrink-0">
                     <div class="relative aspect-[16/11] sm:aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200 bg-gray-100 group">
                         <img src="{{ $bannerImage }}" alt="{{ $campaign->title }}"
+                            width="320" height="240" fetchpriority="high" decoding="async"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
 
                         <!-- Status Badge on Poster -->
@@ -319,23 +324,36 @@
                         <input type="hidden" name="campaign_id" value="{{ $campaign->id }}">
                         <input type="hidden" name="recaptcha_token" id="campaign_recaptcha_token">
 
-                        <input type="text" name="lead_name" placeholder="আপনার নাম লিখুন" required
-                            value="{{ old('lead_name', auth()->check() ? auth()->user()->name : '') }}"
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 @error('lead_name') border-red-400 @enderror">
+                        <div>
+                            <label for="lead_name" class="sr-only">আপনার নাম</label>
+                            <input type="text" id="lead_name" name="lead_name" placeholder="আপনার নাম লিখুন" required
+                                aria-label="আপনার নাম"
+                                value="{{ old('lead_name', auth()->check() ? auth()->user()->name : '') }}"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 @error('lead_name') border-red-400 @enderror">
+                        </div>
 
-                        <input type="tel" name="lead_phone" placeholder="ফোন নম্বর লিখুন" required
-                            value="{{ old('lead_phone', auth()->check() ? auth()->user()->phone : '') }}"
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 @error('lead_phone') border-red-400 @enderror">
+                        <div>
+                            <label for="lead_phone" class="sr-only">ফোন নম্বর</label>
+                            <input type="tel" id="lead_phone" name="lead_phone" placeholder="ফোন নম্বর লিখুন" required
+                                aria-label="ফোন নম্বর"
+                                value="{{ old('lead_phone', auth()->check() ? auth()->user()->phone : '') }}"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 @error('lead_phone') border-red-400 @enderror">
+                        </div>
 
-                        <input type="email" name="lead_email" placeholder="ইমেইল (ঐচ্ছিক)"
-                            value="{{ old('lead_email', auth()->check() ? auth()->user()->email : '') }}"
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                        <div>
+                            <label for="lead_email" class="sr-only">ইমেইল (ঐচ্ছিক)</label>
+                            <input type="email" id="lead_email" name="lead_email" placeholder="ইমেইল (ঐচ্ছিক)"
+                                aria-label="ইমেইল (ঐচ্ছিক)"
+                                value="{{ old('lead_email', auth()->check() ? auth()->user()->email : '') }}"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
+                        </div>
 
                         {{-- Optional: Project selector --}}
                         @if($projects->isNotEmpty())
                             <div>
-                                <label class="block text-xs font-semibold text-gray-500 mb-1.5">কোন প্রজেক্ট সম্পর্কে জানতে চান? <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
-                                <select name="project_id"
+                                <label for="inquiry_project_id" class="block text-xs font-semibold text-gray-500 mb-1.5">কোন প্রজেক্ট সম্পর্কে জানতে চান? <span class="text-gray-400 font-normal">(ঐচ্ছিক)</span></label>
+                                <select id="inquiry_project_id" name="project_id"
+                                    aria-label="প্রজেক্ট নির্বাচন করুন"
                                     class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 cursor-pointer">
                                     <option value="">— প্রজেক্ট নির্বাচন করুন —</option>
                                     @foreach($projects as $proj)
@@ -345,12 +363,17 @@
                             </div>
                         @endif
 
-                        <textarea name="lead_message" rows="3" placeholder="আপনার বার্তা লিখুন..."
-                            class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', $campaign->title . ' সম্পর্কে বিস্তারিত জানতে চাই।') }}</textarea>
+                        <div>
+                            <label for="lead_message" class="sr-only">আপনার বার্তা</label>
+                            <textarea id="lead_message" name="lead_message" rows="3" placeholder="আপনার বার্তা লিখুন..."
+                                aria-label="আপনার বার্তা"
+                                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message', $campaign->title . ' সম্পর্কে বিস্তারিত জানতে চাই।') }}</textarea>
+                        </div>
 
                         <button type="button" id="campaignInquirySubmitBtn"
+                            aria-label="বার্তা পাঠান"
                             class="w-full bg-[#2c4294] hover:bg-[#152960] text-white py-3 rounded-xl font-bold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                            <i class="fa-solid fa-paper-plane text-xs" aria-hidden="true"></i>
                             <span>মেসেজ পাঠান</span>
                         </button>
                     </form>
@@ -366,6 +389,7 @@
                                 <a href="{{ route('campaign.details', $oc->slug) }}" class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all group">
                                     <div class="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                                         <img src="{{ $oc->img_path ? asset('storage/' . $oc->img_path) : asset('assets/images/placeholder.webp') }}"
+                                            width="56" height="56" loading="lazy" decoding="async"
                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform" alt="{{ $oc->title }}">
                                     </div>
                                     <div class="min-w-0">

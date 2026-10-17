@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 'module_name' => ['label' => 'Hero', 'icon' => 'bi bi-image'],
                 'title'            => ['label' => 'Title',                'required' => true,  'show_in_table' => true,  'type' => 'text'],
                 'img_path'         => ['label' => 'Slider Image',     'required' => false, 'show_in_table' => false, 'type' => 'image'],
+                'url'              => ['label' => 'Link URL',             'required' => false, 'show_in_table' => false, 'type' => 'url'],
                 'status'           => ['label' => 'Status',               'required' => true,  'show_in_table' => true,  'type' => 'select'],
             ],
             // 'login-benefits' => [
