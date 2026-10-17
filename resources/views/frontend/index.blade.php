@@ -222,29 +222,10 @@
 
         $now = now();
 
-        $bnDigits = ['0' => '০', '1' => '১', '2' => '২', '3' => '৩', '4' => '৪', '5' => '৫', '6' => '৬', '7' => '৭', '8' => '৮', '9' => '৯'];
-        $bnMonths = [
-            'January' => 'জানুয়ারি',
-            'February' => 'ফেব্রুয়ারি',
-            'March' => 'মার্চ',
-            'April' => 'এপ্রিল',
-            'May' => 'মে',
-            'June' => 'জুন',
-            'July' => 'জুলাই',
-            'August' => 'আগস্ট',
-            'September' => 'সেপ্টেম্বর',
-            'October' => 'অক্টোবর',
-            'November' => 'নভেম্বর',
-            'December' => 'ডিসেম্বর',
-        ];
-        $formatBnDate = function ($date) use ($bnDigits, $bnMonths) {
+        $formatDate = function ($date) {
             if (!$date)
                 return '';
-            $c = \Carbon\Carbon::parse($date);
-            $d = strtr($c->format('d'), $bnDigits);
-            $m = $bnMonths[$c->format('F')] ?? $c->format('M');
-            $y = strtr($c->format('Y'), $bnDigits);
-            return "{$d} {$m}, {$y}";
+            return \Carbon\Carbon::parse($date)->format('d M, Y');
         };
     @endphp
 
@@ -261,10 +242,10 @@
                         <div class="text-left">
                             <span
                                 class="inline-flex items-center gap-1.5 bg-[#2c4294]/10 border border-[#2c4294]/20 text-[#2c4294] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
-                                <i class="fa-solid fa-bullhorn text-xs"></i> স্পেশাল ইভেন্ট
+                                <i class="fa-solid fa-bullhorn text-xs"></i> Special Events
                             </span>
                             <h2 class="text-2xl md:text-3xl font-bold text-[#111111]">
-                                চলমান এবং আসন্ন ইভেন্টসমূহ
+                                Ongoing & Upcoming Events
                             </h2>
                         </div>
 
@@ -272,7 +253,7 @@
                         <div class="hidden lg:block mb-1">
                             <span
                                 class="text-xs font-bold text-[#2c4294] bg-[#2c4294]/10 border border-[#2c4294]/20 px-3.5 py-1.5 rounded-full">
-                                মোট {{ strtr((string) $campaignList->count(), $bnDigits) }}টি ইভেন্ট
+                                Total {{ $campaignList->count() }} Events
                             </span>
                         </div>
                     </div>
@@ -332,7 +313,6 @@
                                     }
                                     $pIds = is_array($pIds) ? array_map('intval', $pIds) : [];
                                     $projCount = count($pIds);
-                                    $bnProjCount = strtr((string) $projCount, $bnDigits);
 
                                     $imageSrc = $camp->img_path ? asset('storage/' . $camp->img_path) : asset('assets/images/placeholder.webp');
                                 @endphp
@@ -344,6 +324,7 @@
                                         <!-- Image Area -->
                                         <div class="relative overflow-hidden bg-gray-100">
                                             <img src="{{ $imageSrc }}"
+                                                width="400" height="275" loading="lazy" decoding="async"
                                                 class="w-auto h-full object-cover transition-transform duration-700 group-hover:scale-105 {{ $isUpcoming ? 'brightness-90' : '' }}"
                                                 alt="{{ $camp->title }}" />
 
@@ -352,7 +333,7 @@
                                                 <div
                                                     class="absolute left-1/2 -translate-x-1/2 bottom-2 z-20 flex flex-col items-center gap-1 bg-black/45 backdrop-blur-md p-1.5 rounded-xl border border-white/20 shadow-lg w-fit whitespace-nowrap">
                                                     <div
-                                                        class="inline-flex items-center gap-1 bg-red-600 text-white px-2 py-0.5 rounded-md text-[9px] font-bold tracking-wider uppercase shadow-md">
+                                                        class="inline-flex items-center gap-1 bg-red-700 text-white px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-wider uppercase shadow-md">
                                                         <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
                                                         শুরু হতে বাকি
                                                     </div>
@@ -408,11 +389,11 @@
                                                 <i class="fa-regular fa-calendar-days text-[#2c4294]"></i>
                                                 <span class="line-clamp-1">
                                                     @if($start && $end)
-                                                        {{ $formatBnDate($start) }} - {{ $formatBnDate($end) }}
+                                                        {{ $formatDate($start) }} - {{ $formatDate($end) }}
                                                     @elseif($start)
-                                                        {{ $formatBnDate($start) }} থেকে শুরু
+                                                        Starts from {{ $formatDate($start) }}
                                                     @else
-                                                        তারিখ শীঘ্রই জানানো হবে
+                                                        Date to be announced soon
                                                     @endif
                                                 </span>
                                             </div>
@@ -422,13 +403,13 @@
                                                 class="border-t border-gray-100 pt-3 mt-auto flex justify-between items-center text-xs">
                                                 <span class="text-gray-600 font-semibold flex items-center gap-1">
                                                     <i class="fa-solid fa-list-check text-[#2c4294]"></i>
-                                                    <span>প্রজেক্ট সংখ্যা: <strong
-                                                            class="text-[#2c4294] font-bold">{{ $bnProjCount }}</strong> টি</span>
+                                                    <span>Projects: <strong
+                                                            class="text-[#2c4294] font-bold">{{ $projCount }}</strong></span>
                                                 </span>
 
                                                 <span
                                                     class="text-[#2c4294] font-bold inline-flex items-center gap-1 group-hover:underline">
-                                                    বিস্তারিত
+                                                    Details
                                                     <i
                                                         class="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
                                                 </span>
@@ -439,7 +420,7 @@
                                     </a>
                                 </div>
                             @empty
-                                <p class="col-span-full text-center text-gray-600 py-10">কোন ইভেন্ট পাওয়া যায়নি।</p>
+                                <p class="col-span-full text-center text-gray-600 py-10">No events found.</p>
                             @endforelse
                         </div>
 
@@ -455,7 +436,7 @@
 
                 <!-- Empty Notice for Tab Filtering -->
                 <div id="campaign-empty-notice" class="hidden text-center py-10 text-gray-600">
-                    কোন ইভেন্ট পাওয়া যায়নি।
+                    No events found.
                 </div>
 
             </div>
@@ -475,10 +456,10 @@
                     <div class="text-left">
                         <span
                             class="inline-flex items-center gap-1.5 bg-[#000678]/10 border border-[#000678]/20 text-[#000678] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
-                            <i class="fa-solid fa-fire text-xs"></i> ফিচার্ড
+                            <i class="fa-solid fa-fire text-xs"></i> Featured
                         </span>
                         <h2 class="text-2xl md:text-3xl font-bold text-[#111111]">
-                            আপনার পছন্দের প্রপার্টি বেছে নিন
+                            Choose Your Preferred Property
                         </h2>
                     </div>
 
@@ -486,7 +467,7 @@
                     <div class="hidden lg:block mb-1">
                         <a href="{{ route('web.project') }}"
                             class="inline-flex items-center gap-1.5 text-[#2c4294] font-bold text-sm hover:underline transition-all group">
-                            সবগুলো দেখুন
+                            View All
                             <i
                                 class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                         </a>
@@ -526,7 +507,7 @@
                             </div>
                         @empty
                             <!-- IMPROVED: Changed text-gray-400 to text-gray-600 for contrast compliance -->
-                            <p class="col-span-full text-center text-gray-600 py-10">কোন প্রকল্প পাওয়া যায়নি।</p>
+                            <p class="col-span-full text-center text-gray-600 py-10">No projects found.</p>
                         @endforelse
                     </div>
 
@@ -543,7 +524,7 @@
             <div class="flex justify-center mt-0 lg:hidden">
                 <a href="{{ route('web.project') }}" aria-label="View all projects"
                     class="inline-flex items-center gap-3 px-8 py-2.5 border border-[#2c4294] text-[#2c4294] rounded-lg font-bold hover:bg-[#2c4294] hover:text-white transition-all duration-300 group">
-                    সবগুলো দেখুন
+                    View All
                     <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
@@ -730,20 +711,20 @@
                 <div class="text-left">
                     <span
                         class="inline-flex items-center gap-1.5 bg-[#000678]/10 border border-[#000678]/20 text-[#000678] px-3 py-1 rounded-full text-xs font-bold mb-1.5">
-                        <i class="fa-solid fa-book-open text-xs"></i> আমাদের জার্নাল থেকে
+                        <i class="fa-solid fa-book-open text-xs"></i> From Our Journal
                     </span>
                     <h2 class="text-2xl md:text-3xl font-bold text-[#111111] mb-1">
-                        আমাদের ব্লগ এক্সপ্লোর করুন</span>
+                        Explore Our Blog
                     </h2>
                     <p class="text-gray-600 text-sm md:text-base max-w-xl">
-                        আমাদের রিসোর্টের দৃশ্য ও শব্দে নিজেকে হারিয়ে ফেলুন। একটি ভার্চুয়াল ট্যুর নিন
+                        Lose yourself in the sights and sounds of our spaces. Take a virtual tour
                     </p>
                 </div>
 
                 <div class="hidden lg:block mb-1 whitespace-nowrap">
                     <a href="{{ route('web.blog') }}" aria-label="Visit our blog"
                         class="inline-flex items-center gap-1.5 text-[#2c4294] font-bold text-sm hover:underline transition-all group">
-                        আরও দেখুন
+                        View More
                         <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
@@ -784,7 +765,7 @@
                                                 $wordCount = str_word_count(strip_tags($blog->body));
                                                 $minutes = ceil($wordCount / 200);
                                                 @endphp
-                                                {{ $minutes == 0 ? 1 : $minutes }} মিনিট পড়ার সময়
+                                                {{ $minutes == 0 ? 1 : $minutes }} min read
                                             </span>
                                         </div>
                                     </div>
@@ -795,7 +776,7 @@
                                     </h3>
 
                                     <span class="inline-flex items-center gap-1.5 text-[#2c4294] font-extrabold text-sm">
-                                        আর্টিকেল পড়ুন
+                                        Read Article
                                         <i
                                             class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                                     </span>
@@ -806,7 +787,7 @@
                                     class="px-5 md:px-6 py-4 border-t border-gray-100 flex items-center justify-between gap-3 mt-auto">
                                     <div class="flex items-center gap-2 overflow-hidden">
                                         <img src="{{ asset($blog->company?->company_logo ? 'storage/' . $blog->company->company_logo : 'assets/images/logo.png') }}"
-                                            class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shadow-sm"
+                                             class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shadow-sm"
                                             alt="Author" />
                                         <div class="leading-tight overflow-hidden">
                                             <h4 class="text-xs md:text-sm font-bold text-gray-900 truncate">
@@ -828,7 +809,7 @@
                             </a>
                         </div>
                         @empty
-                        <p class="col-span-full text-center text-gray-400">কোন ব্লগ পোস্ট পাওয়া যায়নি।</p>
+                        <p class="col-span-full text-center text-gray-400">No blog posts found.</p>
                         @endforelse
 
                     </div>
@@ -841,7 +822,7 @@
             <div class="flex justify-center mt-0 lg:hidden">
                 <a href="{{ route('web.blog') }}" aria-label="Visit our blog"
                     class="inline-flex items-center gap-3 px-8 py-2.5 border border-[#2c4294] text-[#2c4294] rounded-lg font-bold hover:bg-[#2c4294] hover:text-white transition-all duration-300 group">
-                    আরও দেখুন
+                    View More
                     <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
@@ -862,22 +843,22 @@
             </div>
 
             <!-- Dynamic Header Title -->
-            <h4 id="confirmModalTitle" class="font-extrabold text-gray-800 text-lg mb-2">আপনি কি নিশ্চিত?</h4>
+            <h4 id="confirmModalTitle" class="font-extrabold text-gray-800 text-lg mb-2">Are you sure?</h4>
 
             <!-- Dynamic Description Text -->
             <p id="confirmModalText" class="text-gray-600 text-xs leading-relaxed mb-6">
-                আপনি কি সত্যিই এই কাজটি করতে চান?
+                Do you really want to perform this action?
             </p>
 
             <!-- Action Buttons (Cancel & Dynamic Confirm) -->
             <div class="flex gap-3">
                 <button type="button" onclick="closeConfirmModal()"
                     class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">
-                    বাতিল
+                    Cancel
                 </button>
                 <button type="button" id="confirmModalBtn" onclick="executeConfirmAction()"
                     class="w-1/2 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-red-500/10">
-                    হ্যাঁ, মুছে ফেলুন
+                    Yes, Delete
                 </button>
             </div>
 
@@ -901,14 +882,14 @@
 
             <p
                 class="text-white text-base md:text-lg lg:text-xl font-extrabold uppercase tracking-wider text-center md:text-left">
-                আপনার ইনবক্সে ম্যাচিং প্রপার্টি পান
+                Get Matching Properties In Your Inbox
             </p>
 
             <div class="flex-shrink-0">
                 <!-- IMPROVED: hover:text-[#2ba351] changed to hover:text-[#2c4294] -->
                 <a href="{{ route('requirements.create') }}"
                     class="inline-block border border-white hover:bg-white hover:text-[#2c4294] text-white px-5 py-2.5 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-wider transition-all">
-                    আপনার চাহিদা আমাদের জানান
+                    Share Your Requirement With Us
                 </a>
             </div>
 
@@ -1305,7 +1286,7 @@
                         const diff = target - now;
 
                         if (diff <= 0) {
-                            el.innerHTML = '<span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg"><span class="w-2 h-2 rounded-full bg-white animate-ping"></span>ইভেন্ট শুরু হয়েছে!</span>';
+                            el.innerHTML = '<span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg"><span class="w-2 h-2 rounded-full bg-white animate-ping"></span>ইভেন্ট শুরু হয়েছে!</span>';
                             return;
                         }
 

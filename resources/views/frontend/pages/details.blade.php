@@ -15,13 +15,13 @@
             <div class="flex gap-2 text-base py-2 border-gray-100">
 
                 <a href="{{ url('/') }}" class="text-gray-600 hover:text-black">
-                    হোম
+                    Home
                 </a>
 
                 <span class="text-gray-300">›</span>
 
                 <a href="{{ route('web.project') ?? '#' }}" class="text-gray-600 hover:text-black">
-                    প্রপার্টিজ
+                    Properties
                 </a>
 
                 @if($project->category)
@@ -54,7 +54,7 @@
                     target="_blank"
                     class="inline-flex items-center gap-1.5 bg-amber-700 hover:bg-amber-800 text-white text-xs md:text-sm font-bold px-3.5 py-2 rounded-xl shadow-sm transition-all hover:shadow">
                     <i class="fa-solid fa-pen-to-square"></i>
-                    <span>এডিট প্রজেক্ট</span>
+                    <span>Edit Project</span>
                 </a>
             @endif
         </div>
@@ -121,49 +121,49 @@
                         @if(!empty($featuresList))
                             <a href="#section-overview"
                                 class="tab-link px-4 py-2.5 bg-[#2c4294] text-white rounded-xl text-xs md:text-base font-extrabold border border-[#2c4294] shadow-sm shadow-[#2c4294]/10 hover:opacity-95 transition-all whitespace-nowrap">
-                                ওভারভিউ
+                                Overview
                             </a>
                         @endif
 
                         @if(!empty($extraFeatures) && is_array($extraFeatures))
                             <a href="#section-features"
                                 class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                                বৈশিষ্ট্য
+                                Features
                             </a>
                         @endif
 
                         @if($project->description)
                             <a href="#section-description"
                                 class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                                বিবরণ
+                                Description
                             </a>
                         @endif
 
                         @if(!empty($floorPlans))
                             <a href="#section-floor-plan"
                                 class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                                ফ্লোর প্ল্যান
+                                Floor Plan
                             </a>
                         @endif
 
                         @if(!empty($locationViews))
                             <a href="#section-location-view"
                                 class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                                লোকেশন ভিউ
+                                Location View
                             </a>
                         @endif
 
                         @if(!empty($project->video_path))
                             <a href="#section-video"
                                 class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                                ভিডিও
+                                Video
                             </a>
                         @endif
 
                         @if($isValidEmbed)
                             <a href="#section-map-view"
                                 class="tab-link px-4 py-2.5 bg-gray-50 text-gray-600 rounded-xl text-xs md:text-base font-extrabold border border-gray-100 hover:bg-gray-100 hover:text-gray-900 transition-all whitespace-nowrap">
-                                ম্যাপ ভিউ
+                                Map View
                             </a>
                         @endif
 
@@ -191,11 +191,11 @@
                         <div class="grid grid-cols-3 gap-2 text-center pt-2 mb-5">
                             <div class="flex flex-col items-center">
                                 <i class="fa-solid fa-bed text-xl text-gray-600 mb-2"></i>
-                                <span class="text-base font-bold text-gray-800">{{ $bedrooms }} বেড</span>
+                                <span class="text-base font-bold text-gray-800">{{ $bedrooms }} Beds</span>
                             </div>
                             <div class="flex flex-col items-center border-x border-gray-100">
                                 <i class="fa-solid fa-bath text-xl text-gray-600 mb-2"></i>
-                                <span class="text-base font-bold text-gray-800">{{ $baths }} বাথ</span>
+                                <span class="text-base font-bold text-gray-800">{{ $baths }} Baths</span>
                             </div>
                             <div class="flex flex-col items-center">
                                 <i class="fa-solid fa-ruler-combined text-xl text-gray-600 mb-2"></i>
@@ -206,7 +206,7 @@
                         @if(!empty($featuresList))
                             <div class="border-t border-gray-100 pt-5">
 
-                                <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> প্রপার্টি ওভারভিউ
+                                <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> Property Overview
                                 </p>
                                 <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
@@ -243,7 +243,7 @@
                     <div id="section-features"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
 
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> প্রপার্টির বৈশিষ্ট্য
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> Property Features
                         </p>
                         <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-4">
@@ -265,7 +265,7 @@
                     <div id="section-description"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
 
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">প্রপার্টির বিবরণ
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">Property Description
                         </p>
                         <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
                         <div class="prose max-w-none text-gray-600 text-base leading-relaxed space-y-4">
@@ -277,7 +277,7 @@
                 {{-- @if(!empty($project->virtual_tour))
                 <div id="section-virtual-tour"
                     class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                    <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">৩৬০° ভার্চুয়াল ট্যুর</p>
+                    <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">360° Virtual Tour</p>
                     <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                     <div id="panorama-viewer" class="w-full rounded-xl overflow-hidden shadow-lg bg-gray-900"
@@ -287,13 +287,13 @@
 
                 @if(!empty($floorPlans) && count($floorPlans) > 0)
                     <div id="section-floor-plan" class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">ফ্লোর প্ল্যান</p>
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">Floor Plan</p>
                         <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                         <div class="flex flex-wrap gap-4">
                             @foreach($floorPlans as $index => $path)
                                 @if(!empty($path))
-                                    <!-- data-lightbox-index কাস্টম এট্রিবিউট যুক্ত করা হয়েছে -->
+                                    <!-- data-lightbox-index custom attribute -->
                                     <div class="w-24 h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 cursor-pointer transition-transform hover:scale-[1.02] shadow-sm"
                                         data-lightbox-index="{{ $index }}">
                                         <img src="{{ asset('storage/' . $path) }}"
@@ -308,7 +308,7 @@
                 @if(!empty($locationViews) && count($locationViews) > 0)
                     <div id="section-location-view"
                         class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">লোকেশন ভিউ</p>
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">Location View</p>
                         <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                         <div class="flex flex-wrap gap-4">
@@ -398,7 +398,7 @@
                 @if(!empty($project->video_path))
                     <div id="section-video"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm mb-6">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">প্রপার্টি ভিডিও</p>
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2">Property Video</p>
                         <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
 
                         <div class="relative w-full rounded-xl overflow-hidden shadow-lg bg-black group"
@@ -412,8 +412,7 @@
                                     <i class="fa-solid fa-play text-xl md:text-xl ml-1"></i>
                                 </div>
                                 <span
-                                    class="text-white text-xs font-bold uppercase tracking-wider mt-4 drop-shadow-md tracking-widest">ভিডিও
-                                    ট্যুর দেখুন</span>
+                                    class="text-white text-xs font-bold uppercase tracking-wider mt-4 drop-shadow-md tracking-widest">Watch Video Tour</span>
                             </div>
 
                             <!-- মেইন HTML5 ভিডিও ট্যাগ (অটোমেটিক মিউটেড প্রিভিউ রাখা হয়নি, ক্লিক করলেই প্লে হবে) -->
@@ -429,7 +428,7 @@
                 @if($isValidEmbed)
                     <div id="section-map-view"
                         class="scroll-mt-16 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
-                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> ম্যাপ ভিউ
+                        <p class="font-bold text-gray-800 text-lg uppercase tracking-wider mb-2"> Map View
                         </p>
                         <div class="w-16 h-1 bg-[#2c4294] mb-5"></div>
                         <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100" style="height: 350px;">
@@ -448,7 +447,7 @@
 
                 <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                     <h2 class="text-center font-bold text-gray-600 text-sm md:text-base border-b border-gray-100 pb-3 mb-4 tracking-wider uppercase">
-                        {{ $project->category?->short ?: ($project->title . ' এর জন্য যোগাযোগ করুন') }}
+                        {{ $project->category?->short ?: ('Contact for ' . $project->title) }}
                     </h2>
 
 
@@ -461,64 +460,64 @@
 
 
 
-                            <input type="text" name="lead_name" placeholder="আপনার নাম লিখুন" required
+                            <input type="text" name="lead_name" placeholder="Enter your name" required
                                 aria-label="Enter Your Name"
                                 value="{{ auth()->check() ? auth()->user()->name : old('lead_name') }}"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
-                            <input type="email" name="lead_email" placeholder="আপনার ইমেইল লিখুন"
+                            <input type="email" name="lead_email" placeholder="Enter your email"
                                 aria-label="Enter Your E-mail"
                                 value="{{ auth()->check() ? auth()->user()->email : old('lead_email') }}"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
-                            <input type="tel" name="lead_phone" placeholder="আপনার ফোন নম্বর লিখুন" required
+                            <input type="tel" name="lead_phone" placeholder="Enter your phone number" required
                                 aria-label="Enter Your Phone"
                                 value="{{ auth()->check() ? auth()->user()->phone : old('lead_phone') }}"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
                             <div class="flex gap-2">
-                                <input type="text" name="lead_job_title" placeholder="পদের নাম" aria-label="Job Title"
+                                <input type="text" name="lead_job_title" placeholder="Job Title" aria-label="Job Title"
                                     class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
-                                <input type="text" name="lead_company" placeholder="কোম্পানি" aria-label="Company"
+                                <input type="text" name="lead_company" placeholder="Company" aria-label="Company"
                                     class="w-1/2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
                             </div>
 
-                            <input type="text" name="lead_budget" placeholder="আনুমানিক বাজেট" aria-label="Estimated Budget"
+                            <input type="text" name="lead_budget" placeholder="Estimated Budget" aria-label="Estimated Budget"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
 
                             <select name="lead_investment_time" aria-label="When Planning to Invest"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700">
-                                <option value="" disabled selected>কবে বিনিয়োগের পরিকল্পনা করছেন?</option>
-                                <option value="Within 15 Days">১৫ দিনের মধ্যে</option>
-                                <option value="Within 1 Month">১ মাসের মধ্যে</option>
-                                <option value="Within 1-3 Months">১-৩ মাসের মধ্যে</option>
-                                <option value="After 3 Months">৩ মাসের পর</option>
+                                <option value="" disabled selected>When are you planning to invest?</option>
+                                <option value="Within 15 Days">Within 15 Days</option>
+                                <option value="Within 1 Month">Within 1 Month</option>
+                                <option value="Within 1-3 Months">Within 1-3 Months</option>
+                                <option value="After 3 Months">After 3 Months</option>
                             </select>
 
-                            <textarea name="lead_message" rows="3" placeholder="আপনার মেসেজ লিখুন" required
+                            <textarea name="lead_message" rows="3" placeholder="Write your message" required
                                 aria-label="Please type your message"
                                 class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#2c4294]/20 transition-all text-gray-700 resize-none">{{ old('lead_message') }}</textarea>
 
                             <button type="submit" id="leadSubmitBtn"
                                 class="cursor-pointer w-full bg-[#2c4294] hover:bg-[#1a285a] text-white py-3 rounded-xl font-bold text-lg transition-all active:scale-[0.98]">
-                                মেসেজ পাঠান
+                                Send Message
                             </button>
 
                             <div class="text-[11px] text-gray-500 text-center leading-relaxed mt-2.5 flex items-center justify-center gap-1 flex-wrap">
                                 <i class="fa-solid fa-shield-halved text-[#2c4294] text-[11px]"></i>
-                                <span>reCAPTCHA দ্বারা সুরক্ষিত — গুগলের</span>
-                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#1a285a]">গোপনীয়তা নীতি</a>
-                                <span>ও</span>
-                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#1a285a]">শর্তাবলী</a>
+                                <span>Protected by reCAPTCHA — Google's</span>
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#1a285a]">Privacy Policy</a>
+                                <span>and</span>
+                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#2c4294] underline hover:text-[#1a285a]">Terms of Service</a>
                             </div>
                         </form>
                         @if($project->company)
                             <div class="flex justify-between items-center text-xs mt-4 px-1">
-                                <span class="text-gray-600">শর্তাবলী প্রযোজ্য</span>
+                                <span class="text-gray-600">Terms & Conditions Apply</span>
 
                                 <a href="{{ route('web.project', ['company' => $project->company->slug]) }}"
                                     class="font-extrabold text-[#2c4294] hover:underline flex items-center gap-1">
-                                    আরও প্রপার্টি... <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"
+                                    More Properties... <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"
                                         aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -529,7 +528,7 @@
                 @if($similarProjects->isNotEmpty())
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
                         <h2 class="text-sm font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                            একই ধরনের প্রপার্টি
+                            Similar Properties
                         </h2>
                         <div class="flex flex-col gap-4">
                             @foreach($similarProjects as $simProject)
@@ -563,7 +562,7 @@
                 @if($recentProjects->isNotEmpty())
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
                         <h2 class="text-sm font-bold text-gray-600 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wider">
-                            সম্প্রতি দেখেছেন
+                            Recently Viewed
                         </h2>
                         <div class="flex flex-col gap-4">
                             @foreach($recentProjects as $recProject)
@@ -667,7 +666,7 @@
                         showAlertModal(result.message || defaultSuccess, "success", "Thank you for your interest!");
                         form.reset();
                     } else {
-                        let errorMsg = result.message || "কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।";
+                        let errorMsg = result.message || "Something went wrong, please try again.";
                         if (result.errors) {
                             errorMsg = Object.values(result.errors).map(err => err[0]).join("\n");
                         }
@@ -675,7 +674,7 @@
                     }
                 } catch (error) {
                     console.error("Lead form error:", error);
-                    showAlertModal("কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।", "error");
+                    showAlertModal("Something went wrong, please try again.", "error");
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;

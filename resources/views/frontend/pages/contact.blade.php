@@ -21,9 +21,9 @@
                         <i class="fa-solid fa-building text-lg text-gray-700"></i>
                     </div>
                     <div class="flex flex-col">
-                        <h4 class="text-xl font-bold text-gray-900">প্রধান কার্যালয়</h4>
+                        <h4 class="text-xl font-bold text-gray-900">Head Office</h4>
                         <p class="text-gray-600 text-base md:text-base">
-                            {{ $setting->address ?? 'সন্দ্বীপ ভবন, ২৮/এ-৩, টয়েনবি সার্কুলার রোড, মতিঝিল বা/এ, ঢাকা' }}
+                            {{ $setting->address ?? 'Sandwip Bhaban, 28/A-3, Toyenbee Circular Road, Motijheel C/A, Dhaka' }}
                         </p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <i class="fa-solid fa-phone text-lg text-gray-700"></i>
                     </div>
                     <div class="flex flex-col">
-                        <h4 class="text-xl font-bold text-gray-900">ফোন নম্বর</h4>
+                        <h4 class="text-xl font-bold text-gray-900">Phone Number</h4>
                         <p class="text-gray-600 text-base md:text-base">
                             <a href="tel:{{ preg_replace('/[^0-9+]/', '', strip_tags($setting->phone ?? '+8801938886333')) }}" class="hover:text-[#2c4294] transition-colors">
                                 {!! $setting->phone ?? '+880 1938-886333' !!}
@@ -51,7 +51,7 @@
                         <i class="fa-solid fa-envelope text-lg text-gray-700"></i>
                     </div>
                     <div class="flex flex-col">
-                        <h4 class="text-xl font-bold text-gray-900">ইমেইল করুন</h4>
+                        <h4 class="text-xl font-bold text-gray-900">Email Us</h4>
                         <p class="text-gray-600 text-base md:text-base">
                             <a href="mailto:{{ strip_tags($setting->email ?? 'info@domain.com') }}" class="hover:text-[#2c4294] transition-colors">
                                 {{ $setting->email ?? '-' }}
@@ -67,8 +67,8 @@
                             <i class="fa-solid fa-headset text-xl text-black"></i>
                         </div>
                         <div>
-                            <h5 class="text-lg font-bold">সাহায্য প্রয়োজন?</h5>
-                            <p class=" text-base">আমাদের টিমকে কল করুন</p>
+                            <h5 class="text-lg font-bold">Need Help?</h5>
+                            <p class=" text-base">Call our team directly</p>
                         </div>
                     </div>
 
@@ -79,8 +79,8 @@
                     </div>
 
                     <div class="text-xs font-medium uppercase tracking-widest leading-loose">
-                        শনিবার - শুক্রবার <br>
-                        <span class=" normal-case tracking-normal">সকাল ০৯:০০ - রাত ১০:০০</span>
+                        Saturday - Friday <br>
+                        <span class=" normal-case tracking-normal">09:00 AM - 10:00 PM</span>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
             <div class="lg:col-span-6 md:mt-8">
                 <div class="bg-[#DFE8FF] p-7 md:p-10 rounded-[2.5rem] border border-blue-50 shadow-sm">
                     <h2 class="text-xl md:text-xl font-bold text-gray-800 leading-snug mb-8">
-                        আমাদের সাথে যোগাযোগ করুন
+                        Get in Touch with Us
                     </h2>
 
                     @if ($errors->any())
@@ -106,34 +106,34 @@
                     <form id="contactForm" action="{{ route('contact.store') }}" method="POST"
                         class="flex flex-col gap-5">
                         @csrf
-                        <input type="text" name="name" placeholder="আপনার নাম (বাধ্যতামূলক)" required
+                        <input type="text" name="name" placeholder="Your Name (Required)" required
                             class="w-full bg-white px-6 py-4 rounded-xl text-base outline-none border border-transparent shadow-sm focus:ring-2 focus:ring-[#2C4798]/20 transition-all"
                             value="{{ old('name') }}" />
 
-                        <input type="email" name="email" placeholder="ইমেইল ঠিকানা" required
+                        <input type="email" name="email" placeholder="Email Address" required
                             class="w-full bg-white px-6 py-4 rounded-xl text-base outline-none border border-transparent shadow-sm focus:ring-2 focus:ring-[#2C4798]/20 transition-all"
                             value="{{ old('email') }}" />
 
-                        <input type="tel" name="phone" placeholder="ফোন নম্বর (বাধ্যতামূলক)" required
+                        <input type="tel" name="phone" placeholder="Phone Number (Required)" required
                             class="w-full bg-white px-6 py-4 rounded-xl text-base outline-none border border-transparent shadow-sm focus:ring-2 focus:ring-[#2C4798]/20 transition-all"
                             value="{{ old('phone') }}" />
 
-                        <textarea name="message" placeholder="আপনি কী জানতে চান? (ঐচ্ছিক)" rows="4"
+                        <textarea name="message" placeholder="How can we help you? (Optional)" rows="4"
                             class="w-full bg-white px-6 py-4 rounded-xl text-base outline-none border border-transparent shadow-sm focus:ring-2 focus:ring-[#2C4798]/20 transition-all resize-none">{{ old('message') }}</textarea>
 
                         <button type="submit"
                             class="cursor-pointer w-full bg-[#2C4798] hover:bg-[#1e2d6b] text-white py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 transition-all shadow-lg shadow-[#2C4798]/20 active:scale-[0.98]">
                             <i class="fa-solid fa-paper-plane text-base"></i>
-                            সাবমিট করুন
+                            Submit Message
                         </button>
 
                         <div class="text-[11px] text-gray-700 text-center leading-relaxed mt-2.5 flex items-center justify-center gap-1.5 flex-wrap font-medium">
                             <i class="fa-solid fa-shield-halved text-[#1e2d6b] text-[12px]"></i>
-                            <span>এই সাইটটি reCAPTCHA দ্বারা সুরক্ষিত এবং গুগলের</span>
-                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">গোপনীয়তা নীতি</a>
-                            <span>ও</span>
-                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">সেবার শর্তাবলী</a>
-                            <span>প্রযোজ্য।</span>
+                            <span>This site is protected by reCAPTCHA and the Google</span>
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">Privacy Policy</a>
+                            <span>and</span>
+                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="text-[#1e2d6b] font-semibold underline hover:text-black">Terms of Service</a>
+                            <span>apply.</span>
                         </div>
                     </form>
 
@@ -165,7 +165,7 @@
             const originalBtnText = submitBtn.innerHTML;
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সাবমিট হচ্ছে...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
 
             try {
                 const token = await window.getRecaptchaToken('contact');
@@ -188,15 +188,15 @@
                     showAlertModal(successMsg, "success", "Thank you for your interest!", "contactAlertModal");
                     form.reset();
                 } else {
-                    let errorMsg = result.message || "দুঃখিত, কোনো একটি সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।";
+                    let errorMsg = result.message || "Sorry, something went wrong. Please try again.";
                     if (result.errors) {
                         errorMsg = Object.values(result.errors).map(err => err[0]).join("\n");
                     }
-                    showAlertModal(errorMsg, "error", "ত্রুটি!", "contactAlertModal");
+                    showAlertModal(errorMsg, "error", "Error!", "contactAlertModal");
                 }
             } catch (error) {
                 console.error("Contact form error:", error);
-                showAlertModal("দুঃখিত, কোনো একটি সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।", "error", "ত্রুটি!", "contactAlertModal");
+                showAlertModal("Sorry, something went wrong. Please try again.", "error", "Error!", "contactAlertModal");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;

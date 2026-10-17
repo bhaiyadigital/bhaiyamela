@@ -51,21 +51,21 @@
             <div
                 class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:px-12 flex flex-col items-center text-center pb-10 lg:pb-20 pt-10 lg:pt-0">
                 <h2 class="text-xl font-bold uppercase mb-4">
-                    সাবস্ক্রাইব
+                    Subscribe
                 </h2>
                 <p class="text-white/60 text-base mb-8 max-w-[220px]">
-                    আমাদের নতুন প্রকল্প এবং খবরের সাথে আপডেট থাকুন।
+                    Stay updated with our latest projects and news.
                 </p>
 
                 <form action="{{ route('web.subscription') }}" id="subscribe-id" method="POST"
                     class="w-full max-w-[280px] space-y-4">
                     @csrf
-                    <input type="email" name="email" placeholder="ইমেইল এড্রেস" required
+                    <input type="email" name="email" placeholder="Email Address" required
                         class="w-full bg-transparent border border-white/20 rounded-full px-6 py-2.5 text-base focus:outline-none focus:border-white/50 text-center placeholder:text-white/30" />
 
                     <button type="submit"
                         class="w-full bg-[#2c4294] hover:bg-blue-800 text-white py-3 rounded-full font-bold text-base uppercase tracking-widest transition cursor-pointer">
-                        সাবস্ক্রাইব
+                        Subscribe
                     </button>
 
                     @error('email')
@@ -96,13 +96,13 @@
             <!-- Column 3: MENU -->
             <div class="border-t lg:border-t-0 lg:border-l border-[#2c4294] px-6 lg:pl-20 pb-10 lg:pb-20 pt-10 lg:pt-0">
                 <h2 class="text-xl font-bold uppercase  mb-8">
-                    মেনু
+                    Menu
                 </h2>
                 <ul class="space-y-4 text-base text-white/60">
                     <li>
                         <a href="{{ route('web.project') }}" class="hover:text-white transition"
                             aria-label="all projects">
-                            সব প্রকল্প
+                            All Projects
                         </a>
                     </li>
 
@@ -119,7 +119,7 @@
                     <li>
                         <a href="{{ route('requirements.create') }}" class="hover:text-white transition"
                             aria-label="post-requirement">
-                            আপনার চাহিদা জানান
+                            Post Your Requirement
                         </a>
                     </li>
                 </ul>
@@ -128,7 +128,7 @@
             <!-- Column 4: RECENT PROJECTS -->
             <div class="border-t lg:border-t-0 border-[#2c4294] px-6 lg:pl-10 pb-10 lg:pb-20 pt-10 lg:pt-0">
                 <h2 class="text-xl font-bold uppercase  mb-8">
-                    সাম্প্রতিক প্রকল্প
+                    Recent Projects
                 </h2>
                 <ul class="space-y-4 text-base text-white/60">
                     @php
@@ -148,7 +148,7 @@
                         </li>
                     @endforeach
                     @if($footerProjects->isEmpty())
-                        <li>কোন প্রকল্প পাওয়া যায়নি।</li>
+                        <li>No projects found.</li>
                     @endif
                 </ul>
             </div>
