@@ -461,6 +461,9 @@
                                     } elseif ($module === 'project') {
 
                                     $previewUrl = route('project.details', $item->slug) . '?preview=1';
+                                    } elseif ($module === 'campaign') {
+
+                                    $previewUrl = route('campaign.details', $item->slug) . '?preview=1';
                                     } elseif ($module === 'area_guide') {
 
                                     $previewUrl = route('area-guides.show', $item->slug) . '?preview=1';

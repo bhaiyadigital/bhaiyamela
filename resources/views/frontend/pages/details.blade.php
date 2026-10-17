@@ -44,11 +44,19 @@
     <div class="container py-6 mx-auto px-4">
 
 
-        <div class="mb-6">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
             <h1 class="text-xl md:text-3xl font-extrabold text-gray-900 leading-tight flex flex-wrap items-center gap-3">
                 {{ $project->title }}
-
             </h1>
+
+            @if(auth()->check() && (auth()->user()->isSuperAdmin() || auth()->user()->hasPermission('project.edit')))
+                <a href="{{ route('admin.contents.edit', ['project', $project->id]) }}"
+                    target="_blank"
+                    class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs md:text-sm font-bold px-3.5 py-2 rounded-xl shadow-sm transition-all hover:shadow">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>এডিট প্রজেক্ট</span>
+                </a>
+            @endif
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

@@ -344,10 +344,14 @@ class WebController extends Controller
      */
     public function campaignDetails($slug)
     {
-        $campaign = Content::where('module', 'campaign')
-            ->where('slug', $slug)
-            ->active()
-            ->firstOrFail();
+        $query = Content::where('module', 'campaign')
+            ->where('slug', $slug);
+
+        if (request()->query('preview') !== '1') {
+            $query->active();
+        }
+
+        $campaign = $query->firstOrFail();
 
         $campaign->increment('views');
 
