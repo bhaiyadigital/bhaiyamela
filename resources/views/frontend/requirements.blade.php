@@ -23,15 +23,17 @@
     </section>
     <div class="container mx-auto md:py-10 px-4">
 
-        <div class="bg-[#DFE8FF] rounded-xl p-6 md:p-10 border border-blue-50 shadow-sm mb-8">
+        <div class="relative bg-[#DFE8FF] rounded-xl p-6 md:p-10 border border-blue-50 shadow-sm mb-8 overflow-hidden">
 
-            @if(session('success'))
-                <!-- IMPROVED: text-[#2ba351] changed to text-[#2c4294] for contrast check -->
-                <div
-                    class="bg-green-50 text-[#2c4294] border border-green-150 p-4 mb-6 rounded-2xl text-center font-bold text-base shadow-sm">
-                    {{ session('success') }}
-                </div>
-            @endif
+            {{-- Success Popup Modal --}}
+            <x-modal-alert 
+                id="requirementSuccessModal"
+                type="success"
+                title="রিকোয়ারমেন্ট সাবমিট হয়েছে!"
+                sessionKey="success"
+                buttonText="ঠিক আছে"
+                :scoped="true"
+            />
 
             @if(session('error'))
                 <div

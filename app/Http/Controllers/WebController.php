@@ -810,15 +810,17 @@ class WebController extends Controller
     public function campaignInquiry(Request $request)
     {
         $request->validate([
-            'lead_name'    => 'required|string|max:255',
-            'lead_phone'   => 'required|string|max:30',
-            'lead_email'   => 'nullable|email|max:255',
-            'lead_message' => 'nullable|string',
-            'project_id'   => 'nullable|integer',
-            'campaign_id'  => 'nullable|integer',
+            'lead_name'       => 'required|string|max:255',
+            'lead_phone'      => ['required', 'string', new ValidPhoneNumber()],
+            'lead_email'      => 'nullable|email|max:255',
+            'lead_message'    => 'nullable|string',
+            'project_id'      => 'nullable|integer',
+            'campaign_id'     => 'nullable|integer',
+            'recaptcha_token' => ['required', new Recaptcha()],
         ], [
-            'lead_name.required'  => 'আপনার নাম লিখুন।',
-            'lead_phone.required' => 'ফোন নম্বর লিখুন।',
+            'lead_name.required'       => 'আপনার নাম লিখুন।',
+            'lead_phone.required'      => 'ফোন নম্বর লিখুন।',
+            'recaptcha_token.required' => 'reCAPTCHA ভেরিফিকেশন ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।',
         ]);
 
         try {
@@ -852,7 +854,6 @@ class WebController extends Controller
             ]);
 
             return back()->with('campaign_inquiry_success', 'আপনার বার্তা সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।');
-
         } catch (\Exception $e) {
             return back()->with('campaign_inquiry_error', 'দুঃখিত, বার্তা পাঠাতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।')->withInput();
         }
